@@ -33,7 +33,12 @@ typedef NS_ENUM(NSInteger,ZCLogType) {
     ZCLogTypeInfo           = 3,
     ZCLogTypeStartSDK       = 4,
 };
-
+//DEBUG  模式下打印日志,当前行
+#ifdef DEBUG
+#define DLog(fmt, ...) NSLog((@"%s 🐛🐛🐛🐛🐛 [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#define DLog(...)
+#endif
 
 @interface ZCLogUtils : NSObject
 
