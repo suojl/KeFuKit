@@ -51,8 +51,8 @@ typedef NS_ENUM(NSInteger, PageClickTag) {
     [self.backButton setTitle:@"" forState:UIControlStateNormal];
     [self.backButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [self.backButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-    [self.backButton setImage:[ZCUITools zcuiGetBundleImage:@"ZCWebTitleBack_normal"] forState:UIControlStateNormal];
-    [self.backButton setImage:[ZCUITools zcuiGetBundleImage:@"ZCWebTitleBack_pressed"] forState:UIControlStateHighlighted];
+    [self.backButton setImage:[ZCUITools zcuiGetBundleImage:@"ZCicon_web_back_disabled"] forState:UIControlStateNormal];
+    [self.backButton setImage:[ZCUITools zcuiGetBundleImage:@"ZCicon_web_back_disabled"] forState:UIControlStateHighlighted];
     
     // 隐藏右上角的按钮
     self.moreButton.enabled = NO;

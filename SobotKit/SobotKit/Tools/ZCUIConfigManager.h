@@ -57,6 +57,9 @@ typedef NS_ENUM(NSInteger,NSTimerListenerType){
  */
 +(ZCUIConfigManager *) getInstance;
 
+/** 保存历史记录的cid列表 */
+@property(nonatomic, strong) NSMutableArray *cidsArray;
+
 /** 初始化配置UI参数类 */
 @property(nonatomic, strong) ZCKitInfo *kitInfo;
 
@@ -73,6 +76,8 @@ typedef NS_ENUM(NSInteger,NSTimerListenerType){
  *  @return
  */
 -(ZCLibServer *) getZCAPIServer;
+
+
 
 /**
  销毁管理对象

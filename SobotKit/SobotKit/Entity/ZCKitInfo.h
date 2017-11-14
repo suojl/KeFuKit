@@ -7,7 +7,7 @@
 //
 
 #import "ZCProductInfo.h"
-
+#import "KNBGoodsInfo.h"
 
 /**
  *  配置初始化自定义类（UI配置相关）
@@ -70,6 +70,14 @@
 
 
 /**
+ 是否开启机器人语音，（付费，否则语音无法识别）
+ 默认NO
+ */
+@property (nonatomic,assign) BOOL    isOpenRobotVoice;
+
+
+
+/**
  *  留言时是否显示昵称
  *
  *  默认关闭
@@ -95,12 +103,17 @@
  */
 @property(nonatomic,strong) ZCProductInfo *productInfo;
 
+/**
+ *  订单/商品信息
+ */
+@property(nonatomic,strong) KNBGoodsInfo *orderGoodsInfo;
 
 
 ////////////////////////////////////////////////////////////////
 // 自定义字体，（可选）
 ////////////////////////////////////////////////////////////////
 
+#pragma mark-
 /**
  *  顶部标题颜色、评价标题
  */
@@ -416,13 +429,82 @@
 @property (nonatomic, strong) UIColor   *satisfactionSelectedBgColor;
 
 
-
 /**
  *  是否设置相册背景图片
  */
 @property (nonatomic ,assign) BOOL    isSetPhotoLibraryBgImage;
 
 
+#pragma mark- 自定义添加属性
+
+
+#pragma mark- ***** 设置商品文字和颜色属性
+
+/**
+ 商品/订单号 字体和颜色
+ */
+@property (nonatomic,strong) UIFont  *orderNumberLabelFont;
+@property (nonatomic,strong) UIColor *orderNumberLabelColor;
+
+/**
+ 商品/订单状态 字体和颜色
+ */
+@property (nonatomic,strong) UIFont *orderStateLabelFont;
+@property (nonatomic,strong) UIColor *orderStateLabelColor;
+
+/**
+ 商品/订单价钱 字体和颜色
+ */
+@property (nonatomic,strong) UIFont *goodsPriceLabelFont;
+@property (nonatomic,strong) UIColor *goodsPriceLabelColor;
+
+/**
+ 商品/订单日期 字体和颜色
+ */
+@property (nonatomic,strong) UIFont *orderDateLabelFont;
+@property (nonatomic,strong) UIColor *orderDateLabelColor;
+/**
+ 商品/订单描述 字体和颜色
+ */
+@property (nonatomic,strong) UIFont *goodsTitleLabelFont;
+@property (nonatomic,strong) UIColor *goodsTitleLabelColor;
+
+/**
+ *  MD5加密参数
+ */
+@property (nonatomic, strong) NSString *signMd5String;
+
+/**
+ *  json请求参数
+ */
+@property (nonatomic, strong) NSString *jsonRequestParamters;
+/**
+ *  用于md5混淆前缀
+ */
+@property (nonatomic, strong) NSString *md5MixPrefix;
+
+/**
+ *  用于md5混淆后缀
+ */
+@property (nonatomic, strong) NSString *md5MixPostfix;
+
+
+/**
+ *  查询订单接口
+ */
+@property (nonatomic, strong) NSString *queryOrderListForKF;
+
+/**
+ *  版本号
+ */
+@property (nonatomic, strong) NSString *versioNumber;
+
+@property (nonatomic, strong) NSString *orderStatusFlag;
+
+/**
+ *  订单状态数据表
+ */
+@property (nonatomic, strong) NSDictionary *orderStateDictionary;
 
 //@property (nonatomic,strong) id<ZCReceivedMessageDelegate> delegate;
 //@property (nonatomic,strong) ReceivedMessageBlock          receivedBlock;

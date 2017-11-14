@@ -39,29 +39,6 @@
 }
 
 
-+(void)startZCChatListView:(ZCKitInfo *)info with:(UIViewController *)byController{
-    if(byController==nil){
-        
-        return;
-    }
-    if(info == nil){
-        return;
-    }
-    ZCUIChatListController *chat=[[ZCUIChatListController alloc] init];
-    chat.hidesBottomBarWhenPushed=YES;
-    chat.kitInfo = info;
-    chat.userId =[ZCLibClient getZCLibClient].libInitInfo.userId;
-    if(byController.navigationController==nil){
-        chat.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;    // 设置动画效果
-        [byController presentViewController:chat animated:YES completion:^{
-            
-        }];
-    }else{
-        [byController.navigationController pushViewController:chat animated:YES];
-    }
-}
-
-
 +(NSString *)getVersion {
     return zcGetSDKVersion();
 }

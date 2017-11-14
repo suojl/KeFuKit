@@ -26,8 +26,8 @@
 
 @implementation ZCUISkillSetView{
     void(^SkillSetClickBlock)(ZCLibSkillSet *itemModel);
-    void(^CloseBlock)();
-    void(^ToRobotBlock)();
+    void(^CloseBlock)(void);
+    void(^ToRobotBlock)(void);
     
     CGFloat viewWidth;
     CGFloat viewHeight;
@@ -217,11 +217,11 @@
     SkillSetClickBlock = block;
 }
 
--(void)setCloseBlock:(void (^)())closeBlock{
+-(void)setCloseBlock:(void (^)(void))closeBlock{
     CloseBlock = closeBlock;
 }
 
-- (void)closeSkillToRobotBlock:(void(^)()) toRobotBlock{
+- (void)closeSkillToRobotBlock:(void(^)(void)) toRobotBlock{
     ToRobotBlock = toRobotBlock;
 }
 

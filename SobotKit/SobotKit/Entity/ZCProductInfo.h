@@ -31,4 +31,7 @@
 // 缩略图地址
 @property (nonatomic,strong) NSString *thumbUrl;
 
+// 添加自定义字段
+@property (nonatomic,strong) NSString *testAdd;
+
 @end

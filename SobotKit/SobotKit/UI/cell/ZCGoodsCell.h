@@ -13,4 +13,6 @@
  */
 @interface ZCGoodsCell : ZCChatBaseCell
 
+@property (nonatomic, strong) UIButton *btnSendMsg;
+
 @end

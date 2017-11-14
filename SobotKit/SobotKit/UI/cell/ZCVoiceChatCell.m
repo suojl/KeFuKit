@@ -1,6 +1,6 @@
 //
 //  ZCVoiceChatCell.m
-//
+//  
 //
 //  Created by 张新耀 on 15/10/10.
 //
@@ -50,9 +50,9 @@
 
 -(CGFloat) InitDataToView:(ZCLibMessage *)model time:(NSString *)showTime{
     CGFloat height=[super InitDataToView:model time:showTime];
-    
+
     ivBgColor            = self.ivBgView.backgroundColor;
-    
+
     self.ivBgView.hidden = NO;
     
     
@@ -91,14 +91,14 @@
         }
         NSString *timeStr = [NSString stringWithFormat:@"%@",model.richModel.duration];
         
-        //    NSLog(@"当前记录的语音时间时长为%@",timeStr);
+    //    NSLog(@"当前记录的语音时间时长为%@",timeStr);
         if ([timeStr isEqualToString:@"01:00"]) {
             timeStr = @"00:59";
         }
-        
+
         timeStr = [timeStr substringFromIndex:3];
         if (timeStr.length ==2 && [timeStr hasPrefix:@"0"]) {
-            timeStr = [timeStr substringFromIndex:1];
+           timeStr = [timeStr substringFromIndex:1];
             
         }
         timeStr = [timeStr stringByAppendingString:@"″"];
@@ -151,7 +151,6 @@
             _voiceButton.userInteractionEnabled = YES;
         }
         
-        
         height=height+50 ;
     }else{
         _voiceButton.hidden = YES;
@@ -173,9 +172,7 @@
             [_translationLabel setFrame:CGRectMake(msgX, height + 12, size.width, size.height)];
             [self.ivBgView setFrame:CGRectMake(58, height, size.width+33, size.height + 24)];
         }
-        
-        
-        height=height+size.height + 34;
+        height=size.height+34 ;
     }
     
     [self setSendStatus:self.ivBgView.frame];
@@ -188,7 +185,7 @@
     
     
     [self.ivBgView setNeedsDisplay];
-    
+   
     
     [self setFrame:CGRectMake(0, 0, self.viewWidth, height)];
     
@@ -234,9 +231,9 @@
 
 
 - (void)bgColorChangeAction:(UIButton*)sender{
-    
+
     [self.ivBgView setBackgroundColor:[ZCUITools zcgetChatRightVideoSelBgColor]];
-    
+
     [self.ivBgView setNeedsDisplay];
     
 }
@@ -260,15 +257,16 @@
 
 
 /*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect {
- // Drawing code
- }
- */
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
 
 +(CGFloat)getCellHeight:(ZCLibMessage *)model time:(NSString *)showTime viewWith:(CGFloat)width{
     CGFloat height=[super getCellHeight:model time:showTime viewWith:width];
+   
     if(![@"" isEqual:zcLibConvertToString(model.richModel.msgtranslation)]){
         CGSize size = [model.richModel.msgtranslation boundingRectWithSize:CGSizeMake(width - 160, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[ZCUITools zcgetKitChatFont]} context:nil].size;
         height = height + size.height + 34;
@@ -277,7 +275,6 @@
         height = height + 50;
     }
     return height;
-    
 }
 
 

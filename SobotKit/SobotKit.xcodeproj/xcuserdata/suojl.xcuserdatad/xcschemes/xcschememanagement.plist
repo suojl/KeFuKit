@@ -7,17 +7,17 @@
 		<key>CreateFrameworScript.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>26</integer>
+			<integer>2</integer>
 		</dict>
 		<key>SobotKit.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>25</integer>
+			<integer>1</integer>
 		</dict>
 		<key>SobotKitDoc.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>27</integer>
+			<integer>3</integer>
 		</dict>
 	</dict>
 </dict>

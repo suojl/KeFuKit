@@ -49,13 +49,13 @@
  *  直接退出SDK 并关闭技能组弹框
  *  @param closeBlock 直接退出SDK 并关闭技能组弹框的回调事件
  */
-- (void)setCloseBlock:(void(^)()) closeBlock;
+- (void)setCloseBlock:(void(^)(void)) closeBlock;
 
 /**
  *  关闭技能页面 和机器人会话
  *  @param toRobotBlock 关闭技能页面 和机器人会话的回调事件
  */
-- (void)closeSkillToRobotBlock:(void(^)()) toRobotBlock;
+- (void)closeSkillToRobotBlock:(void(^)(void)) toRobotBlock;
 
 /**
  *  @param keyboardView 获取当前键盘类

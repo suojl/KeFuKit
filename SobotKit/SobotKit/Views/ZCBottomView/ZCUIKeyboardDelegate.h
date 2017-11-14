@@ -33,8 +33,10 @@ typedef NS_ENUM(NSInteger,ZCKeyboardType) {
     /** 用户离线不能发送消息，提醒本次会话已结束 */
     ZCKeyboardOnClickAddOverMsgTipCell   = 11,
     ZCKeyboardOnClickAddPhotoCamera      = 12,
-    ZCKeyboardOnClickAddPhotoPicture     = 13
-    
+    ZCKeyboardOnClickAddPhotoPicture     = 13,
+
+    /** 查询用户订单*/
+    ZCKeyboardOnClickQueryOrderForGoods = 14
 };
 
 /**

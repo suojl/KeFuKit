@@ -125,8 +125,12 @@
         //设置 imageview
         UIImageView * imgview = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, myScreenWidth, myScreenHeight)];
         imgview.contentMode = UIViewContentModeScaleAspectFit;
-        UIImage *img  = [UIImage imageNamed:[mImgLocationArr objectAtIndex:i]];
-        imgview.image = img;
+        if(zcLibCheckFileIsExsis([mImgLocationArr objectAtIndex:i])){
+            UIImage *img=[UIImage imageWithContentsOfFile:[mImgLocationArr objectAtIndex:i]];
+        
+//        UIImage *img  = [UIImage imageNamed:[mImgLocationArr objectAtIndex:i]];
+            imgview.image = img;
+        }
         imgview.frame = [self getRectfixMinImageView:imgview];
         //设置 scrollview
         UIScrollView * singleview = [[UIScrollView alloc]initWithFrame:CGRectMake(myScreenWidth*i,-20,myScreenWidth, myScreenHeight)];
@@ -219,14 +223,14 @@
             singleScrollView.contentSize = [self getScrollViewContentSize:imgview];
             singleScrollView.contentOffset = CGPointMake(0, 0);
         }completion:^(BOOL finished) {
-            [self.navigationController popViewControllerAnimated:NO];
-            //[self dismissViewControllerAnimated:NO completion:nil];
+
+            [self.navigationController popViewControllerAnimated:YES];
         }];
         
     }
     else
     {
-        [self.navigationController popViewControllerAnimated:NO];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

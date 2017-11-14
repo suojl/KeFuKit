@@ -80,7 +80,17 @@
     CGFloat timeHeight = 12 ;
     if(![@"" isEqual:zcLibConvertToString(showTime)]){
         [self.lblTime setText:showTime];
-        [self.lblTime setFrame:CGRectMake(0, 0, self.viewWidth, 30)];
+        if (showTime.length < 6) {
+            [self.lblTime setFrame:CGRectMake((self.viewWidth - 53)/2, 8, 53, 20)];
+            self.lblTime.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+            self.lblTime.layer.cornerRadius = 10.0f;
+            self.lblTime.layer.masksToBounds = YES;
+        }else{
+            [self.lblTime setFrame:CGRectMake((self.viewWidth - 90)/2, 8, 90, 20)];
+            self.lblTime.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+            self.lblTime.layer.cornerRadius = 10.0f;
+            self.lblTime.layer.masksToBounds = YES;
+        }
         self.lblTime.hidden=NO;
         timeHeight = 30;
     }
@@ -97,7 +107,7 @@
         _lineView.hidden = YES;
         [self.emojiLabel setTextColor:[ZCUITools zcgetTipLayerTextColor]];
         [self.emojiLabel setTextColor:[ZCUITools zcgetTipLayerTextColor]];
-        [self.ivBgView setBackgroundColor:[ZCUITools zcgetBgTipAirBubblesColor]];
+        [self.ivBgView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2]];
     }
     
     if(model){
@@ -152,9 +162,9 @@
             [_lineView setFrame:lineF];
         }
         
-        self.ivBgView.layer.cornerRadius=3.0f;
+        self.ivBgView.layer.cornerRadius=2.0f;
         self.ivBgView.layer.masksToBounds=YES;
-        
+
         cellHeight=lf.size.height + lf.origin.y ;
 //        NSLog(@"第一次计算之后的cell 搞%f",cellHeight);
         self.frame=CGRectMake(0, 0, self.viewWidth, cellHeight + 10 +3);
@@ -328,7 +338,7 @@
         while ([text hasPrefix:@"\n"]) {
             text=[text substringWithRange:NSMakeRange(1, text.length-1)];
         }
-        
+
         if ([text hasPrefix:[NSString stringWithFormat:@"%@%@",ZCSTLocalString(@"您好，客服"),@"["]]) {
             // 留言标签的处理
             text = [text stringByReplacingOccurrencesOfString:@"[" withString:@""];

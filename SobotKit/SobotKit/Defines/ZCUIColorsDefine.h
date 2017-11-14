@@ -12,9 +12,9 @@
  */
 #define TitleFont [UIFont fontWithName:@"Helvetica Neue" size:18.0]
 
-#define ListTitleFont [UIFont fontWithName:@"Helvetica Neue" size:16.0]
+#define ListTitleFont [UIFont systemFontOfSize:15.0f]//[UIFont fontWithName:@"Helvetica Neue" size:16.0]
 #define ListDetailFont [UIFont fontWithName:@"Helvetica Neue" size:12.0]
-#define ListTimeFont [UIFont fontWithName:@"Helvetica Neue" size:11.0]
+#define ListTimeFont [UIFont systemFontOfSize:12.0f]//[UIFont fontWithName:@"Helvetica Neue" size:11.0]
 
 #define VoiceButtonFont [UIFont fontWithName:@"Helvetica Neue" size:15.0]
 
@@ -42,7 +42,14 @@
  *
  *  @return 颜色为0x08b0b0
  */
-#define BgTitleColor       0x2fb9c3
+#define BgTitleColor       0xef508d
+
+
+/**
+ *  右侧气泡背景颜色
+ @return return 0xfc5b99
+ */
+#define BgRightChatColor    0xfc5b99
 
 
 // 无网络提醒颜色
@@ -62,7 +69,7 @@
  *
  *  @return 颜色为0x666f6f
  */
-#define TextTimeColor      0x676e6f
+#define TextTimeColor      0xffffff
 
 /**
  *  用户名颜色
@@ -125,7 +132,7 @@
  *
  *  @return 颜色为0x07afb2
  */
-#define TextLinkColor      0x2fb9c3
+#define TextLinkColor      0xef508d
 
 
 /**
@@ -133,13 +140,13 @@
  *
  *  @return @"#07afb2"
  */
-#define RCLabelLinkColor   0x2fb9c3
+#define RCLabelLinkColor   0xef508d
 
 // @"#efff96"
 #define RCLabelRLinkColor   0x0d81c0
 
 // 昵称颜色
-#define RClabelNickColor   0x888888
+#define RClabelNickColor   0xffffff
 
 /**
  *  输入框顶部线条颜色
@@ -331,6 +338,15 @@
 // 满意度星级说明
 #define ScoreExplainTextColor  0xfaba4a
 
+// 工单列表页面
+#define TextWordOrderListTextColor   0x8B98AD
 
+#define TextPlaceHolderColor    0xBDC3D1
+
+#define TextUnPlaceHolderColor  0x3D4966
+
+#define wordOrderListHeaderBgColor   0xEFF3FA
+
+#define TextWordOrderListNolTextColor   0x3D4966
 // 字体
 #define HeitiLight(f) [UIFont fontWithName:@"STHeitiSC-Light" size:f]

@@ -17,7 +17,7 @@
 @interface ZCVoiceChatCell : ZCChatBaseCell
 
 @property(nonatomic,strong) ZCButton *voiceButton;
-
 @property(nonatomic,strong) UILabel  *translationLabel;
+
 
 @end

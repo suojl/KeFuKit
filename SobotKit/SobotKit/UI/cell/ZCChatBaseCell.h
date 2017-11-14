@@ -42,7 +42,7 @@
 @property (nonatomic,strong) UILabel                  *lblNickName;
 
 /**
- *  气泡
+ *  聊天气泡
  */
 @property (nonatomic,strong) UIImageView              *ivBgView;
 

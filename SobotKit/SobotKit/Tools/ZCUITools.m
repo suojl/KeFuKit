@@ -24,6 +24,11 @@
     return [UIImage imageNamed:bundleName];
 }
 
++(UIImage *)knbUiGetBundleImage:(NSString *)imageName{
+    NSString *bundleName=[NSString stringWithFormat:@"KeFuSDK.bundle/%@",imageName];
+    return [UIImage imageNamed:bundleName];
+}
+
 +(UIImage *)zcuiGetExpressionBundleImage:(NSString *)imageName{
     //    NSString *bundlePath=[self zcuiFullBundlePath:imageName];
     //    return [UIImage imageWithContentsOfFile:bundlePath];
@@ -113,7 +118,7 @@
     if(configModel!=nil && configModel.listDetailFont!=nil){
         return configModel.listDetailFont;
     }
-    return ListDetailFont;
+    return ListTimeFont;
 }
 
 +(UIFont *)zcgetCustomListKitDetailFont{
@@ -140,7 +145,7 @@
     if(configModel!=nil && configModel.chatFont!=nil){
         return configModel.chatFont;
     }
-    return ListTitleFont;
+    return [UIFont systemFontOfSize:15];
 }
 
 +(UIFont *)zcgetVoiceButtonFont{
@@ -203,7 +208,7 @@
     if (configModel != nil && configModel.socketStatusButtonTitleColor) {
         return configModel.socketStatusButtonTitleColor;
     }
-    return  UIColorFromRGB(TextTopColor);
+    return  UIColorFromRGB(TextBlackColor);
 }
 
 
@@ -237,7 +242,7 @@
     if(configModel!=nil && configModel.rightChatColor!=nil){
         return configModel.rightChatColor;
     }
-    return UIColorFromRGB(BgTitleColor);
+    return UIColorFromRGB(BgRightChatColor);
 }
 
 +(UIColor *)zcgetBackgroundBottomColor{
@@ -339,7 +344,7 @@
     if (configModel != nil && configModel.topViewTextColor) {
         return configModel.topViewTextColor;
     }
-    return  UIColorFromRGB(TextTopColor);
+    return  UIColorFromRGB(0x000000);
 }
 
 
@@ -348,7 +353,7 @@
     if (configModel != nil && configModel.leftChatTextColor) {
         return configModel.leftChatTextColor;
     }
-    return UIColorFromRGB(TextBlackColor);
+    return UIColorFromRGB(0x333333);
 }
 
 
@@ -426,7 +431,7 @@
     if (configModel != nil && configModel.rightChatTextColor) {
         return configModel.rightChatTextColor;
     }
-    return UIColorFromRGB(TextTopColor);
+    return UIColorFromRGB(0xfff9fb);
 }
 
 
@@ -866,7 +871,97 @@
     return text;
 }
 
+#pragma mark- 获取商品/订单 相关属性
+/**
+ 商品/订单号
 
+ @return 商品/订单号 字体和颜色
+ */
++ (UIFont *)knbGetOrderNumberLabelFont{
+    ZCKitInfo *configModel = [self getZCKitInfo];
+    if (configModel != nil && configModel.orderNumberLabelFont) {
+        return configModel.orderNumberLabelFont;
+    }
+    return TitleGoodsFont;
+}
++ (UIColor *)knbGetOrderNumberLabelColor{
+    ZCKitInfo * configModel = [self getZCKitInfo];
+    if (configModel != nil && configModel.orderNumberLabelColor) {
+        return configModel.orderNumberLabelColor;
+    }
+    return UIColorFromRGB(TextBlackColor);
+}
+
+/**
+ 商品/订单状态
+
+ @return 商品/订单状态 字体和颜色
+ */
++ (UIFont *)knbGetOrderStateLabelFont{
+    ZCKitInfo *configModel = [self getZCKitInfo];
+    if (configModel != nil && configModel.orderStateLabelFont) {
+        return configModel.orderStateLabelFont;
+    }
+    return TitleGoodsFont;
+}
++ (UIColor *)knbGetOrderStateLabelColor{
+    ZCKitInfo * configModel = [self getZCKitInfo];
+    if (configModel != nil && configModel.orderStateLabelColor) {
+        return configModel.orderStateLabelColor;
+    }
+    return UIColorFromRGB(TextBlackColor);
+}
+/**
+ 商品/订单价钱 字体和颜色
+ */
++ (UIFont *)knbGetGoodsPriceLabelFont{
+    ZCKitInfo *configModel = [self getZCKitInfo];
+    if (configModel != nil && configModel.goodsPriceLabelFont) {
+        return configModel.goodsPriceLabelFont;
+    }
+    return TitleGoodsFont;
+}
++ (UIColor *)knbGetGoodsPriceLabelColor{
+    ZCKitInfo * configModel = [self getZCKitInfo];
+    if (configModel != nil && configModel.goodsPriceLabelColor) {
+        return configModel.goodsPriceLabelColor;
+    }
+    return UIColorFromRGB(TextBlackColor);
+}
+/**
+ 商品/订单日期 字体和颜色
+ */
++ (UIFont *)knbGetOrderDateLabelFont{
+    ZCKitInfo *configModel = [self getZCKitInfo];
+    if (configModel != nil && configModel.orderDateLabelFont) {
+        return configModel.orderDateLabelFont;
+    }
+    return TitleGoodsFont;
+}
++ (UIColor *)knbGetOrderDateLabelColor{
+    ZCKitInfo * configModel = [self getZCKitInfo];
+    if (configModel != nil && configModel.orderDateLabelColor) {
+        return configModel.orderDateLabelColor;
+    }
+    return UIColorFromRGB(TextBlackColor);
+}
+/**
+ 商品/订单描述 字体和颜色
+ */
++ (UIFont *)knbGetGoodsTitleLabelFont{
+    ZCKitInfo *configModel = [self getZCKitInfo];
+    if (configModel != nil && configModel.goodsTitleLabelFont) {
+        return configModel.goodsTitleLabelFont;
+    }
+    return TitleGoodsFont;
+}
++ (UIColor *)knbGetGoodsTitleLabelColor{
+    ZCKitInfo * configModel = [self getZCKitInfo];
+    if (configModel != nil && configModel.goodsTitleLabelColor) {
+        return configModel.goodsTitleLabelColor;
+    }
+    return UIColorFromRGB(TextBlackColor);
+}
 
 
 @end

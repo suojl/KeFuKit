@@ -84,7 +84,7 @@ Class object_getClass(id object);
     }
     
     [[ZCPlatformTools sharedInstance] cleanCacheDataByAppkey:[ZCLibClient getZCLibClient].libInitInfo.appKey userId:[ZCLibClient getZCLibClient].libInitInfo.userId];
-        
+
     [ZCLibClient getZCLibClient].libInitInfo.skillSetId = @"";
     [ZCLibClient getZCLibClient].libInitInfo.skillSetName = @"";
     
@@ -204,7 +204,7 @@ Class object_getClass(id object);
 //        [ZCLogUtils logHeader:LogHeader debug:@"isArtificial====%zd\n,isUserTipTime====%zd\n,userTipTime===%d\n",[self getZCLibConfig].isArtificial,isUserTipTime,userTipTime];
     
     ZCLibConfig *libConfig = [[ZCPlatformTools sharedInstance] getPlatformInfo].config;
-    
+
     lowMinTime=lowMinTime+1;
     
     // 用户超时，此处不处理了，改由服务器判断

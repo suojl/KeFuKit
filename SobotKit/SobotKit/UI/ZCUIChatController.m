@@ -45,6 +45,12 @@
 
 #import "ZCSatisfactionCell.h"
 
+#import "KNBGoodsInfo.h"
+#import "KNBGoodsCell.h"
+#import "KNBOrderCell.h"
+#import "YYModel.h"
+#import "KNBOrderViewController.h"
+
 
 #define cellRichTextIdentifier @"ZCRichTextChatCell"
 #define cellImageIdentifier @"ZCImageChatCell"
@@ -52,6 +58,9 @@
 #define cellTipsIdentifier @"ZCTipsChatCell"
 #define cellGoodsIndentifier @"ZCGoodsCell"
 #define cellSatisfactionIndentifier @"ZCSatisfactionCell"
+
+#define kGoodsCellIndentifier @"KNBGoodsCell"
+#define kOrderCellIndentifier @"KNBOrderCell"
 
 
 #define BottomHeight       49
@@ -75,7 +84,9 @@ typedef NS_ENUM(NSInteger,ExitType) {
 };
 
 
-@interface ZCUIChatController ()<UITableViewDataSource,UITableViewDelegate,ZCChatCellDelegate,ZCUIVoiceDelegate,ZCUIBackActionSheetDelegate,ZCUIKeyboardDelegate,ZCMessageDelegate,UIAlertViewDelegate,ZCActionSheetDelegate,ZCUIManagerDelegate>{
+@interface ZCUIChatController ()<UITableViewDataSource,UITableViewDelegate,ZCChatCellDelegate
+,ZCUIVoiceDelegate,ZCUIBackActionSheetDelegate,ZCUIKeyboardDelegate,ZCMessageDelegate
+,UIAlertViewDelegate,ZCActionSheetDelegate,ZCUIManagerDelegate,KNBOrderViewControllerDelegate,ZCReceivedMessageDelegate>{
     
     // 页面加载生命周期
     void (^PageClickBlock)   (id object,ZCPageBlockType type);
@@ -118,9 +129,10 @@ typedef NS_ENUM(NSInteger,ExitType) {
     // 记录评价页面消失
     BOOL                        _isDismissSheetPage;
     BOOL                        isStartConnectSockt;
+    BOOL                        isComment;
     
-    
-    
+//    NSMutableArray<NSNumber *> *_cellsHeight;
+
 }
 
 @property (nonatomic,strong) NSString *vcTitle;
@@ -265,12 +277,11 @@ typedef NS_ENUM(NSInteger,ExitType) {
 
 -(UITableView *)createTable{
     if(!_listTable){
-        
         CGFloat TH = BottomHeight;
         if (ZC_iPhoneX) {
             TH = BottomHeight + 34;
         }
-        _listTable=[[UITableView alloc] initWithFrame:CGRectMake(0, NavBarHeight , viewWidth, viewHeigth-NavBarHeight-TH)];
+        _listTable=[[UITableView alloc] initWithFrame:CGRectMake(0, NavBarHeight , viewWidth, viewHeigth-NavBarHeight- TH)];
         
         [_listTable setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin];
         [_listTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -281,13 +292,17 @@ typedef NS_ENUM(NSInteger,ExitType) {
         [_listTable registerClass:[ZCVoiceChatCell class] forCellReuseIdentifier:cellVoiceIdentifier];
         [_listTable registerClass:[ZCTipsChatCell class] forCellReuseIdentifier:cellTipsIdentifier];
         [_listTable registerClass:[ZCGoodsCell class] forCellReuseIdentifier:cellGoodsIndentifier];
+        [_listTable registerClass:[KNBGoodsCell class] forCellReuseIdentifier:kGoodsCellIndentifier];
+        [_listTable registerClass:[KNBOrderCell class] forCellReuseIdentifier:kOrderCellIndentifier];
+//
+//        [_listTable registerNib:[UINib nibWithNibName:@"KNBGoodsCell" bundle:nil] forCellReuseIdentifier:kGoodsCellIndentifier];
+
+
+
         [_listTable registerClass:[ZCSatisfactionCell class] forCellReuseIdentifier:cellSatisfactionIndentifier];
         [_listTable setSeparatorColor:[UIColor clearColor]];
         [_listTable setBackgroundColor:[UIColor clearColor]];
         _listTable.clipsToBounds=NO;
-        _listTable.estimatedRowHeight = 0;
-        _listTable.estimatedSectionHeaderHeight = 0;
-        _listTable.estimatedSectionFooterHeight = 0;
         [self.view addSubview:_listTable];
         [self.view insertSubview:_listTable atIndex:0];
         
@@ -302,6 +317,11 @@ typedef NS_ENUM(NSInteger,ExitType) {
         [self.refreshControl addTarget:self action:@selector(getHistoryMessage) forControlEvents:UIControlEventValueChanged];
         [_listTable addSubview:_refreshControl];
         
+//        if (@available(iOS 11.0, *)) {
+//              _listTable.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;//UIScrollView也适用
+//        }else {
+//            self.automaticallyAdjustsScrollViewInsets = NO;
+//        }
     }
     return _listTable;
 }
@@ -309,9 +329,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
 
 // 通告栏 eg: “国庆大酬宾。
 - (UIView *)notifitionTopViewWithisShowTopView:(BOOL) isShow  Title:(NSString *) title  addressUrl:(NSString *)url iconUrl:(NSString *)icoUrl{
-    // 测试代码
-   
-    
+
     if (!_notifitionTopView && isShow && ![@"" isEqual:zcLibConvertToString(title)]) {
         _notifitionTopView = [[UIView alloc]init];
         _notifitionTopView.frame = CGRectMake(0, NavBarHeight, viewWidth, 40);
@@ -347,7 +365,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
             // arraw
             UIImageView * arrawIcon = [[UIImageView alloc]initWithFrame:CGRectMake(viewWidth - 30, 11, 18, 18)];
             arrawIcon.backgroundColor = [UIColor clearColor];
-            [arrawIcon setImage:[ZCUITools zcuiGetBundleImage:@"ZCWebTitleBack_normal"]];
+            [arrawIcon setImage:[ZCUITools zcuiGetBundleImage:@"ZCicon_web_back_disabled"]];
             arrawIcon.transform = CGAffineTransformMakeRotation(M_PI);
             arrawIcon.contentMode = UIViewContentModeScaleAspectFill;
             [arrawIcon addGestureRecognizer:tapAction];
@@ -362,7 +380,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
 }
 
 - (void)jumpWebView:(UITapGestureRecognizer*)tap{
-    NSLog(@"跳转到web");
+//    NSLog(@"跳转到web");
     // 目前PC 没有设置点击通告之后关闭通告的地方，所以取消这个设置。
 //    if ([self getZCLibConfig].announceClickFlag == 1) {
 //        [self.notifitionTopView removeFromSuperview];
@@ -424,7 +442,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
         _socketStatusButton=[UIButton buttonWithType:UIButtonTypeCustom];
         [_socketStatusButton setFrame:CGRectMake(60, NavBarHeight-44, viewWidth-120, 44)];
         [_socketStatusButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-        [_socketStatusButton setBackgroundColor:[ZCUITools zcgetsocketStatusButtonBgColor]];
+        [_socketStatusButton setBackgroundColor:[UIColor clearColor]];
         [_socketStatusButton setTitle:[NSString stringWithFormat:@"  %@",ZCSTLocalString(@"收取中...")] forState:UIControlStateNormal];
         [_socketStatusButton setTitleColor:[ZCUITools zcgetsocketStatusButtonTitleColor] forState:UIControlStateNormal];
         [_socketStatusButton.titleLabel setFont:[ZCUITools zcgetTitleFont]];
@@ -432,7 +450,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
         [self.view addSubview:_socketStatusButton];
         _socketStatusButton.hidden=YES;
         
-        UIActivityIndicatorView *_activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        UIActivityIndicatorView *_activityView=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         _activityView.hidden=YES;
         _activityView.tag = 1;
         _activityView.center = CGPointMake(_socketStatusButton.frame.size.width/2 - 50, 22);
@@ -469,7 +487,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
     // 创建table
     [self createTable];
     
-    // 创建
+    // 创建底部输入框键盘的View
     _zcKeyboardView = [ZCUIChatKeyboard initWihtConfigView:self.view table:_listTable delegate:self];
     
     // 评价页面是否消失
@@ -487,7 +505,10 @@ typedef NS_ENUM(NSInteger,ExitType) {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     navBarHide=self.navigationController.navigationBarHidden;
-    
+//    _cellsHeight = [[NSMutableArray alloc] init];
+
+//    KNBOrderViewController *orderVC = [[KNBOrderViewController alloc] init];
+//    [self addChildViewController:orderVC];
     // table 置顶
     if (iOS7) {
         self.automaticallyAdjustsScrollViewInsets = NO;
@@ -517,7 +538,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
     _voiceTools.delegate  = self;
     
     // 网络监听
-    _netWorkTools = [ZCLibNetworkTools shareNetworkTools];
+    _netWorkTools = [[ZCLibNetworkTools alloc] init];
 }
 
 
@@ -563,11 +584,11 @@ typedef NS_ENUM(NSInteger,ExitType) {
 
 -(void) checkInitAction{
     [[ZCIMChat getZCIMChat] setChatPageState:ZCChatPageStateActive];
-   
-    
+    [ZCLibClient getZCLibClient].delegate = self;
+
     // 判断是否需要重新初始化
     if([ZCPlatformTools checkInitParameterChanged]){
-        
+
         // 初始化记录传入的技能组
         [[NSUserDefaults standardUserDefaults] setObject:zcLibConvertToString([ZCLibClient getZCLibClient].libInitInfo.skillSetId) forKey:@"UserDefaultGroupID"];
         [[NSUserDefaults standardUserDefaults] setObject:zcLibConvertToString([ZCLibClient getZCLibClient].libInitInfo.skillSetName) forKey:@"UserDefaultGroupName"];
@@ -599,8 +620,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
         }
         
         
-        _cidsArr = [self getPlatformInfo].cidsArray;
-        
+        _cidsArr = [self getShareMS].cidsArray;
         if(_cidsArr !=nil && _cidsArr.count>0){
             _currentCid = [_cidsArr lastObject];
             [_cidsArr removeAllObjects];
@@ -668,7 +688,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
         
         
         // 显示商品信息
-        if(self.zckitInfo.productInfo!=nil && [self getPlatformInfo].config.isArtificial  && ![@"" isEqualToString:self.zckitInfo.productInfo.title] && ![@"" isEqualToString:self.zckitInfo.productInfo.link]){
+        if(self.zckitInfo.productInfo!=nil && [self getZCLibConfig].isArtificial  && ![@"" isEqualToString:self.zckitInfo.productInfo.title] && ![@"" isEqualToString:self.zckitInfo.productInfo.link]){
             [_listArray addObject:[self createMessageToArrayByAction:ZCTipCellMessageNullMessage type:0 name:@"" face:@"" tips:ZCReceivedMessageUnKonw content:nil]];
         }
 
@@ -703,7 +723,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
         _isNoMore = NO;
     }
     
-    if ([self getPlatformInfo].config.type == 2) {
+    if ([self getZCLibConfig].type == 2) {
         [ZCStoreConfiguration setZCParamter:KEY_ZCISROBOTHELLO value:@"1"];
     }else{
         [ZCStoreConfiguration setZCParamter:KEY_ZCISROBOTHELLO value:@"0"];
@@ -712,7 +732,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
   
 #pragma mark ---TODO   排队的model的存储
     [self getPlatformInfo].waitintMessage = nil;
-    
+
     [ZCUIConfigManager getInstance].kitInfo = self.zckitInfo;
     
     __weak ZCUIChatController *safeSelf = self;
@@ -983,20 +1003,20 @@ typedef NS_ENUM(NSInteger,ExitType) {
     if(_listArray && _listArray.count>0){
         ZCLibMessage *lastMsg = [_listArray lastObject];
         if(lastMsg.tipStyle>0){
-            
+
             [[ZCPlatformTools sharedInstance] getPlatformInfo].lastMsg = lastMsg.sysTips;
             [[ZCPlatformTools sharedInstance] getPlatformInfo].lastDate = lastMsg.ts;
         } else {
-            
+
             [[ZCPlatformTools sharedInstance] getPlatformInfo].lastMsg = lastMsg.richModel.msg;
             [[ZCPlatformTools sharedInstance] getPlatformInfo].lastDate = lastMsg.ts;
         }
     }
-    
+
     // 如果通道没有建立成功，则清空数据，下次重新初始化
     if(isStartConnectSockt){
         [self getPlatformInfo].cidsArray = nil;
-    
+
         [self getPlatformInfo].messageArr = nil;
     }else{
         [self getPlatformInfo].cidsArray = _cidsArr;
@@ -1004,16 +1024,16 @@ typedef NS_ENUM(NSInteger,ExitType) {
     }
     _cidsArr = nil;
     _listArray = nil;
-    
+
     [ZCIMChat getZCIMChat].delegate   = nil;
-    
+
     if(iOS7){
         // 设置页面不能使用边缘手势关闭
         if(self.navigationController!=nil){
             self.navigationController.interactivePopGestureRecognizer.enabled = YES;
         }
     }
-    
+
     if(PageClickBlock){
         PageClickBlock(self,ZCPageBlockGoBack);
     }
@@ -1021,6 +1041,17 @@ typedef NS_ENUM(NSInteger,ExitType) {
     // 返回进入SDK之前navc的样式
     if(!navBarHide){
         [self.navigationController setNavigationBarHidden:NO];
+    }
+    
+    if(iOS7){
+        // 设置页面不能使用边缘手势关闭
+        if(self.navigationController!=nil){
+            self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+        }
+    }
+    
+    if(PageClickBlock){
+        PageClickBlock(self,ZCPageBlockGoBack);
     }
     
     
@@ -1149,13 +1180,15 @@ typedef NS_ENUM(NSInteger,ExitType) {
 
 #pragma mark 实现智齿消息监听
 -(void)onReceivedMessage:(ZCLibMessage *)message unReaded:(int)num object:(id)objec showType:(ZCReceivedMessageType)type{
+//    NSLog(@"----%@",[self getPlatformInfo].appkey);
+//    NSLog(@"----%@",zcLibConvertToString(objec[@"appId"]));
     if(![[self getPlatformInfo].appkey isEqual:zcLibConvertToString(objec[@"appId"])]){
         return;
     }
-    
+
     self.vcTitle = self.titleLabel.text;
     
-    
+
     [[ZCUIConfigManager getInstance] cleanAdminCount];
     //[_zcKeyboardView getKeyBoardViewStatus] == AGAINACCESSASTATUS
     if([_zcKeyboardView getKeyBoardViewStatus] == NEWSESSION_KEYBOARD_STATUS){
@@ -1165,9 +1198,9 @@ typedef NS_ENUM(NSInteger,ExitType) {
     if(type==ZCReceivedMessageUnKonw){
         return;
     }
-    
-    
-    
+
+
+
     _receivedName = message.senderName;
 
     [self setTitleName:_receivedName];
@@ -1245,6 +1278,10 @@ typedef NS_ENUM(NSInteger,ExitType) {
     
 }
 
+//未读消息数获取
+-(void)onReceivedMessage:(id) message unRead:(int) nleft obj:(id) object{
+    NSLog(@"---------%@-----",object);
+}
 
 /**
  添加消息到列表
@@ -1642,58 +1679,70 @@ typedef NS_ENUM(NSInteger,ExitType) {
 
 
 
-#pragma mark UITableView delegate Start
+#pragma mark- UITableView delegate Start 聊天消息代理方法
 // 返回section数
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return 2;
 }
 
 // 返回section高度
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if(_isNoMore){
+    if(_isNoMore && section == 0){
         return TableSectionHeight;
+    }
+    if(section == 1 && _zcKeyboardView && !_zcKeyboardView.vioceTipLabel.hidden){
+        return 40;
     }
     return 0;
 }
 
 // 返回section 的View
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if(_isNoMore){
+    if(_isNoMore && section == 0){
     
         UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0, viewWidth, TableSectionHeight)];
         [view setBackgroundColor:[UIColor clearColor]];
-        
-        UILabel *lbl=[[UILabel alloc] initWithFrame:CGRectMake(20, 19, viewWidth-40, TableSectionHeight -19)];
+
+        CGFloat labX = (viewWidth - 114)/2;
+        UILabel *lbl=[[UILabel alloc] initWithFrame:CGRectMake(labX, 19, 114, TableSectionHeight -19)];
         lbl.font=[ZCUITools zcgetListKitDetailFont];
-        lbl.backgroundColor = [UIColor clearColor];
+        lbl.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
         [lbl setTextAlignment:NSTextAlignmentCenter];
         // 没有更多记录的颜色
         [lbl setTextColor:[ZCUITools zcgetTimeTextColor]];
         [lbl setAutoresizesSubviews:YES];
         [lbl setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
 //        [lbl setText:Had_NO_MORE_DATA];
-        [lbl setText:ZCSTLocalString(@"到顶了，没有更多")];
+        [lbl setText:ZCSTLocalString(@"到顶了,没有更多")];
+        lbl.layer.cornerRadius = 7;
+        lbl.layer.masksToBounds = YES;
         [view addSubview:lbl];
         return view;
     }
-    return nil;
-}
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 0;
-}
-
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    if(section == 1){
+        
+        UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0, viewWidth, 40)];
+        [view setBackgroundColor:[UIColor clearColor]];
+        return view;
+    }
+    
     return nil;
 }
 
 // 返回section下得行数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if(section == 1){
+        return 0;
+    }
+//    _cellsHeight = nil;
+//    _cellsHeight = [[NSMutableArray alloc] initWithCapacity:_listArray.count];
     return _listArray.count;
 }
 
 // cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+
     ZCLibMessage *model=[_listArray objectAtIndex:indexPath.row];
     ZCChatBaseCell *cell=nil;
     
@@ -1705,16 +1754,31 @@ typedef NS_ENUM(NSInteger,ExitType) {
                 cell = [[ZCSatisfactionCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellSatisfactionIndentifier];
             }
         }else{
+            // 聊天提示信息cell
             cell = (ZCTipsChatCell*)[tableView dequeueReusableCellWithIdentifier:cellTipsIdentifier];
             if (cell == nil) {
                 cell = [[ZCTipsChatCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellTipsIdentifier];
             }
         }
     }else if(model.tipStyle == ZCReceivedMessageUnKonw){
-        // 商品内容
-        cell = (ZCGoodsCell*)[tableView dequeueReusableCellWithIdentifier:cellGoodsIndentifier];
-        if (cell == nil) {
-            cell = [[ZCGoodsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellGoodsIndentifier];
+        // 商品 或 订单
+        NSString *goodsType = [ZCUIConfigManager getInstance].kitInfo.orderGoodsInfo.cardType;
+        if ([@"商品" isEqualToString:goodsType]) {
+            KNBGoodsCell *goodsCell = (KNBGoodsCell*)[tableView dequeueReusableCellWithIdentifier:kGoodsCellIndentifier];
+            if (goodsCell == nil) {
+                goodsCell = [[KNBGoodsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kGoodsCellIndentifier];
+            }
+            goodsCell.goodsInfo = nil;
+            [goodsCell.btnSendGoods setHidden:NO];
+            cell = goodsCell;
+        }else{
+            KNBOrderCell *goodsCell = (KNBOrderCell*)[tableView dequeueReusableCellWithIdentifier:kOrderCellIndentifier];
+            if (goodsCell == nil) {
+                goodsCell = [[KNBOrderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kOrderCellIndentifier];
+            }
+            goodsCell.goodsInfo = nil;
+            [goodsCell.btnSendGoods setHidden:NO];
+            cell = goodsCell;
         }
     }else if(model.richModel.msgType==1){
         cell = (ZCImageChatCell*)[tableView dequeueReusableCellWithIdentifier:cellImageIdentifier];
@@ -1722,9 +1786,33 @@ typedef NS_ENUM(NSInteger,ExitType) {
             cell = [[ZCImageChatCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellImageIdentifier];
         }
     }else if(model.richModel.msgType==0){
-        cell = (ZCRichTextChatCell*)[tableView dequeueReusableCellWithIdentifier:cellRichTextIdentifier];
-        if (cell == nil) {
-            cell = [[ZCRichTextChatCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellRichTextIdentifier];
+        NSString *message = model.richModel.msg;
+        // 判断是否为订单/商品信息
+        KNBGoodsInfo *goodsInfo = nil;
+        if ((goodsInfo = [self isJSONtoModel:message])){
+            NSString *goodsType = goodsInfo.cardType;
+            if ([@"商品" isEqualToString:goodsType]) {
+                KNBGoodsCell *goodsCell = [tableView dequeueReusableCellWithIdentifier:kGoodsCellIndentifier];
+                if (goodsCell == nil) {
+                    goodsCell = [[KNBGoodsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kGoodsCellIndentifier];
+                }
+                goodsCell.goodsInfo = goodsInfo;
+                [goodsCell.btnSendGoods setHidden:YES];
+                cell = goodsCell;
+            }else{
+                KNBOrderCell *goodsCell = [tableView dequeueReusableCellWithIdentifier:kOrderCellIndentifier];
+                if (goodsCell == nil) {
+                    goodsCell = [[KNBOrderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kOrderCellIndentifier];
+                }
+                goodsCell.goodsInfo = goodsInfo;
+                [goodsCell.btnSendGoods setHidden:YES];
+                cell = goodsCell;
+            }
+        }else{ // 普通聊天文本
+            cell = (ZCRichTextChatCell*)[tableView dequeueReusableCellWithIdentifier:cellRichTextIdentifier];
+            if (cell == nil) {
+                cell = [[ZCRichTextChatCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellRichTextIdentifier];
+            }
         }
     }else if(model.richModel.msgType==2){
         cell = (ZCVoiceChatCell*)[tableView dequeueReusableCellWithIdentifier:cellVoiceIdentifier];
@@ -1744,15 +1832,19 @@ typedef NS_ENUM(NSInteger,ExitType) {
     NSString *time=@"";
     NSString *format=@"MM-dd HH:mm";
 
+    // 会话ID
     if([model.cid isEqual:[self getZCLibConfig].cid]){
         format=@"HH:mm";
     }
-    
-    
+
+
     if(indexPath.row>0){
         ZCLibMessage *lm=[_listArray objectAtIndex:(indexPath.row-1)];
         if(![model.cid isEqual:lm.cid]){
-            //            time=intervalSinceNow(model.ts);
+    //            time=intervalSinceNow(model.ts);
+            NSLog(@"--------%@",    model.richModel.msg);
+            NSLog(@"----model.cid----%@",    model.cid);
+            NSLog(@"----lm.cid----%@",    lm.cid);
             time = zcLibDateTransformString(format, zcLibStringFormateDate(model.ts));
         }
     }else{
@@ -1768,24 +1860,33 @@ typedef NS_ENUM(NSInteger,ExitType) {
     }
     
     [cell InitDataToView:model time:time];
-    
+//    [_cellsHeight addObject:[NSNumber numberWithFloat:cellHeight]];
+//    _cellsHeight[indexPath.row] = [NSNumber numberWithFloat:cellHeight];
+//    [_cellsHeight setObject:[NSNumber numberWithFloat:cellHeight] atIndexedSubscript:indexPath.row];
+
     [cell setBackgroundColor:[UIColor clearColor]];
-    
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    
+
     return cell;
 }
 
 // table 行的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
+//    if (indexPath.row < _cellsHeight.count) {
+//        CGFloat cellheight = [[_cellsHeight objectAtIndex:indexPath.row] floatValue];
+//        NSLog(@"---row: %ld-----height: %lf",(long)indexPath.row,cellheight);
+//        return cellheight;
+//    }
+
     ZCLibMessage *model =[_listArray objectAtIndex:indexPath.row];
     NSString *time=@"";
     NSString *format=@"MM-dd HH:mm";
     if([model.cid isEqual:[self getZCLibConfig].cid]){
         format=@"HH:mm";
     }
-    
+
     if(indexPath.row>0){
         ZCLibMessage *lm=[_listArray objectAtIndex:(indexPath.row-1)];
         if(![model.cid isEqual:lm.cid]){
@@ -1797,16 +1898,16 @@ typedef NS_ENUM(NSInteger,ExitType) {
         time = zcLibDateTransformString(format, zcLibStringFormateDate(model.ts));
         //        time=intervalSinceNow(model.ts);
     }
-    
+
     if(model.tipStyle == 2){
         time = @"";
     }
-    
+
     CGFloat cellheight = 0;
-    
+
     // 设置内容
     if(model.tipStyle>0){
-        
+
         if(model.tipStyle == ZCReceivedMessageEvaluation){
             // 评价cell的高度
             cellheight = [ZCSatisfactionCell getCellHeight:model time:time viewWith:viewWidth];
@@ -1814,20 +1915,66 @@ typedef NS_ENUM(NSInteger,ExitType) {
             // 提示cell的高度
            cellheight = [ZCTipsChatCell getCellHeight:model time:time viewWith:viewWidth];
         }
-        
+
     }else if(model.tipStyle == ZCReceivedMessageUnKonw){
         // 商品内容
-        cellheight = [ZCGoodsCell getCellHeight:model time:time viewWith:viewWidth];
+//        cellheight = [ZCGoodsCell getCellHeight:model time:time viewWith:viewWidth];
+        NSString *goodsType = [ZCUIConfigManager getInstance].kitInfo.orderGoodsInfo.cardType;
+        if ([@"商品" isEqualToString:goodsType]) {
+            KNBGoodsCell *goodsCell = (KNBGoodsCell*)[tableView dequeueReusableCellWithIdentifier:kGoodsCellIndentifier];
+            if (goodsCell == nil) {
+                goodsCell = [[KNBGoodsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kGoodsCellIndentifier];
+            }
+            goodsCell.goodsInfo = nil;
+            [goodsCell.btnSendGoods setHidden:NO];
+            cellheight = [goodsCell InitDataToView:model time:time];
+        }else{
+
+            KNBOrderCell *goodsCell = [tableView dequeueReusableCellWithIdentifier:kOrderCellIndentifier];
+            if (goodsCell == nil) {
+                goodsCell = [[KNBOrderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kOrderCellIndentifier];
+            }
+            goodsCell.goodsInfo = nil;
+            [goodsCell.btnSendGoods setHidden:NO];
+            cellheight = [goodsCell InitDataToView:model time:time];
+        }
+//        DLog(@"------%lf",cellheight);
+
     }else if(model.richModel.msgType==1){
         cellheight = [ZCImageChatCell getCellHeight:model time:time viewWith:viewWidth];
     }else if(model.richModel.msgType==0){
-        cellheight = [ZCRichTextChatCell getCellHeight:model time:time viewWith:viewWidth];
+        // 判断是否为商品信息
+        KNBGoodsInfo *goodsInfo = nil;
+        if ((goodsInfo = [self isJSONtoModel:model.richModel.msg])){
+            // 商品内容
+            NSString *goodsType = goodsInfo.cardType;
+            if ([@"商品" isEqualToString:goodsType]) {
+                KNBGoodsCell *goodsCell = [tableView dequeueReusableCellWithIdentifier:kGoodsCellIndentifier];
+                if (goodsCell == nil) {
+                    goodsCell = [[KNBGoodsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kGoodsCellIndentifier];
+                }
+                goodsCell.goodsInfo = goodsInfo;
+                [goodsCell.btnSendGoods setHidden:YES];
+                cellheight = [goodsCell InitDataToView:model time:time];
+            }else{
+                KNBOrderCell *goodsCell = [tableView dequeueReusableCellWithIdentifier:kOrderCellIndentifier];
+                if (goodsCell == nil) {
+                    goodsCell = [[KNBOrderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kOrderCellIndentifier];
+                }
+                goodsCell.goodsInfo = goodsInfo;
+                [goodsCell.btnSendGoods setHidden:YES];
+                cellheight = [goodsCell InitDataToView:model time:time];
+            }
+        }else{
+            cellheight = [ZCRichTextChatCell getCellHeight:model time:time viewWith:viewWidth];
+        }
     }else if(model.richModel.msgType==2){
         cellheight = [ZCVoiceChatCell getCellHeight:model time:time viewWith:viewWidth];
-        
+
     }else{
         cellheight = [ZCRichTextChatCell getCellHeight:model time:time viewWith:viewWidth];
     }
+//    _cellsHeight[indexPath.row] = [NSNumber numberWithFloat:cellheight];
     return cellheight;
 }
 
@@ -1837,7 +1984,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
 }
 
 
-#pragma mark table cell delegate start
+#pragma mark- table cell delegate start
 -(void)cellItemClick:(ZCLibMessage *)model type:(ZCChatCellClickType)type obj:(id)object{
     
     // 提醒本次会话已结束
@@ -1903,14 +2050,18 @@ typedef NS_ENUM(NSInteger,ExitType) {
             model.sendStatus = 1;
             [_listTable reloadData];
         } success:^(ZCLibMessage *message, ZCMessageSendCode sendCode) {
-            model.sendStatus = message.sendStatus;
-            
             if(![self getZCLibConfig].isArtificial && sendCode==ZC_SENDMessage_New){
-                [_listArray addObject:message];
-                
+                NSInteger index = [_listArray indexOfObject:message];
+                [_listArray insertObject:message atIndex:index+1];
                 [_listTable reloadData];
                 [self scrollTableToBottom];
+            }else if(sendCode == ZC_SENDMessage_Success){
+                model.sendStatus = 0;
+                model.richModel.msgtranslation = message.richModel.msgtranslation;
+
+                [_listTable reloadData];
             }else{
+                model.sendStatus = 2;
                 [_listTable reloadData];
             }
         } progress:^(ZCLibMessage *message) {
@@ -1923,6 +2074,8 @@ typedef NS_ENUM(NSInteger,ExitType) {
         }];
        
     }
+    
+    
         
     if(type==ZCChatCellClickTypePlayVoice  || type == ZCChatCellClickTypeReceiverPlayVoice){
         if(animateView){
@@ -2083,11 +2236,11 @@ typedef NS_ENUM(NSInteger,ExitType) {
     }];
     
     if (self.navigationController) {
-        
+
         [self.navigationController pushViewController:leaveMessageVC animated:YES];
     }else{
         [self  presentViewController:leaveMessageVC animated:YES completion:^{
-            
+
         }];
     }
 
@@ -2106,7 +2259,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
             CGFloat h=_listTable.bounds.size.height;
             
             CGRect tf         = _listTable.frame;
-            CGFloat x=tf.size.height-_listTable.contentSize.height;
+            CGFloat x = tf.size.height-_listTable.contentSize.height;
             
             CGFloat keyBoardHeight = viewHeigth - _zcKeyboardView.zc_bottomView.frame.origin.y-BottomHeight;
             if(x > 0){
@@ -2118,7 +2271,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
                 if (!ZC_iPhoneX) {
                     barHight = 0;
                 }
-                tf.origin.y   = NavBarHeight - keyBoardHeight + barHight;
+                tf.origin.y   = NavBarHeight - keyBoardHeight  + barHight;
             }
             _listTable.frame  = tf;
             
@@ -2128,6 +2281,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
                 [_listTable setContentOffset:CGPointMake(0, 0) animated:NO];
             }
         });
+
     });
     
 }
@@ -2164,11 +2318,11 @@ typedef NS_ENUM(NSInteger,ExitType) {
         return YES;
     }
 }
-#pragma mark UITableView delegate end
+#pragma mark 聊天气泡代理方法结束
 
 
 
-#pragma mark section 跟随table滚动
+#pragma mark- section 跟随table滚动
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat sectionHeaderHeight = TableSectionHeight;
     //固定section 随着cell滚动而滚动
@@ -2319,8 +2473,18 @@ typedef NS_ENUM(NSInteger,ExitType) {
 #pragma mark 键盘事件 delegate
 
 // 执行发送消息
+
+/**
+ 执行发送消息
+
+ @param text 消息体
+ @param question 引导的问题ID
+ @param type 消息体类型
+ @param time 声音长度
+ */
 -(void) sendMessage:(NSString *)text questionId:(NSString*)question type:(ZCMessageType) type duration:(NSString *) time{
     // 发送空的录音样式
+    DLog(@"发送的聊天信息=== text:%@, question:%@, type:%ld, time:%@",text,question,(long)type,time);
     if (type == ZCMessagetypeStartSound) {
         if(recordModel == nil){
             recordModel = [[self getZCAPIServer]  setLocalDataToArr:0 type:2 duration:@"0" style:0 send:NO name:[self getZCLibConfig].zcinitInfo.nickName content:@"" config:[self getZCLibConfig]];
@@ -2375,16 +2539,19 @@ typedef NS_ENUM(NSInteger,ExitType) {
     __block ZCLibMessage    *sendMessage;
     
     __weak ZCUIChatController *safeVC = self;
-    
+
     [[self getZCAPIServer] sendMessage:text questionId:question msgType:type duration:time config:[self getZCLibConfig] robotFlag:[ZCLibClient getZCLibClient].libInitInfo.robotId start:^(ZCLibMessage *message) {
+        DLog(@"-----%@",message)
+//        message
         sendMessage  = message;
         sendMessage.sendStatus=1;
         
         [safeVC.listArray addObject:sendMessage];
         [safeVC.listTable reloadData];
-        
         [safeVC scrollTableToBottom];
+       
     } success:^(ZCLibMessage *message, ZCMessageSendCode sendCode) {
+        DLog(@"-----%@",message);
         if([self getZCLibConfig].isArtificial){
             [ZCStoreConfiguration setZCParamter:KEY_ZCISSENDTOUSER value:@"1"];
             [ZCStoreConfiguration setZCParamter:KEY_ZCISSENDTOROBOT value:@"0"];
@@ -2408,7 +2575,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
                     // 仅机器人的模式不做处理
                     if ([safeVC getZCLibConfig].type != 1) {
                         // 设置键盘的样式 （机器人，转人工按钮显示）
-//                        [safeVC.zcKeyboardView setRobotViewStatusType:ROBOTSTATUS];
+                        //                        [safeVC.zcKeyboardView setRobotViewStatusType:ROBOTSTATUS];
                         [safeVC.zcKeyboardView setKeyBoardStatus:ROBOT_KEYBOARD_STATUS];
                         
                         // 保存在本次有效的会话中显示转人工按钮
@@ -2441,7 +2608,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
                 [[self getShareMS] cleanUserCount];
                 [[self getShareMS] cleanAdminCount];
                 [_zcKeyboardView hideKeyboard];
-//                [_zcKeyboardView setRobotViewStatusType:AGAINACCESSASTATUS];
+                //                [_zcKeyboardView setRobotViewStatusType:AGAINACCESSASTATUS];
                 [_zcKeyboardView setKeyBoardStatus:NEWSESSION_KEYBOARD_STATUS];
                 [self addTipsListenerMessage:ZCTipCellMessageOverWord];
             }
@@ -2690,6 +2857,12 @@ typedef NS_ENUM(NSInteger,ExitType) {
         }
     }else if(type == ZCKeyboardOnClickAddBlockTipCell){
         [self addTipsListenerMessage:ZCTipCellMessageIsBlock];
+    }else if(type == ZCKeyboardOnClickQueryOrderForGoods){
+        // 查询订单的点击事件
+        [_zcKeyboardView hideKeyboard];
+        KNBOrderViewController *orderVC = [[KNBOrderViewController alloc] init];
+        orderVC.vcDelegate = self;
+        [self presentViewController:orderVC animated:YES completion:nil];
     }
 }
 
@@ -2787,9 +2960,9 @@ typedef NS_ENUM(NSInteger,ExitType) {
         
         ZCLibMessage *message = [[self getZCAPIServer] setLocalDataToArr:ZCTipCellMessageWaiting type:ZCReceivedMessageWaiting duration:@"" style:messageType send:NO name:self.receivedName content:zcLibConvertToString(dict[@"data"][@"count"]) config:[self getZCLibConfig]];
         [self addReceivedNameMessageToList:message];
-        
+
         [self getPlatformInfo].waitintMessage = message;
-        
+
         // 如果没有机器人欢迎语，添加机器人欢迎语 (只在转人工不成功的情况下添加) 仅人工模式不添加
         if ([self getZCLibConfig].type != 2 ) {
             // 添加机器人欢迎语
@@ -2815,7 +2988,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
                 }
             }
         }
-        
+
         // 设置机器人的键盘样式
 //        [self.zcKeyboardView setRobotViewStatusType:ROBOTSTATUS];
         [self.zcKeyboardView setKeyBoardStatus:ROBOT_KEYBOARD_STATUS];
@@ -2875,6 +3048,9 @@ typedef NS_ENUM(NSInteger,ExitType) {
 
 // 提交评价
 - (void)commitSatisfactionWithIsResolved:(int)isResolved Rating:(int)rating{
+    if(isComment){
+        return;
+    }
     if (isResolved == 2) {
         // 没有选择 按已解决处理
         isResolved = 0;
@@ -2964,7 +3140,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
         }
         [self goBackIsKeep];
     }else{
-        NSLog(@"评价页面关闭了");
+//        NSLog(@"评价页面关闭了");
     }
     
 }
@@ -2977,7 +3153,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
     if([self getZCLibConfig].isArtificial && self.zckitInfo.isCloseAfterEvaluation){
         // 调用离线接口
         [[self getZCAPIServer] logOut:[self getZCLibConfig]];
-        
+
         // 添加离线消息
         [self addTipsListenerMessage:ZCTipCellMessageOverWord];
     
@@ -3038,6 +3214,47 @@ typedef NS_ENUM(NSInteger,ExitType) {
 //    NSLog(@"release BlockLeakViewController");
 }
 
+//-(BOOL)isGoodsMsg:(NSString *)message{
+//    if (message && ![@"" isEqualToString:message] && (message.length >= 6)){
+//        NSString *flagStr = [message substringToIndex:6];
+//        if ([@"[消息类型]" isEqualToString:flagStr]) {
+//            return YES;
+//        }
+//    }
+//    return NO;
+//}
+#pragma mark- KNBOrderViewControllerDelegate 订单查询控制器代理
+-(void)dismissViewController:(UIViewController *)controller andSendOrderMessage:(NSString *)msg{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    if(![self getZCLibConfig].isArtificial){
+        return;
+    }
+    [self sendMessage:msg questionId:@"" type:ZCMessageTypeText duration:@""];
+}
+
+-(KNBGoodsInfo *)isJSONtoModel:(NSString *)message{
+    // 判断字符串是否以 特定字符开头
+//    if (message && ![@"" isEqualToString:message] && (message.length >= 6)){
+    if ([message hasPrefix:@"[消息类型]"]){
+//        NSString *flagStr = [message substringToIndex:6];
+//        if ([@"[消息类型]" isEqualToString:flagStr]) {
+
+            message = [message stringByReplacingOccurrencesOfString:@"<br>" withString:@","];
+            message = [message stringByReplacingOccurrencesOfString:@"\n" withString:@","];
+            message = [message stringByReplacingOccurrencesOfString:@"[" withString:@"\""];
+            message = [message stringByReplacingOccurrencesOfString:@"]" withString:@"\""];
+
+            NSString *msgJSON = [NSString stringWithFormat:@"{%@}",message];
+            KNBGoodsInfo *goodsInfo = [KNBGoodsInfo yy_modelWithJSON:msgJSON];
+            if (goodsInfo) {
+                return goodsInfo;
+            } else {
+                return nil;
+            }
+//        }
+    }
+    return nil;
+}
 /*
  #pragma mark - Navigation
  

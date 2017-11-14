@@ -24,5 +24,5 @@
 
 @property (nonatomic,strong) NSString         *tipMsg;
 // 直接退出SDK 并关闭技能组弹框
--(void)setCloseBlock:(void (^)())closeBlock;
+-(void)setCloseBlock:(void (^)(void))closeBlock;
 @end

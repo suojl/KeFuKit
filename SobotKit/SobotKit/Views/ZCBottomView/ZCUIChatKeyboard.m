@@ -110,7 +110,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
     lineView.backgroundColor = [ZCUITools zcgetBackgroundBottomLineColor];
     [lineView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
     [_zc_sourceView addSubview:lineView];
-    
+
     [self zc_chatTextView];
     
     [self zc_pressedButton];
@@ -217,26 +217,16 @@ typedef NS_ENUM(NSInteger,ExitType) {
         [_zc_pressedButton addTarget:self action:@selector(btnTouchCancel:) forControlEvents:UIControlEventTouchCancel];
         [_zc_pressedButton addTarget:self action:@selector(btnTouchCancel:) forControlEvents:UIControlEventTouchUpOutside];
         
-        
-        
         if (![self getZCLibConfig].isArtificial ) {
             if (![ZCUIConfigManager getInstance].kitInfo.isShowTansfer && ![ZCLibClient getZCLibClient].isShowTurnBtn) {
                 // 不显示转人工的按钮
                 [_zc_pressedButton setFrame:CGRectMake(48, (BottomHeight-35)/2, [self getSourceViewWidth]-58, 35)];
-                // 开启语音的功能   机器人开启语音识别
-                [self getZCLibConfig].isOpenRobotVoice = YES;
-//                if ([ZCUITools zcgetOpenRecord] && [self getZCLibConfig].isOpenRobotVoice) {
-//
-//                    [_zc_pressedButton setFrame:CGRectMake(48 , (BottomHeight-35)/2, [self getSourceViewWidth]-48*2-5, 35)];
-//                   
-//                }
             }else{
                 [_zc_pressedButton setFrame:CGRectMake(48 *2, (BottomHeight-35)/2, [self getSourceViewWidth]-48*3-5, 35)];
             }
         }else{
             [_zc_pressedButton setFrame:CGRectMake(48, (BottomHeight-35)/2, [self getSourceViewWidth]-48*3, 35)];
         }
-        
         
     }
     return _zc_pressedButton;
@@ -246,11 +236,11 @@ typedef NS_ENUM(NSInteger,ExitType) {
     if (!_zc_turnButton) {
         _zc_turnButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_zc_turnButton setImage:[ZCUITools zcuiGetBundleImage:ZCSTLocalString(@"ZCIcon_manualWork_nol")] forState:UIControlStateNormal];
-        [_zc_turnButton setImage:[ZCUITools zcuiGetBundleImage:ZCSTLocalString(@"ZCicon_manualWork_pre")] forState:UIControlStateHighlighted];
-        if (zcGetAppLanguages() == 1) {
-            [_zc_turnButton setImage:[ZCUITools zcuiGetBundleImage:@"ZCIcon_manualWork_normal_en"] forState:UIControlStateNormal];
-            [_zc_turnButton setImage:[ZCUITools zcuiGetBundleImage:@"ZCicon_manualWork_pressed_en"] forState:UIControlStateHighlighted];
-        }
+        [_zc_turnButton setImage:[ZCUITools zcuiGetBundleImage:ZCSTLocalString(@"ZCIcon_manualWork_pre")] forState:UIControlStateHighlighted];
+//        if (zcGetAppLanguages() == 1) {
+//            [_zc_turnButton setImage:[ZCUITools zcuiGetBundleImage:ZCSTLocalString(@"ZCIcon_manualWork_normal_en")] forState:UIControlStateNormal];
+//            [_zc_turnButton setImage:[ZCUITools zcuiGetBundleImage:ZCSTLocalString(@"ZCIcon_manualWork_pressed_en")] forState:UIControlStateHighlighted];
+//        }
         [_zc_turnButton setImageEdgeInsets:UIEdgeInsetsMake(10.5, 10, 10.5, 10)];
         [_zc_turnButton setFrame:CGRectMake(0, 0 , 48, 49)];
         [_zc_turnButton setBackgroundColor:[UIColor clearColor]];
@@ -408,21 +398,25 @@ typedef NS_ENUM(NSInteger,ExitType) {
         if ([self getZCLibConfig].msgFlag == 0) {
             titles = [NSMutableArray arrayWithObjects:ZCSTLocalString(@"评价"),ZCSTLocalString(@"留言"), nil];
             
-            tags = [NSMutableArray arrayWithObjects:[NSString stringWithFormat:@"%zd",ZCKeyboardOnClickSatisfaction],
+            tags = [NSMutableArray arrayWithObjects:
+                    [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickSatisfaction],
                     [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickLeavePage],nil];
             
         }else{
             titles = [NSMutableArray arrayWithObjects:ZCSTLocalString(@"评价"), nil];
             
-            tags = [NSMutableArray arrayWithObjects:[NSString stringWithFormat:@"%zd",ZCKeyboardOnClickSatisfaction],nil];
+            tags = [NSMutableArray arrayWithObjects:
+                    [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickSatisfaction],nil];
         }
     }else{
-        titles = [NSMutableArray arrayWithObjects:ZCSTLocalString(@"图片"),ZCSTLocalString(@"拍摄"),ZCSTLocalString(@"评价"), nil];
-        tags = [NSMutableArray arrayWithObjects:[NSString stringWithFormat:@"%zd",ZCKeyboardOnClickAddPhotoPicture],
-                [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickAddPhotoCamera],
-                [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickSatisfaction],nil];
-        
-        
+        titles = [NSMutableArray arrayWithObjects:@"订单",ZCSTLocalString(@"图片")
+                  ,ZCSTLocalString(@"评价"),ZCSTLocalString(@"留言"), nil];
+        tags = [NSMutableArray arrayWithObjects:
+                [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickQueryOrderForGoods],
+                [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickAddPhotoPicture],
+                [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickSatisfaction],
+                [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickLeavePage],nil];
+
     }
     [self creatButtonForArray:titles tags:tags];
     
@@ -450,17 +444,23 @@ typedef NS_ENUM(NSInteger,ExitType) {
         [buttons setFrame:CGRectMake(mx, my, 60, itemH)];
         
         if(tag == ZCKeyboardOnClickSatisfaction){
-            [buttons setImage:[ZCUITools zcuiGetBundleImage:@"ZCIconSatisfaction"] forState:UIControlStateNormal];
-            [buttons setImage:[ZCUITools zcuiGetBundleImage:@"ZCIconSatisfactionSelected"] forState:UIControlStateHighlighted];
-            [buttons setImage:[ZCUITools zcuiGetBundleImage:@"ZCIconSatisfactionSelected"] forState:UIControlStateSelected];
+            [buttons setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_evaluate"]
+                     forState:UIControlStateNormal];
+            [buttons setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_evaluate"]
+                     forState:UIControlStateHighlighted];
+            [buttons setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_evaluate"]
+                     forState:UIControlStateSelected];
         }else if(tag == ZCKeyboardOnClickLeavePage){
-            [buttons setImage:[ZCUITools zcuiGetBundleImage:@"ZCIcon_leavewords_normal"] forState:UIControlStateNormal];
-            [buttons setImage:[ZCUITools zcuiGetBundleImage:@"ZCIcon_leavewords_press"] forState:UIControlStateHighlighted];
-            [buttons setImage:[ZCUITools zcuiGetBundleImage:@"ZCIcon_leavewords_press"] forState:UIControlStateSelected];
+            [buttons setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_leaveMessage"] forState:UIControlStateNormal];
+            [buttons setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_leaveMessage"] forState:UIControlStateHighlighted];
+            [buttons setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_leaveMessage"] forState:UIControlStateSelected];
         }else if(tag == ZCKeyboardOnClickAddPhotoPicture){
-            [buttons setImage:[ZCUITools zcuiGetBundleImage:@"ZCIconsendPictures"] forState:UIControlStateNormal];
-            [buttons setImage:[ZCUITools zcuiGetBundleImage:@"ZCIconsendPicturesSelected"] forState:UIControlStateHighlighted];
-            [buttons setImage:[ZCUITools zcuiGetBundleImage:@"ZCIconsendPicturesSelected"] forState:UIControlStateSelected];
+            [buttons setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_picture"]
+                     forState:UIControlStateNormal];
+            [buttons setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_picture"]
+                     forState:UIControlStateHighlighted];
+            [buttons setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_picture"]
+                     forState:UIControlStateSelected];
         }else if(tag == ZCKeyboardOnClickAddPhotoCamera){
             [buttons setImage:[ZCUITools zcuiGetBundleImage:@"ZCIconTakingPictures"] forState:UIControlStateNormal];
             [buttons setImage:[ZCUITools zcuiGetBundleImage:@"ZCIconTakingPicturesSelected"] forState:UIControlStateHighlighted];
@@ -469,6 +469,13 @@ typedef NS_ENUM(NSInteger,ExitType) {
             [buttons setImage:[ZCUITools zcuiGetBundleImage:@"ZCIcon_change_person"] forState:UIControlStateNormal];
             [buttons setImage:[ZCUITools zcuiGetBundleImage:@"ZCIcon_change_person_press"] forState:UIControlStateHighlighted];
             [buttons setImage:[ZCUITools zcuiGetBundleImage:@"ZCIcon_change_person_press"] forState:UIControlStateSelected];
+        }else if (tag == ZCKeyboardOnClickQueryOrderForGoods){
+            [buttons setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_Order"]
+                     forState:UIControlStateNormal];
+            [buttons setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_Order"]
+                     forState:UIControlStateHighlighted];
+            [buttons setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_Order"]
+                     forState:UIControlStateSelected];
         }
         
         buttons.tag = tag;
@@ -584,6 +591,11 @@ typedef NS_ENUM(NSInteger,ExitType) {
         // 去留言界面
         if (_delegate && [_delegate respondsToSelector:@selector(keyboardItemClick:object:)]) {
             [_delegate keyboardItemClick:ZCKeyboardOnClickLeavePage object:@"2"];
+        }
+    }else if (btn.tag == ZCKeyboardOnClickQueryOrderForGoods){
+        // 查询订单
+        if (_delegate && [_delegate respondsToSelector:@selector(keyboardItemClick:object:)]) {
+            [_delegate keyboardItemClick:ZCKeyboardOnClickQueryOrderForGoods object:nil];
         }
     }
 }
@@ -778,28 +790,21 @@ typedef NS_ENUM(NSInteger,ExitType) {
             // 设置聊天是与机器人
             [[self getConfigMS] cleanUserCount];
             
-            // 设置按钮未转键盘
-            _zc_turnButton.tag = BUTTON_CONNECT_USER;
-            [_zc_turnButton setImage:[ZCUITools zcuiGetBundleImage:ZCSTLocalString(@"ZCIcon_manualWork_nol")] forState:UIControlStateNormal];
-            [_zc_turnButton setImage:[ZCUITools zcuiGetBundleImage:ZCSTLocalString(@"ZCIcon_manualWork_pre")] forState:UIControlStateHighlighted];
-            if (zcGetAppLanguages() == 1) {
-                [_zc_turnButton setImage:[ZCUITools zcuiGetBundleImage:@"ZCIcon_manualWork_normal_en"] forState:UIControlStateNormal];
-                [_zc_turnButton setImage:[ZCUITools zcuiGetBundleImage:@"ZCicon_manualWork_pressed_en"] forState:UIControlStateHighlighted];
-            }
             // 设置textview的frame 默认值
             [_zc_chatTextView setFrame:CGRectMake(48 * 2, (BottomHeight-35)/2, [self getSourceViewWidth]-48*3-5, 35)];
             _zc_voiceButton.frame = CGRectMake(48, 0, 48, 49);
             _zc_voiceButton.hidden = NO;
             
-            // 开启语音的功能   机器人开启语音识别
-            [self getZCLibConfig].isOpenRobotVoice = YES;
-#pragma warning 屏蔽语音转文字按钮
-//            if (![ZCUITools zcgetOpenRecord] || ![self getZCLibConfig].isOpenRobotVoice) {
+            [_zc_turnButton setImageEdgeInsets:UIEdgeInsetsMake(10.5, 15, 10.5, 5)];
             
+            // 开启语音的功能   机器人开启语音识别
+            if (![ZCUITools zcgetOpenRecord] || ![self getZCkitinfo].isOpenRobotVoice) {
+                
+                [_zc_turnButton setImageEdgeInsets:UIEdgeInsetsMake(10.5, 10, 10.5, 10)];
                 [_zc_chatTextView setFrame:CGRectMake(48 , (BottomHeight-35)/2, [self getSourceViewWidth]-48*2-5, 35)];
                 // 显示语音按钮
                 _zc_voiceButton.hidden = YES;
-//            }
+            }
             
             // 重新设定 “按住 说话” 的frame
             [_zc_pressedButton setFrame:_zc_chatTextView.frame];
@@ -880,7 +885,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
             [_zc_chatTextView setFrame:CGRectMake(10, (BottomHeight-35)/2, [self getSourceViewWidth]-68, 35)];
             
             // 开启语音的功能   机器人开启语音识别
-            if ([ZCUITools zcgetOpenRecord] && [self getZCLibConfig].isOpenRobotVoice) {
+            if ([ZCUITools zcgetOpenRecord] && [self getZCkitinfo].isOpenRobotVoice) {
                 
                 [_zc_chatTextView setFrame:CGRectMake(48 , (BottomHeight-35)/2, [self getSourceViewWidth]-48*2-5, 35)];
                 // 显示语音按钮
@@ -1254,8 +1259,8 @@ typedef NS_ENUM(NSInteger,ExitType) {
     
     {
         CGFloat bh         = BottomHeight + (_zc_chatTextView.frame.size.height-35);
-        CGRect tf         = _zc_listTable.frame;
-        CGFloat x=tf.size.height-_zc_listTable.contentSize.height;
+        CGRect tf          = _zc_listTable.frame;
+        CGFloat x = tf.size.height - _zc_listTable.contentSize.height;
         CGFloat SH = StatusBarHeight;
         CGFloat bottomH = 0;
         if (ZC_iPhoneX) {
@@ -1267,11 +1272,13 @@ typedef NS_ENUM(NSInteger,ExitType) {
                 tf.origin.y = NavBarHeight - (_zc_keyBoardHeight - x)-(bh-BottomHeight);
             }
         }else{
-            tf.origin.y   = NavBarHeight - _zc_keyBoardHeight-(bh-BottomHeight - bottomH);
+            tf.origin.y   = NavBarHeight - _zc_keyBoardHeight-(bh-BottomHeight -bottomH);
         }
         _zc_listTable.frame  = tf;
         
         CGRect bf         = _zc_bottomView.frame;
+        
+       
         bf.origin.y       = [self getSourceViewHeight] - bh - _zc_keyBoardHeight - SH;
         bf.size.height    = bh;
         _zc_bottomView.frame = bf;
@@ -1766,23 +1773,19 @@ typedef NS_ENUM(NSInteger,ExitType) {
 }
 #pragma mark -- 满意度事件
 - (void)satisfactionAction{
-    
     // 调评价页面
     if (_delegate && [_delegate respondsToSelector:@selector(keyboardItemClick:object:)]) {
         [_delegate keyboardItemClick:ZCKeyboardOnClickSatisfaction object:nil];
     }
-    
 }
 
 #pragma mark -- 留言事件
 
 - (void)leaveMsgBtnActionType:(NSInteger) type {
-
     [self hideKeyboard];
     [self removeKeyboardObserver];
     // 点击bottom上的留言按钮 跳转到留言并提交 不直接退出SDK
      [self leaveMsgBtnAction:ISNOCOLSE];
-
 }
 
 - (void)leaveMsgBtnAction:(ExitType ) exitType {
@@ -1818,7 +1821,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
             _zc_moreView.frame=pf;
         }else if(type==BUTTON_ADDPHOTO){
             //显示更多
-            bh=MoreViewHeight;
+            bh = MoreViewHeight;
             
             ff.origin.y=[self getSourceViewHeight];
             _zc_emojiView.frame=ff;
@@ -1831,7 +1834,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
         _zc_keyBoardHeight    = bh;
         
         bh         = BottomHeight + (_zc_chatTextView.frame.size.height-35);
-        CGFloat x=tf.size.height-_zc_listTable.contentSize.height;
+        CGFloat x = tf.size.height-_zc_listTable.contentSize.height;
         if(x > 0){
             if(x<_zc_keyBoardHeight){
                 tf.origin.y = NavBarHeight - (_zc_keyBoardHeight - x)-(bh-BottomHeight);
@@ -1845,8 +1848,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
         if (ZC_iPhoneX) {
             SH = 0;
         }
-        
-        bf.origin.y       = [self getSourceViewHeight] - bh - _zc_keyBoardHeight - SH;
+        bf.origin.y       = [self getSourceViewHeight] - bh - _zc_keyBoardHeight - SH;// - StatusBarHeight
         bf.size.height    = bh;
         _zc_bottomView.frame = bf;
         

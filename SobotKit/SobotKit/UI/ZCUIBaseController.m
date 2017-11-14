@@ -45,9 +45,14 @@
 
 -(void)createTitleView{
     self.topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, NavBarHeight)];
-    [self.topView setBackgroundColor:[ZCUITools zcgetDynamicColor]];
+//    [self.topView setBackgroundColor:[ZCUITools zcgetDynamicColor]];
+    [self.topView setBackgroundColor:UIColorFromRGB(0xffffff)];
     [_topView setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth];
     [_topView setAutoresizesSubviews:YES];
+
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, NavBarHeight-1, self.view.frame.size.width, 1)];
+    [lineView setBackgroundColor:UIColorFromRGB(0xe6e6e6)];
+    [self.topView addSubview:lineView];
     [self.view addSubview:self.topView];
     
     
@@ -76,24 +81,24 @@
     
     self.backButton=[UIButton buttonWithType:UIButtonTypeCustom];
     [self.backButton setFrame:CGRectMake(0, NavBarHeight-44, 64, 44)];
-    [self.backButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [self.backButton setImage:[ZCUITools zcuiGetBundleImage:@"ZCicon_titlebar_back_normal"] forState:UIControlStateNormal];
-    [self.backButton setImage:[ZCUITools zcuiGetBundleImage:@"ZCicon_titlebar_back_normal"] forState:UIControlStateHighlighted];
+    [self.backButton.imageView setContentMode:UIViewContentModeScaleToFill];
+    [self.backButton setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_nav_jump"] forState:UIControlStateNormal];
+    [self.backButton setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_nav_jump"] forState:UIControlStateHighlighted];
     [self.backButton setBackgroundColor:[UIColor clearColor]];
-    [self.backButton setImageEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-    [self.backButton setContentEdgeInsets:UIEdgeInsetsZero];
-    [self.backButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-    [self.backButton setAutoresizesSubviews:YES];
-    [self.backButton setTitle:ZCSTLocalString(@"返回") forState:UIControlStateNormal];
-    [self.backButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 0)];
-    [self.backButton.titleLabel setFont:[ZCUITools zcgetListKitTitleFont]];
-    [self.backButton setTitleColor:[ZCUITools zcgetTopViewTextColor] forState:UIControlStateNormal];
+    [self.backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
+//    [self.backButton setContentEdgeInsets:UIEdgeInsetsZero];
+//    [self.backButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+//    [self.backButton setAutoresizesSubviews:YES];
+//    [self.backButton setTitle:ZCSTLocalString(@"返回") forState:UIControlStateNormal];
+//    [self.backButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 0)];
+//    [self.backButton.titleLabel setFont:[ZCUITools zcgetListKitTitleFont]];
+//    [self.backButton setTitleColor:[ZCUITools zcgetTopViewTextColor] forState:UIControlStateNormal];
     [self.topView addSubview:self.backButton];
     self.backButton.tag = BUTTON_BACK;
     [self.backButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    
-    
+
+    //ef508d
     self.moreButton=[UIButton buttonWithType:UIButtonTypeCustom];
     [self.moreButton setFrame:CGRectMake(self.view.frame.size.width-74, NavBarHeight-44, 74, 44)];
     [self.moreButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
@@ -106,8 +111,8 @@
     [self.moreButton setTitle:@"" forState:UIControlStateNormal];
     [self.moreButton.titleLabel setFont:[ZCUITools zcgetListKitTitleFont]];
     [self.moreButton setTitleColor:[ZCUITools zcgetTopViewTextColor] forState:UIControlStateNormal];
-    [self.moreButton setImage:[ZCUITools zcuiGetBundleImage:@"ZCIcon_btnmore"] forState:UIControlStateNormal];
-    [self.moreButton setImage:[ZCUITools zcuiGetBundleImage:@"ZCIcon_btnmore_press"] forState:UIControlStateHighlighted];
+    [self.moreButton setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_nav_more"] forState:UIControlStateNormal];
+    [self.moreButton setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_nav_more"] forState:UIControlStateHighlighted];
     [self.topView addSubview:self.moreButton];
     self.moreButton.tag = BUTTON_MORE;
     [self.moreButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];

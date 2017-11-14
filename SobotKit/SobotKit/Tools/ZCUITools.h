@@ -25,6 +25,8 @@
 +(UIImage *) zcuiGetBundleImage:(NSString *) imageName;
 +(UIImage *)zcuiGetExpressionBundleImage:(NSString *)imageName;
 
++(UIImage *)knbUiGetBundleImage:(NSString *) imageName;
+
 /**
  *  获取表情库
  *
@@ -473,6 +475,36 @@
  */
 + (NSString *)zcAddTransformString:(NSString *)contentText;
 
+#pragma mark- 获取商品/订单 相关属性
+/**
+ 商品/订单号 字体和颜色
 
+ @return 商品/订单号 字体和颜色
+ */
++ (UIFont *)knbGetOrderNumberLabelFont;
++ (UIColor *)knbGetOrderNumberLabelColor;
+
+/**
+ 商品/订单状态 字体和颜色
+
+ @return 商品/订单状态 字体和颜色
+ */
++ (UIFont *)knbGetOrderStateLabelFont;
++ (UIColor *)knbGetOrderStateLabelColor;
+/**
+ 商品/订单价钱 字体和颜色
+ */
++ (UIFont *)knbGetGoodsPriceLabelFont;
++ (UIColor *)knbGetGoodsPriceLabelColor;
+/**
+ 商品/订单日期 字体和颜色
+ */
++ (UIFont *)knbGetOrderDateLabelFont;
++ (UIColor *)knbGetOrderDateLabelColor;
+/**
+ 商品/订单描述 字体和颜色
+ */
++ (UIFont *)knbGetGoodsTitleLabelFont;
++ (UIColor *)knbGetGoodsTitleLabelColor;
 
 @end

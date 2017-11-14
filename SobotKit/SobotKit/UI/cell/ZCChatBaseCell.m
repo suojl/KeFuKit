@@ -147,8 +147,19 @@
     _tempModel=model;
     if(![@"" isEqual:zcLibConvertToString(showTime)]){
         [_lblTime setText:showTime];
-        [_lblTime setFrame:CGRectMake(0, 0, self.viewWidth, 30)];
+//        [_lblTime setFrame:CGRectMake(0, 0, self.viewWidth, 30)];
         _lblTime.hidden=NO;
+        if (showTime.length < 6) {
+            [self.lblTime setFrame:CGRectMake((self.viewWidth - 53)/2, 10, 53, 20)];
+            self.lblTime.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+            self.lblTime.layer.cornerRadius = 10.0f;
+            self.lblTime.layer.masksToBounds = YES;
+        }else{
+            [self.lblTime setFrame:CGRectMake((self.viewWidth - 90)/2, 10, 90, 20)];
+            self.lblTime.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+            self.lblTime.layer.cornerRadius = 10.0f;
+            self.lblTime.layer.masksToBounds = YES;
+        }
         cellHeight = 30 ;
     }
     
@@ -190,7 +201,7 @@
             [_lblNickName setText:[NSString stringWithFormat:@"%@",[ZCLibClient getZCLibClient].libInitInfo.nickName]];
         }
        
-        // 设置用户的头像 (这里的头像取 用户自定义的不用从服务器拉取)
+        // 设置用户的头像 (这里的头像取 用户自定义的不用重服务器拉取)
         [_ivHeader loadWithURL:[NSURL URLWithString:zcUrlEncodedString([ZCLibClient getZCLibClient].libInitInfo.avatarUrl)] placeholer:[ZCUITools zcuiGetBundleImage:@"ZCIcon_UserAvatar_nol"] showActivityIndicatorView:NO];
         
         
@@ -304,7 +315,7 @@
         }
         
         if(_tempModel.showTurnUser && ![self getCurConfig].isArtificial && [ZCLibClient getZCLibClient].libInitInfo.serviceMode!=1){
-        
+
             [self.btnTurnUser setFrame:CGRectMake(backgroundF.origin.x + 10,  backgroundF.origin.y + backgroundF.size.height+15, 69, 24)];
             self.btnTurnUser.hidden = NO;
             
