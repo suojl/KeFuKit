@@ -161,7 +161,6 @@
     // 显示 商品图片
     if (zcLibConvertToString([self getGoodsInfo].goodsImgUrl)!=nil && ![@"" isEqualToString:[self getGoodsInfo].goodsImgUrl]) {
         [_goodsImageView setFrame: CGRectMake(15, ivBgViewHeight, 55, 55)];
-        NSLog(@"--------%@",[self getGoodsInfo].goodsImgUrl);
         [self.goodsImageView loadWithURL:[NSURL URLWithString:[self getGoodsInfo].goodsImgUrl] placeholer:[ZCUITools zcuiGetBundleImage:@"ZCicon_default_bg"] showActivityIndicatorView:YES];
     }
 

@@ -39,16 +39,15 @@
 
     // 关键设置，必须设置了参数才生效
     [[ZCLibClient getZCLibClient] setLibInitInfo:initInfo];
-    //    initInfo.serviceMode    = 4;
+//        initInfo.serviceMode    = 4;
     // 组ID: 0abc24fed103436285cb9d3e40a9525f
     // 客服ID: 060001d0527d4996bfdb7a843b53c2ac
     //    initInfo.skillSetId = @"";
     //    initInfo.skillSetName = @"";
     //    initInfo.receptionistId = @"";
     //    initInfo.titleType = @"2";
-//    initInfo.nickName = @"小锁";
+    initInfo.nickName = @"小锁";
 //    initInfo.userSex = @"0";
-    //    initInfo.zx = @"自定义字段测试";
 
     // 设置用户信息参数
 //    [self customUserInformationWith:initInfo];
@@ -61,18 +60,19 @@
     /**   设置订单查询接口   **/
 
     // 设置md5加密格式
-    //    uiInfo.md5MixPrefix = @"blln";
-    //    uiInfo.md5MixPostfix = @"blln";
-    //    uiInfo.versioNumber = @"1.3.0";
-    ////    // 设置订单查询接口
-    //    uiInfo.queryOrderListForKF = @"http://10.10.8.22:9214/blln-app/order/queryOrderListForKF.do";
-
-    uiInfo.md5MixPrefix = @"mtmy";
-    uiInfo.md5MixPostfix = @"mtmy";
+    uiInfo.md5MixPrefix = @"blln";
+    uiInfo.md5MixPostfix = @"blln";
     uiInfo.versioNumber = @"1.3.0";
     uiInfo.orderStatusFlag = @"5";
-    //    // 设置订单查询接口http://60.205.112.197/mtmy-app/queryMyOrder150.do
-    uiInfo.queryOrderListForKF = @"http://60.205.112.197/mtmy-app/order/queryMyOrder150.do";
+    // 设置订单查询接口
+    uiInfo.queryOrderListForKF = @"http://10.10.8.22:9214/blln-app/order/queryOrderListForKF.do";
+
+//    uiInfo.md5MixPrefix = @"mtmy";
+//    uiInfo.md5MixPostfix = @"mtmy";
+//    uiInfo.versioNumber = @"1.3.0";
+//    uiInfo.orderStatusFlag = @"5";
+//    //    // 设置订单查询接口http://60.205.112.197/mtmy-app/queryMyOrder150.do
+//    uiInfo.queryOrderListForKF = @"http://60.205.112.197/mtmy-app/order/queryMyOrder150.do";
 
     /**   ----------------------END----------------------   **/
 

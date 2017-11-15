@@ -235,8 +235,8 @@ typedef NS_ENUM(NSInteger,ExitType) {
 - (UIButton *)zc_turnButton{
     if (!_zc_turnButton) {
         _zc_turnButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_zc_turnButton setImage:[ZCUITools zcuiGetBundleImage:ZCSTLocalString(@"ZCIcon_manualWork_nol")] forState:UIControlStateNormal];
-        [_zc_turnButton setImage:[ZCUITools zcuiGetBundleImage:ZCSTLocalString(@"ZCIcon_manualWork_pre")] forState:UIControlStateHighlighted];
+        [_zc_turnButton setImage:[ZCUITools knbUiGetBundleImage:ZCSTLocalString(@"KeFu_zhuanRenGong")] forState:UIControlStateNormal];
+        [_zc_turnButton setImage:[ZCUITools knbUiGetBundleImage:ZCSTLocalString(@"KeFu_zhuanRenGong")] forState:UIControlStateHighlighted];
 //        if (zcGetAppLanguages() == 1) {
 //            [_zc_turnButton setImage:[ZCUITools zcuiGetBundleImage:ZCSTLocalString(@"ZCIcon_manualWork_normal_en")] forState:UIControlStateNormal];
 //            [_zc_turnButton setImage:[ZCUITools zcuiGetBundleImage:ZCSTLocalString(@"ZCIcon_manualWork_pressed_en")] forState:UIControlStateHighlighted];

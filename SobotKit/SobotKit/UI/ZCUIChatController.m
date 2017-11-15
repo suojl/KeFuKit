@@ -1842,9 +1842,6 @@ typedef NS_ENUM(NSInteger,ExitType) {
         ZCLibMessage *lm=[_listArray objectAtIndex:(indexPath.row-1)];
         if(![model.cid isEqual:lm.cid]){
     //            time=intervalSinceNow(model.ts);
-            NSLog(@"--------%@",    model.richModel.msg);
-            NSLog(@"----model.cid----%@",    model.cid);
-            NSLog(@"----lm.cid----%@",    lm.cid);
             time = zcLibDateTransformString(format, zcLibStringFormateDate(model.ts));
         }
     }else{
@@ -3235,6 +3232,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
 -(KNBGoodsInfo *)isJSONtoModel:(NSString *)message{
     // 判断字符串是否以 特定字符开头
 //    if (message && ![@"" isEqualToString:message] && (message.length >= 6)){
+    message = [message stringByReplacingOccurrencesOfString:@"" withString:@" "];
     if ([message hasPrefix:@"[消息类型]"]){
 //        NSString *flagStr = [message substringToIndex:6];
 //        if ([@"[消息类型]" isEqualToString:flagStr]) {
