@@ -1,0 +1,8 @@
+#提交git要忽略的文件
+*.xcuserstate
+project.xcworkspace
+xcuserdata
+UserInterfaceState.xcuserstate
+project.xcworkspace/
+xcuserdata/
+UserInterface.xcuserstate
