@@ -7,7 +7,7 @@
 		<key>CreateFrameworScript.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<key>SobotKit.xcscheme</key>
 		<dict>
@@ -23,6 +23,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>7BB21F9F1C005611003539F7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7BB220C01C005746003539F7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

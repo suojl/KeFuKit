@@ -16,6 +16,7 @@
 #import "NSObject+YYModel.h"
 #import "ZCLibClient.h"
 #import "ZCUIConfigManager.h"
+#import "MJRefresh.h"
 
 #define kHistoryOrderCell @"KNBHistoryOrderCell"
 
@@ -25,6 +26,10 @@
     UIButton    *_closeBtn;         // 关闭按钮
 
     NSMutableArray  *_goodsInfoArray;
+
+    UIView      *_emptyView;
+
+    int _pageNumber;
 }
 
 @end
@@ -34,10 +39,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _pageNumber = 1;
     [self setupUI];
     _goodsInfoArray = [[NSMutableArray alloc] initWithCapacity:10];
 
-    [self getDatasourceByNetwork];
+    //    [self getDatasourceByNetwork];
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    _orderTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(getDatasourceByNetwork)];
+    [_orderTableView.mj_footer beginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -67,6 +76,7 @@
     [_orderTableView setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
     [_orderTableView registerClass:[KNBHistoryOrderCell class] forCellReuseIdentifier:kHistoryOrderCell];
     _orderTableView.backgroundColor = [UIColor clearColor];
+    _orderTableView.tableFooterView = [UIView new];
     [self.view addSubview:_orderTableView];
 
     _titleLabel = [[UILabel alloc] init];
@@ -89,6 +99,15 @@
 //    _closeBtn.sd_layout.rightSpaceToView(_topView, 15).centerYEqualToView(_topView)
 //    .widthIs(15).heightIs(15);
 
+    /*---空页面---*/
+    UILabel *detailsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, viewWidth, 15)];
+    detailsLabel.textAlignment = NSTextAlignmentCenter;
+    detailsLabel.text = @"你还没有下过订单!";
+    _emptyView = [[UIView alloc] initWithFrame:_orderTableView.frame];
+    _emptyView.backgroundColor = [UIColor whiteColor];
+    _emptyView.hidden = YES;
+    [_emptyView addSubview:detailsLabel];
+    [self.view addSubview:_emptyView];
 }
 
 -(void)getDatasourceByNetwork{
@@ -102,7 +121,7 @@
 
     NSString *userId = [ZCLibClient getZCLibClient].libInitInfo.userId;
 
-    NSString *paramters = [NSString stringWithFormat:@"{\"version\" : \"%@\", \"flag\" : %@, \"user_id\" : %@, \"page\" : 1}",versionNumber,orderStatusFlag,userId];
+    NSString *paramters = [NSString stringWithFormat:@"{\"version\" : \"%@\", \"flag\" : %@, \"user_id\" : %@, \"page\" : %d}",versionNumber,orderStatusFlag,userId,_pageNumber];
     NSString *paramterString = [NSString stringWithFormat:@"%@%@%@",md5MixPrefix,paramters,md5MixPostfix];
     NSString *signMd5String = zcLibMd5(paramterString);
     NSString *jsonParamters = [NSString stringWithFormat:@"%@%@",md5MixPrefix,paramters];
@@ -116,26 +135,37 @@
 //    NSString *signMd5String = [ZCUIConfigManager getInstance].kitInfo.signMd5String;
     NSDictionary *parameters = @{@"sign": signMd5String,
                                  @"jsonStr": jsonParamters};
-    NSLog(@"----%@",signMd5String);
-    NSLog(@"----%@",jsonParamters);
+    
+    __weak __typeof(self)weakSelf = self;
+    __weak __typeof(_goodsInfoArray)weakInfoArray = _goodsInfoArray;
     [sessionManager POST:requestURL parameters:parameters progress:nil
                  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
-                     KNBQueryBackInfo *orderData = [KNBQueryBackInfo yy_modelWithJSON:responseObject];
 
+
+                     KNBQueryBackInfo *orderData = [KNBQueryBackInfo yy_modelWithJSON:responseObject];
                      NSArray<KNBOrderInfo *> *orderArray = orderData.data;
 
+                     if (orderArray.count == 0) {
+                         [weakSelf.orderTableView.mj_footer setState:MJRefreshStateNoMoreData];
+                         return;
+                     }
                      for (KNBOrderInfo *orderInfo in orderArray) {
                          for (KNBGoodsInfo *goodsInfo in orderInfo.goodsList) {
                              goodsInfo.orderNumber = orderInfo.orderNo;
                              goodsInfo.orderDate = orderInfo.createData;
                              goodsInfo.orderId = orderInfo.orderId;
                              goodsInfo.orderState = [NSString stringWithFormat:@"%ld",(long)orderInfo.orderStatus];
-                             [_goodsInfoArray addObject:goodsInfo];
+                             [weakInfoArray addObject:goodsInfo];
                          }
                      }
+                     [weakSelf.orderTableView.mj_footer endRefreshing];
+                     if (weakInfoArray.count == 0) {
+                         _emptyView.hidden = NO;
+                     }
                      NSLog(@"----%@",responseObject);
-                     [self.orderTableView reloadData];
+                     _pageNumber ++;
+                     [weakSelf.orderTableView reloadData];
                  } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                      DLog(@"----%@",error);
                  }];
@@ -174,14 +204,14 @@
     return 113;
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView *bottomView = [[UIView alloc] init];
-    bottomView.backgroundColor = UIColorFromRGB(0xe6e7e5);
-    return bottomView;
-}
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 1;
-}
+//-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+//    UIView *bottomView = [[UIView alloc] init];
+//    bottomView.backgroundColor = UIColorFromRGB(0xe6e7e5);
+//    return bottomView;
+//}
+//-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+//    return 1;
+//}
 
 -(NSString *)makeGoodsToMessage:(KNBGoodsInfo *)goodsInfo{
 //        [消息类型]:[123]

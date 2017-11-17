@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C939E3E1FBE7A7B00220839 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9C939E3D1FBE7A7A00220839 /* MJRefresh.bundle */; };
 		9CAFF2ED1FB5A73C00206C8B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAFF2EC1FB5A73C00206C8B /* AppDelegate.m */; };
 		9CAFF2F01FB5A73C00206C8B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAFF2EF1FB5A73C00206C8B /* ViewController.m */; };
 		9CAFF2F31FB5A73C00206C8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CAFF2F11FB5A73C00206C8B /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9C939E3D1FBE7A7A00220839 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		9CAFF2E81FB5A73C00206C8B /* MyIMKitTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyIMKitTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CAFF2EB1FB5A73C00206C8B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9CAFF2EC1FB5A73C00206C8B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		9CAFF31A1FB5AAE000206C8B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				9C939E3D1FBE7A7A00220839 /* MJRefresh.bundle */,
 				9CDC5B0C1FBA97D8009DC3D7 /* KeFuSDK.bundle */,
 				9CAFF3221FB5ABB700206C8B /* SobotKit.bundle */,
 				9CAFF3211FB5ABB200206C8B /* ZCEmojiExpression.bundle */,
@@ -224,6 +227,7 @@
 			files = (
 				9CAFF2F81FB5A73C00206C8B /* LaunchScreen.storyboard in Resources */,
 				9CDC5B0D1FBA97D8009DC3D7 /* KeFuSDK.bundle in Resources */,
+				9C939E3E1FBE7A7B00220839 /* MJRefresh.bundle in Resources */,
 				9CAFF3241FB5ABB700206C8B /* ZCEmojiExpression.bundle in Resources */,
 				9CAFF3251FB5ABB700206C8B /* SobotKit.bundle in Resources */,
 				9CAFF2F51FB5A73C00206C8B /* Assets.xcassets in Resources */,

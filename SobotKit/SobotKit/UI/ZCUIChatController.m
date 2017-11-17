@@ -692,6 +692,11 @@ typedef NS_ENUM(NSInteger,ExitType) {
             [_listArray addObject:[self createMessageToArrayByAction:ZCTipCellMessageNullMessage type:0 name:@"" face:@"" tips:ZCReceivedMessageUnKonw content:nil]];
         }
 
+        // 显示商品信息
+        if(self.zckitInfo.orderGoodsInfo!=nil && [self getZCLibConfig].isArtificial){
+            [_listArray addObject:[self createMessageToArrayByAction:ZCTipCellMessageNullMessage type:0 name:@"" face:@"" tips:ZCReceivedMessageUnKonw content:nil]];
+        }
+
         [_listTable reloadData];
         
         [self scrollTableToBottom];
@@ -1399,6 +1404,9 @@ typedef NS_ENUM(NSInteger,ExitType) {
     // 是否添加商品信息
     if(message.richModel!=nil && message.richModel.msgType == 0 && [message.richModel.msg isEqual:[self getZCLibConfig].adminHelloWord]){
         if(self.zckitInfo.productInfo!=nil && ![@"" isEqualToString:self.zckitInfo.productInfo.title] && ![@"" isEqualToString:self.zckitInfo.productInfo.link]){
+            [_listArray addObject:[self createMessageToArrayByAction:ZCTipCellMessageEvaluation type:0 name:@"" face:@"" tips:ZCReceivedMessageUnKonw content:nil]];
+        }
+        if(self.zckitInfo.orderGoodsInfo!=nil){
             [_listArray addObject:[self createMessageToArrayByAction:ZCTipCellMessageEvaluation type:0 name:@"" face:@"" tips:ZCReceivedMessageUnKonw content:nil]];
         }
     }
@@ -3241,6 +3249,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
             message = [message stringByReplacingOccurrencesOfString:@"\n" withString:@","];
             message = [message stringByReplacingOccurrencesOfString:@"[" withString:@"\""];
             message = [message stringByReplacingOccurrencesOfString:@"]" withString:@"\""];
+        message = [message stringByReplacingOccurrencesOfString:@"##" withString:@","];
 
             NSString *msgJSON = [NSString stringWithFormat:@"{%@}",message];
             KNBGoodsInfo *goodsInfo = [KNBGoodsInfo yy_modelWithJSON:msgJSON];
