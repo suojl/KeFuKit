@@ -1,0 +1,30 @@
+dependencies: \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/UI/cell/ZCRichTextChatCell.m \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/build/SobotKit.build/Release-iphoneos/SobotKit.build/module.modulemap \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotKit.pch \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Tools/ZCUITools.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibCommon.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Defines/ZCUITipsDefine.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Tools/ZCUIToastTools.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLogUtils.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/UI/cell/ZCRichTextChatCell.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/UI/cell/ZCChatBaseCell.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibMessage.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibRich.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibConfig.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibInitInfo.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/UI/cell/ZCChatCellDelegate.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Views/XHImageViewer/Categorys/ZCUIImageView.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Views/ZCEmojiLabel/ZCMLEmojiLabel.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Views/ZCEmojiLabel/ZCTTTAttributedLabel/ZCTTTAttributedLabel.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Views/XHImageViewer/Views/ZCUIXHImageViewer.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Views/XHImageViewer/Protocol/ZCUIXHImageURLDataSource.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLIbGlobalDefine.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Views/ZCActionSheetView/ZCActionSheet.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Defines/ZCUIColorsDefine.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCIMChat.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibStatusDefine.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibNetworkTools.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibMessageConstants.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCPlatformTools.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCPlatformInfo.h

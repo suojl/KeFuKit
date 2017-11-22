@@ -1,0 +1,93 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [
+    {
+      'type': 'directory',
+      'name': "/Users/zsl/Desktop/KeFuKit/SobotKit/build/Release-iphonesimulator/SobotKit.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "KNBGoodsInfo.h",
+          'external-contents': "/Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Entity/KNBGoodsInfo.h"
+        },
+        {
+          'type': 'file',
+          'name': "SobotKit-Swift.h",
+          'external-contents': "/Users/zsl/Desktop/KeFuKit/SobotKit/build/Release-iphonesimulator/SobotKit.framework/Headers/SobotKit-Swift.h"
+        },
+        {
+          'type': 'file',
+          'name': "SobotKit.h",
+          'external-contents': "/Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotKit.h"
+        },
+        {
+          'type': 'file',
+          'name': "ZCKitInfo.h",
+          'external-contents': "/Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Entity/ZCKitInfo.h"
+        },
+        {
+          'type': 'file',
+          'name': "ZCLibClient.h",
+          'external-contents': "/Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibClient.h"
+        },
+        {
+          'type': 'file',
+          'name': "ZCLibConfig.h",
+          'external-contents': "/Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibConfig.h"
+        },
+        {
+          'type': 'file',
+          'name': "ZCLibInitInfo.h",
+          'external-contents': "/Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibInitInfo.h"
+        },
+        {
+          'type': 'file',
+          'name': "ZCLibRich.h",
+          'external-contents': "/Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibRich.h"
+        },
+        {
+          'type': 'file',
+          'name': "ZCPlatformInfo.h",
+          'external-contents': "/Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCPlatformInfo.h"
+        },
+        {
+          'type': 'file',
+          'name': "ZCProductInfo.h",
+          'external-contents': "/Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Entity/ZCProductInfo.h"
+        },
+        {
+          'type': 'file',
+          'name': "ZCSobot.h",
+          'external-contents': "/Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/ZCSobot.h"
+        },
+        {
+          'type': 'file',
+          'name': "ZCUIBaseController.h",
+          'external-contents': "/Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/UI/ZCUIBaseController.h"
+        },
+        {
+          'type': 'file',
+          'name': "ZCUIChatController.h",
+          'external-contents': "/Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/UI/ZCUIChatController.h"
+        },
+        {
+          'type': 'file',
+          'name': "ZCUIChatListController.h",
+          'external-contents': "/Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/UI/ZCUIChatListController.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/zsl/Desktop/KeFuKit/SobotKit/build/Release-iphonesimulator/SobotKit.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/zsl/Desktop/KeFuKit/SobotKit/build/SobotKit.build/Release-iphonesimulator/SobotKit.build/module.modulemap"
+        }
+      ]
+    }
+  ]
+}

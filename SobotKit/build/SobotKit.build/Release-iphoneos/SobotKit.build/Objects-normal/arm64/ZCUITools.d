@@ -1,0 +1,33 @@
+dependencies: \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Tools/ZCUITools.m \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/build/SobotKit.build/Release-iphoneos/SobotKit.build/module.modulemap \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotKit.pch \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Tools/ZCUITools.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibCommon.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Defines/ZCUITipsDefine.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Tools/ZCUIToastTools.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLogUtils.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Tools/ZCUIConfigManager.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Entity/ZCKitInfo.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Entity/ZCProductInfo.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Entity/KNBGoodsInfo.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibConfig.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibInitInfo.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibServer.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibMessageConstants.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibMessage.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibRich.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibStatusDefine.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Views/ZCBottomView/ZCUIKeyboardDelegate.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibClient.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Defines/ZCUIColorsDefine.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLIbGlobalDefine.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Tools/ZCStoreConfiguration.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLocalStore.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Views/ZCBottomView/ZCUIChatKeyboard.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Views/ZCSkillGroups/ZCUISkillSetView.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/SobotLib/include/ZCLibSkillSet.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Views/ZCButton/ZCButton.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Views/ZCEmoji/EmojiBoardView.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Views/ZCEmoji/EmojiButton.h \
+  /Users/zsl/Desktop/KeFuKit/SobotKit/SobotKit/Views/ZCUIRecordView/ZCUIRecordView.h
