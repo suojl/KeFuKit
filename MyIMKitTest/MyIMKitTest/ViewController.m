@@ -38,7 +38,7 @@
     // 错误日志收集
     [ZCLibClient setZCLibUncaughtExceptionHandler];
 
-    ZCLibInitInfo *initInfo = [ZCLibInitInfo new];
+    ZCLibInitInfo *initInfo = [ZCLibInitInfo new];//aaa
 
 #pragma mark 设置默认APPKEY
 //    initInfo.appKey         = @"6daf80b9ba1b48ed90f4c80f88bc3ab0";
