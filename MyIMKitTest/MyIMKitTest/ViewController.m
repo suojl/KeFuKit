@@ -51,11 +51,16 @@
 //        initInfo.serviceMode    = 4;
     // 组ID: 0abc24fed103436285cb9d3e40a9525f
     // 客服ID: 060001d0527d4996bfdb7a843b53c2ac
-        initInfo.skillSetId = @"469efb3e757d4cd7a1e03af18203fe4a";
+    initInfo.skillSetId = @"469efb3e757d4cd7a1e03af18203fe4a";
     //    initInfo.skillSetName = @"";
-        initInfo.receptionistId = @"4ef76f9d896c4be1b482f3f0eb01aacd";
+//    initInfo.receptionistId = @"4ef76f9d896c4be1b482f3f0eb01aacd";
     //    initInfo.titleType = @"2";
     initInfo.nickName = @"小锁";
+//    initInfo.realName = @"";    // 用户真实姓名
+//    initInfo.phone = @"";   //用户手机号
+//    initInfo.avatarUrl = @""; //设置用户头像
+//    initInfo.qqNumber = @"";    //QQ号码
+//    initInfo.userRemark = @"";  //用户备注
 //    initInfo.userSex = @"0";
 
     // 设置用户信息参数
@@ -148,13 +153,13 @@
 //    uiInfo.productInfo = productInfo;
 
     KNBGoodsInfo *goodsInfo = [KNBGoodsInfo new];
-    goodsInfo.orderNumber = @"fads49534959032234";
-    goodsInfo.orderState = @"待收货";
-    goodsInfo.orderDate = @"2017-01-23";
+//    goodsInfo.orderNumber = @"fads49534959032234";
+//    goodsInfo.orderState = @"待收货";
+//    goodsInfo.orderDate = @"2017-01-23";
     goodsInfo.goodsTitle = @"卡萨丁佛闻风丧胆";
     goodsInfo.goodsPrice = @"2434535";
     goodsInfo.goodsImgUrl = @"http://imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=cfb53f93c3177f3e0439f44e18a651b2/6609c93d70cf3bc7814060c9db00baa1cd112a56.jpg";
-    goodsInfo.cardType = @"订单";
+    goodsInfo.cardType = @"商品";
     uiInfo.orderGoodsInfo = goodsInfo;
 
     //mtmy订单状态（-2：取消订单；-1：待付款；1：待发货；2：待收货；3：已退款（退货并退款使用）；4：已完成；）

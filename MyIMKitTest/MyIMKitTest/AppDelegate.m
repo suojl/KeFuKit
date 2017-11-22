@@ -88,7 +88,11 @@
     NSLog(@"Userinfo %@",notification.request.content.userInfo);
 
     //功能：可设置是否在应用内弹出通知
-    completionHandler(UNNotificationPresentationOptionAlert);
+    if (@available(iOS 10.0, *)) {
+        completionHandler(UNNotificationPresentationOptionAlert);
+    } else {
+        // Fallback on earlier versions
+    }
 
 }
 

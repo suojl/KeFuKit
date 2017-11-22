@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9C939E3E1FBE7A7B00220839 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9C939E3D1FBE7A7A00220839 /* MJRefresh.bundle */; };
 		9CAFF2ED1FB5A73C00206C8B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAFF2EC1FB5A73C00206C8B /* AppDelegate.m */; };
 		9CAFF2F01FB5A73C00206C8B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAFF2EF1FB5A73C00206C8B /* ViewController.m */; };
 		9CAFF2F31FB5A73C00206C8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CAFF2F11FB5A73C00206C8B /* Main.storyboard */; };
@@ -22,7 +21,7 @@
 		9CAFF3241FB5ABB700206C8B /* ZCEmojiExpression.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9CAFF3211FB5ABB200206C8B /* ZCEmojiExpression.bundle */; };
 		9CAFF3251FB5ABB700206C8B /* SobotKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9CAFF3221FB5ABB700206C8B /* SobotKit.bundle */; };
 		9CAFF33B1FB5BC4B00206C8B /* SobotKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CAFF3341FB5B58500206C8B /* SobotKit.framework */; };
-		9CDC5B0D1FBA97D8009DC3D7 /* KeFuSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9CDC5B0C1FBA97D8009DC3D7 /* KeFuSDK.bundle */; };
+		9CC6BBB41FC5126500DC229C /* KeFuSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9CC6BBB31FC5126500DC229C /* KeFuSDK.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +42,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9C939E3D1FBE7A7A00220839 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		9CAFF2E81FB5A73C00206C8B /* MyIMKitTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyIMKitTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CAFF2EB1FB5A73C00206C8B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9CAFF2EC1FB5A73C00206C8B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -63,7 +61,7 @@
 		9CAFF3211FB5ABB200206C8B /* ZCEmojiExpression.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZCEmojiExpression.bundle; sourceTree = "<group>"; };
 		9CAFF3221FB5ABB700206C8B /* SobotKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SobotKit.bundle; sourceTree = "<group>"; };
 		9CAFF32D1FB5B58500206C8B /* SobotKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SobotKit.xcodeproj; path = ../SobotKit/SobotKit.xcodeproj; sourceTree = "<group>"; };
-		9CDC5B0C1FBA97D8009DC3D7 /* KeFuSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = KeFuSDK.bundle; sourceTree = "<group>"; };
+		9CC6BBB31FC5126500DC229C /* KeFuSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = KeFuSDK.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,8 +132,7 @@
 		9CAFF31A1FB5AAE000206C8B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				9C939E3D1FBE7A7A00220839 /* MJRefresh.bundle */,
-				9CDC5B0C1FBA97D8009DC3D7 /* KeFuSDK.bundle */,
+				9CC6BBB31FC5126500DC229C /* KeFuSDK.bundle */,
 				9CAFF3221FB5ABB700206C8B /* SobotKit.bundle */,
 				9CAFF3211FB5ABB200206C8B /* ZCEmojiExpression.bundle */,
 			);
@@ -226,8 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CAFF2F81FB5A73C00206C8B /* LaunchScreen.storyboard in Resources */,
-				9CDC5B0D1FBA97D8009DC3D7 /* KeFuSDK.bundle in Resources */,
-				9C939E3E1FBE7A7B00220839 /* MJRefresh.bundle in Resources */,
+				9CC6BBB41FC5126500DC229C /* KeFuSDK.bundle in Resources */,
 				9CAFF3241FB5ABB700206C8B /* ZCEmojiExpression.bundle in Resources */,
 				9CAFF3251FB5ABB700206C8B /* SobotKit.bundle in Resources */,
 				9CAFF2F51FB5A73C00206C8B /* Assets.xcassets in Resources */,
@@ -402,7 +398,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dengyun.dengyunblln;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dengyun.dengyunblln2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -428,7 +424,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dengyun.dengyunblln;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dengyun.dengyunblln2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

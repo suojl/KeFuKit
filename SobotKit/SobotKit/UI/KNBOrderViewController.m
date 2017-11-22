@@ -100,12 +100,19 @@
 //    .widthIs(15).heightIs(15);
 
     /*---空页面---*/
-    UILabel *detailsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, viewWidth, 15)];
-    detailsLabel.textAlignment = NSTextAlignmentCenter;
-    detailsLabel.text = @"你还没有下过订单!";
+
     _emptyView = [[UIView alloc] initWithFrame:_orderTableView.frame];
     _emptyView.backgroundColor = [UIColor whiteColor];
     _emptyView.hidden = YES;
+    CGFloat imageView_X = _orderTableView.frame.size.width/2 - 50;
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[ZCUITools knbUiGetBundleImage:@"KeFu_No_order"]];
+    imageView.frame = CGRectMake(imageView_X, 55, 100, 81);
+    [_emptyView addSubview:imageView];
+    CGFloat labelY = CGRectGetMaxY(imageView.frame) + 20;
+    UILabel *detailsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, labelY, viewWidth, 15)];
+    detailsLabel.textAlignment = NSTextAlignmentCenter;
+    detailsLabel.textColor = UIColorFromRGB(0x999999);
+    detailsLabel.text = @"您还没有订单~";
     [_emptyView addSubview:detailsLabel];
     [self.view addSubview:_emptyView];
 }
@@ -146,10 +153,6 @@
                      KNBQueryBackInfo *orderData = [KNBQueryBackInfo yy_modelWithJSON:responseObject];
                      NSArray<KNBOrderInfo *> *orderArray = orderData.data;
 
-                     if (orderArray.count == 0) {
-                         [weakSelf.orderTableView.mj_footer setState:MJRefreshStateNoMoreData];
-                         return;
-                     }
                      for (KNBOrderInfo *orderInfo in orderArray) {
                          for (KNBGoodsInfo *goodsInfo in orderInfo.goodsList) {
                              goodsInfo.orderNumber = orderInfo.orderNo;
@@ -162,6 +165,10 @@
                      [weakSelf.orderTableView.mj_footer endRefreshing];
                      if (weakInfoArray.count == 0) {
                          _emptyView.hidden = NO;
+                     }
+                     if (orderArray.count == 0) {
+                         [weakSelf.orderTableView.mj_footer setState:MJRefreshStateNoMoreData];
+                         return;
                      }
                      NSLog(@"----%@",responseObject);
                      _pageNumber ++;
