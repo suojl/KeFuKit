@@ -11,12 +11,13 @@
 #import "ZCUIColorsDefine.h"
 #import "ZCLIbGlobalDefine.h"
 #import "KNBHistoryOrderCell.h"
-#import "AFNetworking.h"
+//#import "AFNetworking.h"
 #import "KNBOrderInfo.h"
 #import "NSObject+YYModel.h"
 #import "ZCLibClient.h"
 #import "ZCUIConfigManager.h"
 #import "MJRefresh.h"
+//#import ""
 
 #define kHistoryOrderCell @"KNBHistoryOrderCell"
 
@@ -134,48 +135,91 @@
     NSString *jsonParamters = [NSString stringWithFormat:@"%@%@",md5MixPrefix,paramters];
 
 
-    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
-    sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
 
 //    NSString *requestURL =  [ZCUIConfigManager getInstance].kitInfo.queryOrderListForKF;
 //    NSString *jsonParamters = [ZCUIConfigManager getInstance].kitInfo.jsonRequestParamters;
 //    NSString *signMd5String = [ZCUIConfigManager getInstance].kitInfo.signMd5String;
     NSDictionary *parameters = @{@"sign": signMd5String,
                                  @"jsonStr": jsonParamters};
-    
+    NSURL *url = [NSURL URLWithString:requestURL];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"POST";
+
+    request.HTTPBody = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:NULL];
+
+    NSURLSession *session = [NSURLSession sharedSession];
+
     __weak __typeof(self)weakSelf = self;
     __weak __typeof(_goodsInfoArray)weakInfoArray = _goodsInfoArray;
-    [sessionManager POST:requestURL parameters:parameters progress:nil
-                 success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+
+            NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSLog(@"%@", result);
+            KNBQueryBackInfo *orderData = [KNBQueryBackInfo yy_modelWithJSON:result];
+             NSArray<KNBOrderInfo *> *orderArray = orderData.data;
+
+             for (KNBOrderInfo *orderInfo in orderArray) {
+                 for (KNBGoodsInfo *goodsInfo in orderInfo.goodsList) {
+                     goodsInfo.orderNumber = orderInfo.orderNo;
+                     goodsInfo.orderDate = orderInfo.createData;
+                     goodsInfo.orderId = orderInfo.orderId;
+                     goodsInfo.orderState = [NSString stringWithFormat:@"%ld",(long)orderInfo.orderStatus];
+                     [weakInfoArray addObject:goodsInfo];
+                 }
+             }
+             if (weakInfoArray.count == 0) {
+                 _emptyView.hidden = NO;
+             }
+             if (orderArray.count == 0) {
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     [weakSelf.orderTableView.mj_footer setState:MJRefreshStateNoMoreData];
+                 });
+                 return;
+             }
+             _pageNumber ++;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.orderTableView.mj_footer endRefreshing];
+            [weakSelf.orderTableView reloadData];
+        });
+
+    }];
+    [dataTask resume];
 
 
+//    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+//    sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
 
-                     KNBQueryBackInfo *orderData = [KNBQueryBackInfo yy_modelWithJSON:responseObject];
-                     NSArray<KNBOrderInfo *> *orderArray = orderData.data;
-
-                     for (KNBOrderInfo *orderInfo in orderArray) {
-                         for (KNBGoodsInfo *goodsInfo in orderInfo.goodsList) {
-                             goodsInfo.orderNumber = orderInfo.orderNo;
-                             goodsInfo.orderDate = orderInfo.createData;
-                             goodsInfo.orderId = orderInfo.orderId;
-                             goodsInfo.orderState = [NSString stringWithFormat:@"%ld",(long)orderInfo.orderStatus];
-                             [weakInfoArray addObject:goodsInfo];
-                         }
-                     }
-                     [weakSelf.orderTableView.mj_footer endRefreshing];
-                     if (weakInfoArray.count == 0) {
-                         _emptyView.hidden = NO;
-                     }
-                     if (orderArray.count == 0) {
-                         [weakSelf.orderTableView.mj_footer setState:MJRefreshStateNoMoreData];
-                         return;
-                     }
-                     NSLog(@"----%@",responseObject);
-                     _pageNumber ++;
-                     [weakSelf.orderTableView reloadData];
-                 } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                     DLog(@"----%@",error);
-                 }];
+//    [sessionManager POST:requestURL parameters:parameters progress:nil
+//                 success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//
+//
+//
+//                     KNBQueryBackInfo *orderData = [KNBQueryBackInfo yy_modelWithJSON:responseObject];
+//                     NSArray<KNBOrderInfo *> *orderArray = orderData.data;
+//
+//                     for (KNBOrderInfo *orderInfo in orderArray) {
+//                         for (KNBGoodsInfo *goodsInfo in orderInfo.goodsList) {
+//                             goodsInfo.orderNumber = orderInfo.orderNo;
+//                             goodsInfo.orderDate = orderInfo.createData;
+//                             goodsInfo.orderId = orderInfo.orderId;
+//                             goodsInfo.orderState = [NSString stringWithFormat:@"%ld",(long)orderInfo.orderStatus];
+//                             [weakInfoArray addObject:goodsInfo];
+//                         }
+//                     }
+//                     if (weakInfoArray.count == 0) {
+//                         _emptyView.hidden = NO;
+//                     }
+//                     if (orderArray.count == 0) {
+//                         [weakSelf.orderTableView.mj_footer setState:MJRefreshStateNoMoreData];
+//                         return;
+//                     }
+//                     NSLog(@"----%@",responseObject);
+//                     _pageNumber ++;
+//                     [weakSelf.orderTableView.mj_footer endRefreshing];
+//                     [weakSelf.orderTableView reloadData];
+//                 } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//                     DLog(@"----%@",error);
+//                 }];
 }
 -(void)closeBtnClick:(UIButton *)sender{
     [self dismissViewControllerAnimated:YES completion:nil];

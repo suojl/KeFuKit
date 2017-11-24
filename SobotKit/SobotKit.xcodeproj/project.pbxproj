@@ -221,19 +221,6 @@
 		9CAFF2BF1FB59DDF00206C8B /* KNBHistoryOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAFF2BD1FB59DDF00206C8B /* KNBHistoryOrderCell.m */; };
 		9CAFF2C21FB59E2A00206C8B /* KNBOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAFF2C01FB59E2A00206C8B /* KNBOrderViewController.m */; };
 		9CAFF2C31FB59E2A00206C8B /* KNBOrderViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CAFF2C11FB59E2A00206C8B /* KNBOrderViewController.h */; };
-		9CAFF2D21FB5A4F000206C8B /* AFHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CAFF2C51FB5A4EF00206C8B /* AFHTTPSessionManager.h */; };
-		9CAFF2D31FB5A4F000206C8B /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAFF2C61FB5A4EF00206C8B /* AFHTTPSessionManager.m */; };
-		9CAFF2D41FB5A4F000206C8B /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CAFF2C71FB5A4EF00206C8B /* AFNetworking.h */; };
-		9CAFF2D51FB5A4F000206C8B /* AFNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CAFF2C81FB5A4EF00206C8B /* AFNetworkReachabilityManager.h */; };
-		9CAFF2D61FB5A4F000206C8B /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAFF2C91FB5A4EF00206C8B /* AFNetworkReachabilityManager.m */; };
-		9CAFF2D71FB5A4F000206C8B /* AFSecurityPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CAFF2CA1FB5A4EF00206C8B /* AFSecurityPolicy.h */; };
-		9CAFF2D81FB5A4F000206C8B /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAFF2CB1FB5A4EF00206C8B /* AFSecurityPolicy.m */; };
-		9CAFF2D91FB5A4F000206C8B /* AFURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CAFF2CC1FB5A4EF00206C8B /* AFURLRequestSerialization.h */; };
-		9CAFF2DA1FB5A4F000206C8B /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAFF2CD1FB5A4EF00206C8B /* AFURLRequestSerialization.m */; };
-		9CAFF2DB1FB5A4F000206C8B /* AFURLResponseSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CAFF2CE1FB5A4EF00206C8B /* AFURLResponseSerialization.h */; };
-		9CAFF2DC1FB5A4F000206C8B /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAFF2CF1FB5A4EF00206C8B /* AFURLResponseSerialization.m */; };
-		9CAFF2DD1FB5A4F000206C8B /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CAFF2D01FB5A4EF00206C8B /* AFURLSessionManager.h */; };
-		9CAFF2DE1FB5A4F000206C8B /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAFF2D11FB5A4EF00206C8B /* AFURLSessionManager.m */; };
 		9CAFF35C1FB5C2F800206C8B /* KNBOrderInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CAFF3581FB5C2F700206C8B /* KNBOrderInfo.h */; };
 		9CAFF35D1FB5C2F800206C8B /* KNBOrderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAFF3591FB5C2F700206C8B /* KNBOrderInfo.m */; };
 		9CAFF35E1FB5C2F800206C8B /* KNBGoodsInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CAFF35A1FB5C2F700206C8B /* KNBGoodsInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -432,19 +419,6 @@
 		9CAFF2BD1FB59DDF00206C8B /* KNBHistoryOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNBHistoryOrderCell.m; sourceTree = "<group>"; };
 		9CAFF2C01FB59E2A00206C8B /* KNBOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNBOrderViewController.m; sourceTree = "<group>"; };
 		9CAFF2C11FB59E2A00206C8B /* KNBOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNBOrderViewController.h; sourceTree = "<group>"; };
-		9CAFF2C51FB5A4EF00206C8B /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
-		9CAFF2C61FB5A4EF00206C8B /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
-		9CAFF2C71FB5A4EF00206C8B /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		9CAFF2C81FB5A4EF00206C8B /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		9CAFF2C91FB5A4EF00206C8B /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		9CAFF2CA1FB5A4EF00206C8B /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
-		9CAFF2CB1FB5A4EF00206C8B /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
-		9CAFF2CC1FB5A4EF00206C8B /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
-		9CAFF2CD1FB5A4EF00206C8B /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
-		9CAFF2CE1FB5A4EF00206C8B /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
-		9CAFF2CF1FB5A4EF00206C8B /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
-		9CAFF2D01FB5A4EF00206C8B /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
-		9CAFF2D11FB5A4EF00206C8B /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		9CAFF3581FB5C2F700206C8B /* KNBOrderInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNBOrderInfo.h; sourceTree = "<group>"; };
 		9CAFF3591FB5C2F700206C8B /* KNBOrderInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNBOrderInfo.m; sourceTree = "<group>"; };
 		9CAFF35A1FB5C2F700206C8B /* KNBGoodsInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNBGoodsInfo.h; sourceTree = "<group>"; };
@@ -590,7 +564,6 @@
 			isa = PBXGroup;
 			children = (
 				9C9055C21FBD2CD500135A44 /* MJRefresh */,
-				9CAFF2C41FB5A4EF00206C8B /* AFNetworking */,
 				9CAFF29E1FB59D4200206C8B /* SDAutoLayout */,
 				9CAFF2931FB59D2F00206C8B /* YYModel */,
 				7B7EF61A1FB3EC170034C02F /* SobotLib */,
@@ -994,26 +967,6 @@
 			path = KNBCell;
 			sourceTree = "<group>";
 		};
-		9CAFF2C41FB5A4EF00206C8B /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				9CAFF2C51FB5A4EF00206C8B /* AFHTTPSessionManager.h */,
-				9CAFF2C61FB5A4EF00206C8B /* AFHTTPSessionManager.m */,
-				9CAFF2C71FB5A4EF00206C8B /* AFNetworking.h */,
-				9CAFF2C81FB5A4EF00206C8B /* AFNetworkReachabilityManager.h */,
-				9CAFF2C91FB5A4EF00206C8B /* AFNetworkReachabilityManager.m */,
-				9CAFF2CA1FB5A4EF00206C8B /* AFSecurityPolicy.h */,
-				9CAFF2CB1FB5A4EF00206C8B /* AFSecurityPolicy.m */,
-				9CAFF2CC1FB5A4EF00206C8B /* AFURLRequestSerialization.h */,
-				9CAFF2CD1FB5A4EF00206C8B /* AFURLRequestSerialization.m */,
-				9CAFF2CE1FB5A4EF00206C8B /* AFURLResponseSerialization.h */,
-				9CAFF2CF1FB5A4EF00206C8B /* AFURLResponseSerialization.m */,
-				9CAFF2D01FB5A4EF00206C8B /* AFURLSessionManager.h */,
-				9CAFF2D11FB5A4EF00206C8B /* AFURLSessionManager.m */,
-			);
-			path = AFNetworking;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1021,14 +974,12 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9CAFF2D91FB5A4F000206C8B /* AFURLRequestSerialization.h in Headers */,
 				7B7EF63F1FB3EC170034C02F /* ZCLibInitInfo.h in Headers */,
 				7BB220BA1C005653003539F7 /* ZCUIRecordView.h in Headers */,
 				7B7EF63C1FB3EC170034C02F /* ZCLIbGlobalDefine.h in Headers */,
 				9CAFF2921FB59D0400206C8B /* KNBOrderCell.h in Headers */,
 				7B357CE51C084FD5009DE1FB /* ZCUIToastTools.h in Headers */,
 				7B24832B1E691AF600476D2B /* ZCProductInfo.h in Headers */,
-				9CAFF2DD1FB5A4F000206C8B /* AFURLSessionManager.h in Headers */,
 				7B7002AB1F5E773200C59281 /* ZCUIChatListController.h in Headers */,
 				9C9055F51FBD2CD500135A44 /* MJRefreshComponent.h in Headers */,
 				7B7EF64B1FB3EC170034C02F /* ZCPlatformInfo.h in Headers */,
@@ -1036,7 +987,6 @@
 				9C9055F71FBD2CD500135A44 /* MJRefreshFooter.h in Headers */,
 				9CAFF35E1FB5C2F800206C8B /* KNBGoodsInfo.h in Headers */,
 				7B7EF6381FB3EC170034C02F /* ZCLibClient.h in Headers */,
-				9CAFF2D51FB5A4F000206C8B /* AFNetworkReachabilityManager.h in Headers */,
 				9CAFF2B71FB59DCD00206C8B /* KNBPartPresentationController.h in Headers */,
 				7BB220451C005653003539F7 /* ZCKitInfo.h in Headers */,
 				7B7EF6441FB3EC170034C02F /* ZCLibRich.h in Headers */,
@@ -1061,7 +1011,6 @@
 				9C9056131FBD2CD500135A44 /* UIScrollView+MJExtension.h in Headers */,
 				9C9055FB1FBD2CD500135A44 /* MJRefreshAutoGifFooter.h in Headers */,
 				7B7EF6431FB3EC170034C02F /* ZCLibReachability.h in Headers */,
-				9CAFF2DB1FB5A4F000206C8B /* AFURLResponseSerialization.h in Headers */,
 				7BB220AF1C005653003539F7 /* ZCUIKeyboardDelegate.h in Headers */,
 				2693647B1C50EBD50015517C /* ZCSatisfactionCell.h in Headers */,
 				7BB220B41C005653003539F7 /* ZCUIWavesView.h in Headers */,
@@ -1126,18 +1075,15 @@
 				9C9056051FBD2CD500135A44 /* MJRefreshBackStateFooter.h in Headers */,
 				7BB220441C005653003539F7 /* ZCUITipsDefine.h in Headers */,
 				7B4259E21E52ADE500153047 /* ZCStoreConfiguration.h in Headers */,
-				9CAFF2D41FB5A4F000206C8B /* AFNetworking.h in Headers */,
 				9C9056011FBD2CD500135A44 /* MJRefreshBackGifFooter.h in Headers */,
 				7BB2208E1C005653003539F7 /* ZCUIWebController.h in Headers */,
 				7B7EF63E1FB3EC170034C02F /* ZCLibHttpManager.h in Headers */,
 				7B7EF6391FB3EC170034C02F /* ZCLibCommon.h in Headers */,
-				9CAFF2D21FB5A4F000206C8B /* AFHTTPSessionManager.h in Headers */,
 				7BB220AB1C005653003539F7 /* ZCUIXHViewState.h in Headers */,
 				7BB220A41C005653003539F7 /* ZCUIXHCacheManager.h in Headers */,
 				7B7D441E1D1A2F8E00EB6EB4 /* EmojiBoardView.h in Headers */,
 				7B8F1E8F1C02B7A000F8DFAC /* ZCUIImageTools.h in Headers */,
 				26FD6B451DF1080600F62DE6 /* ZCTTTAttributedLabel.h in Headers */,
-				9CAFF2D71FB5A4F000206C8B /* AFSecurityPolicy.h in Headers */,
 				7B4259DA1E52A6CB00153047 /* ZCSobotCore.h in Headers */,
 				7BB220861C005653003539F7 /* ZCVoiceChatCell.h in Headers */,
 				9C9056071FBD2CD500135A44 /* MJRefreshGifHeader.h in Headers */,
@@ -1255,7 +1201,6 @@
 				26FD6B461DF1080600F62DE6 /* ZCTTTAttributedLabel.m in Sources */,
 				7BB220891C005653003539F7 /* ZCUIBaseController.m in Sources */,
 				7BB220871C005653003539F7 /* ZCVoiceChatCell.m in Sources */,
-				9CAFF2DC1FB5A4F000206C8B /* AFURLResponseSerialization.m in Sources */,
 				9C9056101FBD2CD500135A44 /* MJRefreshConst.m in Sources */,
 				9CAFF29C1FB59D2F00206C8B /* YYClassInfo.m in Sources */,
 				9CAFF2901FB59D0400206C8B /* KNBGoodsCell.m in Sources */,
@@ -1263,10 +1208,7 @@
 				9C9056001FBD2CD500135A44 /* MJRefreshAutoStateFooter.m in Sources */,
 				9C9055F61FBD2CD500135A44 /* MJRefreshComponent.m in Sources */,
 				7B0101771D4F243B00EA1BF6 /* ZCPieChartView.m in Sources */,
-				9CAFF2D31FB5A4F000206C8B /* AFHTTPSessionManager.m in Sources */,
 				9C9056081FBD2CD500135A44 /* MJRefreshGifHeader.m in Sources */,
-				9CAFF2DE1FB5A4F000206C8B /* AFURLSessionManager.m in Sources */,
-				9CAFF2D61FB5A4F000206C8B /* AFNetworkReachabilityManager.m in Sources */,
 				7B357CE61C084FD5009DE1FB /* ZCUIToastTools.m in Sources */,
 				7BB220AA1C005653003539F7 /* ZCUIXHImageViewer.m in Sources */,
 				7B7002B31F5E8A1500C59281 /* ZCUIChatListCell.m in Sources */,
@@ -1297,7 +1239,6 @@
 				9C9056141FBD2CD500135A44 /* UIScrollView+MJExtension.m in Sources */,
 				7B7002AC1F5E773200C59281 /* ZCUIChatListController.m in Sources */,
 				7BB220AC1C005653003539F7 /* ZCUIXHViewState.m in Sources */,
-				9CAFF2DA1FB5A4F000206C8B /* AFURLRequestSerialization.m in Sources */,
 				7BB220461C005653003539F7 /* ZCKitInfo.m in Sources */,
 				7BB220A51C005653003539F7 /* ZCUIXHCacheManager.m in Sources */,
 				7BB220851C005653003539F7 /* ZCTipsChatCell.m in Sources */,
@@ -1330,7 +1271,6 @@
 				9CAFF2AC1FB59D4300206C8B /* UIView+SDAutoLayout.m in Sources */,
 				9C9055F21FBD2CD500135A44 /* MJRefreshAutoFooter.m in Sources */,
 				7BB220A31C005653003539F7 /* ZCUIImageView.m in Sources */,
-				9CAFF2D81FB5A4F000206C8B /* AFSecurityPolicy.m in Sources */,
 				7BD684CB1D40B23F00EBDB71 /* ZCMLEmojiLabel.m in Sources */,
 				9C9056181FBD2CD500135A44 /* UIView+MJExtension.m in Sources */,
 				7B295A7C1C50EFBF0054FD02 /* ZCUISkillSetView.m in Sources */,

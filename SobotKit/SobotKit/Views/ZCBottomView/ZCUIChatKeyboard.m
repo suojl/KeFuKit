@@ -410,12 +410,11 @@ typedef NS_ENUM(NSInteger,ExitType) {
         }
     }else{
         titles = [NSMutableArray arrayWithObjects:@"订单",ZCSTLocalString(@"图片")
-                  ,ZCSTLocalString(@"评价"),ZCSTLocalString(@"留言"), nil];
+                  ,ZCSTLocalString(@"评价"), nil];
         tags = [NSMutableArray arrayWithObjects:
                 [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickQueryOrderForGoods],
                 [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickAddPhotoPicture],
-                [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickSatisfaction],
-                [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickLeavePage],nil];
+                [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickSatisfaction],nil];
 
     }
     [self creatButtonForArray:titles tags:tags];
