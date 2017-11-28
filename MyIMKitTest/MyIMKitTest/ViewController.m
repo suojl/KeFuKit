@@ -53,7 +53,7 @@
     // 客服ID: 060001d0527d4996bfdb7a843b53c2ac
     initInfo.skillSetId = @"469efb3e757d4cd7a1e03af18203fe4a";
     //    initInfo.skillSetName = @"";
-//    initInfo.receptionistId = @"4ef76f9d896c4be1b482f3f0eb01aacd";
+    initInfo.receptionistId = @"4ef76f9d896c4be1b482f3f0eb01aacd";
     //    initInfo.titleType = @"2";
     initInfo.nickName = @"小锁";
 //    initInfo.realName = @"";    // 用户真实姓名

@@ -16,10 +16,12 @@
 #import "NSObject+YYModel.h"
 #import "ZCLibClient.h"
 #import "ZCUIConfigManager.h"
-#import "MJRefresh.h"
+//#import "MJRefresh.h"
 //#import ""
 
 #define kHistoryOrderCell @"KNBHistoryOrderCell"
+#define hTableViewHeight 227
+#define hTopViewHeight 45
 
 @interface KNBOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -44,10 +46,10 @@
     [self setupUI];
     _goodsInfoArray = [[NSMutableArray alloc] initWithCapacity:10];
 
-    //    [self getDatasourceByNetwork];
+        [self getDatasourceByNetwork];
     // 设置自动切换透明度(在导航栏下面自动隐藏)
-    _orderTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(getDatasourceByNetwork)];
-    [_orderTableView.mj_footer beginRefreshing];
+//    _orderTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(getDatasourceByNetwork)];
+//    [_orderTableView.mj_footer beginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,14 +65,14 @@
     CGFloat viewWidth = self.view.frame.size.width;
 //    CGFloat viewHeight = self.view.frame.size.height;
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, viewWidth, 45)];
+    _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, viewWidth, hTopViewHeight)];
     [_topView setBackgroundColor:UIColorFromRGB(0xffffff)];
     _topView.layer.borderWidth = 1.0f;
     _topView.layer.borderColor = UIColorFromRGB(0xe6e7e5).CGColor;
     [self.view addSubview:_topView];
 
     // 初始化订单TableView
-    _orderTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 45, ScreenWidth, 227) style:UITableViewStylePlain];
+    _orderTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, hTopViewHeight, ScreenWidth, hTableViewHeight) style:UITableViewStylePlain];
     _orderTableView.delegate = self;
     _orderTableView.dataSource = self;
 //    [_orderTableView setSeparatorColor:UIColorFromRGB(0xe6e7e5)];
@@ -116,6 +118,24 @@
     detailsLabel.text = @"您还没有订单~";
     [_emptyView addSubview:detailsLabel];
     [self.view addSubview:_emptyView];
+    [self createRefreshView];
+}
+
+//创建刷新的view,在屏幕外边,先添加到屏幕上,然后在添加tableView
+-(void)createRefreshView
+{
+    CGFloat refreshView_Y = CGRectGetMaxY(_orderTableView.frame);
+    _refreshView = [[UIView alloc]initWithFrame:CGRectMake(0, refreshView_Y, ScreenWidth, 20)];
+    _refreshView.backgroundColor = [UIColor whiteColor];
+    _refreshLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 20)];
+    _refreshLabel.text = @"上拉加载";
+    _refreshLabel.font = [UIFont systemFontOfSize:15];
+    _refreshLabel.textColor = UIColorFromRGB(0xef508d);
+    _refreshLabel.textAlignment = NSTextAlignmentCenter;
+
+    [_refreshView addSubview:_refreshLabel];
+    [self.view addSubview:_refreshView];
+    [self.view bringSubviewToFront:_refreshView];
 }
 
 -(void)getDatasourceByNetwork{
@@ -134,11 +154,6 @@
     NSString *signMd5String = zcLibMd5(paramterString);
     NSString *jsonParamters = [NSString stringWithFormat:@"%@%@",md5MixPrefix,paramters];
 
-
-
-//    NSString *requestURL =  [ZCUIConfigManager getInstance].kitInfo.queryOrderListForKF;
-//    NSString *jsonParamters = [ZCUIConfigManager getInstance].kitInfo.jsonRequestParamters;
-//    NSString *signMd5String = [ZCUIConfigManager getInstance].kitInfo.signMd5String;
     NSDictionary *parameters = @{@"sign": signMd5String,
                                  @"jsonStr": jsonParamters};
     NSURL *url = [NSURL URLWithString:requestURL];
@@ -170,56 +185,26 @@
              if (weakInfoArray.count == 0) {
                  _emptyView.hidden = NO;
              }
-             if (orderArray.count == 0) {
-                 dispatch_async(dispatch_get_main_queue(), ^{
-                     [weakSelf.orderTableView.mj_footer setState:MJRefreshStateNoMoreData];
-                 });
-                 return;
-             }
-             _pageNumber ++;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf.orderTableView.mj_footer endRefreshing];
-            [weakSelf.orderTableView reloadData];
-        });
+            if (orderArray.count == 0) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+//                    _orderTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+//                    _refreshView.frame = CGRectMake(0, hTopViewHeight + hTableViewHeight,
+//                                                    ScreenWidth, 20);
+                    _refreshLabel.text = @"没有更多数据";
+                });
+                return;
+            }
+            _pageNumber ++;
+            dispatch_async(dispatch_get_main_queue(), ^{
 
+                _orderTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+                _refreshView.frame = CGRectMake(0, hTopViewHeight + hTableViewHeight,
+                                                ScreenWidth, 20);
+                _refreshLabel.text = @"上拉加载";
+                [weakSelf.orderTableView reloadData];
+            });
     }];
     [dataTask resume];
-
-
-//    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
-//    sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
-
-//    [sessionManager POST:requestURL parameters:parameters progress:nil
-//                 success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//
-//
-//
-//                     KNBQueryBackInfo *orderData = [KNBQueryBackInfo yy_modelWithJSON:responseObject];
-//                     NSArray<KNBOrderInfo *> *orderArray = orderData.data;
-//
-//                     for (KNBOrderInfo *orderInfo in orderArray) {
-//                         for (KNBGoodsInfo *goodsInfo in orderInfo.goodsList) {
-//                             goodsInfo.orderNumber = orderInfo.orderNo;
-//                             goodsInfo.orderDate = orderInfo.createData;
-//                             goodsInfo.orderId = orderInfo.orderId;
-//                             goodsInfo.orderState = [NSString stringWithFormat:@"%ld",(long)orderInfo.orderStatus];
-//                             [weakInfoArray addObject:goodsInfo];
-//                         }
-//                     }
-//                     if (weakInfoArray.count == 0) {
-//                         _emptyView.hidden = NO;
-//                     }
-//                     if (orderArray.count == 0) {
-//                         [weakSelf.orderTableView.mj_footer setState:MJRefreshStateNoMoreData];
-//                         return;
-//                     }
-//                     NSLog(@"----%@",responseObject);
-//                     _pageNumber ++;
-//                     [weakSelf.orderTableView.mj_footer endRefreshing];
-//                     [weakSelf.orderTableView reloadData];
-//                 } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//                     DLog(@"----%@",error);
-//                 }];
 }
 -(void)closeBtnClick:(UIButton *)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -255,15 +240,6 @@
     return 113;
 }
 
-//-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-//    UIView *bottomView = [[UIView alloc] init];
-//    bottomView.backgroundColor = UIColorFromRGB(0xe6e7e5);
-//    return bottomView;
-//}
-//-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-//    return 1;
-//}
-
 -(NSString *)makeGoodsToMessage:(KNBGoodsInfo *)goodsInfo{
 //        [消息类型]:[123]
 //        [订单编号]:[18264532919127139187478]
@@ -281,6 +257,34 @@
     contextStr = [contextStr stringByAppendingFormat:@"[商品首图]:[%@]",goodsInfo.goodsImgUrl];
 
     return contextStr;
+}
+
+//检测tableView的滚动
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y + scrollView.frame.size.height >= scrollView.contentSize.height) {
+
+        CGFloat move = scrollView.contentOffset.y + scrollView.frame.size.height - scrollView.contentSize.height;
+        if (move <= 20) {
+                _orderTableView.contentInset = UIEdgeInsetsMake(0, 0, move, 0);
+                CGFloat refreshView_Y = CGRectGetMaxY(_orderTableView.frame);
+                _refreshView.frame = CGRectMake(0, refreshView_Y - move, ScreenWidth, 20);
+        }
+    }else{
+        _orderTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        _refreshView.frame = CGRectMake(0, hTopViewHeight + hTableViewHeight,
+                                        ScreenWidth, 20);
+    }
+}
+
+//tableView滚动结束后调用的方法
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    CGFloat offset = scrollView.contentOffset.y + scrollView.frame.size.height - scrollView.contentSize.height;
+    if (offset >= 20) {
+        _refreshLabel.text = @"正在加载数据";
+        [self getDatasourceByNetwork];
+    }
 }
 
 @end

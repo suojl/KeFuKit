@@ -38,7 +38,7 @@
 #define BgSystemColor      0xf0f5f5
 
 /**
- *  顶部蓝色背景
+ *  顶部蓝色背景/主题色
  *
  *  @return 颜色为0x08b0b0
  */
