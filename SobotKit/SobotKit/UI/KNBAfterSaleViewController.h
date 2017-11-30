@@ -1,15 +1,15 @@
 //
-//  KNBOrderViewController.h
+//  KNBAfterSaleViewController.h
 //  SobotKit
 //
-//  Created by suojl on 2017/11/1.
+//  Created by suojl on 2017/11/30.
 //  Copyright © 2017年 zhichi. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 #import "KNBPartPresentTransitionViewController.h"
 
-@interface KNBOrderViewController : KNBPartPresentTransitionViewController
+@interface KNBAfterSaleViewController : KNBPartPresentTransitionViewController
 
 @property (nonatomic,strong) UIView *topView;
 @property (nonatomic,strong) UITableView *orderTableView;

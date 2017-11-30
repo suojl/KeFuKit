@@ -410,11 +410,12 @@ typedef NS_ENUM(NSInteger,ExitType) {
         }
     }else{
         titles = [NSMutableArray arrayWithObjects:@"订单",ZCSTLocalString(@"图片")
-                  ,ZCSTLocalString(@"评价"),@"售后订单" nil];
+                  ,ZCSTLocalString(@"评价"),@"售后订单", nil];
         tags = [NSMutableArray arrayWithObjects:
                 [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickQueryOrderForGoods],
                 [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickAddPhotoPicture],
-                [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickSatisfaction],nil];
+                [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickSatisfaction],
+                [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickQuerySaleAfter],nil];
 
     }
     [self creatButtonForArray:titles tags:tags];
@@ -474,6 +475,13 @@ typedef NS_ENUM(NSInteger,ExitType) {
             [buttons setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_Order"]
                      forState:UIControlStateHighlighted];
             [buttons setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_Order"]
+                     forState:UIControlStateSelected];
+        }else if (tag == ZCKeyboardOnClickQuerySaleAfter){
+            [buttons setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_AfterSaleOrder"]
+                     forState:UIControlStateNormal];
+            [buttons setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_AfterSaleOrder"]
+                     forState:UIControlStateHighlighted];
+            [buttons setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_AfterSaleOrder"]
                      forState:UIControlStateSelected];
         }
         
@@ -595,6 +603,11 @@ typedef NS_ENUM(NSInteger,ExitType) {
         // 查询订单
         if (_delegate && [_delegate respondsToSelector:@selector(keyboardItemClick:object:)]) {
             [_delegate keyboardItemClick:ZCKeyboardOnClickQueryOrderForGoods object:nil];
+        }
+    }else if (btn.tag == ZCKeyboardOnClickQuerySaleAfter){
+        // 查询订单
+        if (_delegate && [_delegate respondsToSelector:@selector(keyboardItemClick:object:)]) {
+            [_delegate keyboardItemClick:ZCKeyboardOnClickQuerySaleAfter object:nil];
         }
     }
 }

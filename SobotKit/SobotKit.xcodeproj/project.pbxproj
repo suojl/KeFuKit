@@ -186,6 +186,8 @@
 		9CAFF35D1FB5C2F800206C8B /* KNBOrderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAFF3591FB5C2F700206C8B /* KNBOrderInfo.m */; };
 		9CAFF35E1FB5C2F800206C8B /* KNBGoodsInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CAFF35A1FB5C2F700206C8B /* KNBGoodsInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CAFF35F1FB5C2F800206C8B /* KNBGoodsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAFF35B1FB5C2F800206C8B /* KNBGoodsInfo.m */; };
+		9CE1C86C1FCFF67E00ED6FAC /* KNBAfterSaleViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE1C86A1FCFF67E00ED6FAC /* KNBAfterSaleViewController.h */; };
+		9CE1C86D1FCFF67E00ED6FAC /* KNBAfterSaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE1C86B1FCFF67E00ED6FAC /* KNBAfterSaleViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -345,6 +347,8 @@
 		9CAFF3591FB5C2F700206C8B /* KNBOrderInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNBOrderInfo.m; sourceTree = "<group>"; };
 		9CAFF35A1FB5C2F700206C8B /* KNBGoodsInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KNBGoodsInfo.h; sourceTree = "<group>"; };
 		9CAFF35B1FB5C2F800206C8B /* KNBGoodsInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNBGoodsInfo.m; sourceTree = "<group>"; };
+		9CE1C86A1FCFF67E00ED6FAC /* KNBAfterSaleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KNBAfterSaleViewController.h; sourceTree = "<group>"; };
+		9CE1C86B1FCFF67E00ED6FAC /* KNBAfterSaleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KNBAfterSaleViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -567,6 +571,8 @@
 				7BB220021C005653003539F7 /* ZCUIWebController.m */,
 				7B7002A91F5E773200C59281 /* ZCUIChatListController.h */,
 				7B7002AA1F5E773200C59281 /* ZCUIChatListController.m */,
+				9CE1C86A1FCFF67E00ED6FAC /* KNBAfterSaleViewController.h */,
+				9CE1C86B1FCFF67E00ED6FAC /* KNBAfterSaleViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -830,6 +836,7 @@
 				7BB220821C005653003539F7 /* ZCRichTextChatCell.h in Headers */,
 				7B7EF6431FB3EC170034C02F /* ZCLibReachability.h in Headers */,
 				7BB220AF1C005653003539F7 /* ZCUIKeyboardDelegate.h in Headers */,
+				9CE1C86C1FCFF67E00ED6FAC /* KNBAfterSaleViewController.h in Headers */,
 				2693647B1C50EBD50015517C /* ZCSatisfactionCell.h in Headers */,
 				7BB220B41C005653003539F7 /* ZCUIWavesView.h in Headers */,
 				7BB2207D1C005653003539F7 /* ZCChatCellDelegate.h in Headers */,
@@ -1042,6 +1049,7 @@
 				7BB2209D1C005653003539F7 /* ZCUIRatingView.m in Sources */,
 				7B7D44211D1A2F8E00EB6EB4 /* EmojiButton.m in Sources */,
 				9CAFF2BF1FB59DDF00206C8B /* KNBHistoryOrderCell.m in Sources */,
+				9CE1C86D1FCFF67E00ED6FAC /* KNBAfterSaleViewController.m in Sources */,
 				7BB220A71C005653003539F7 /* ZCUIXHFileAttribute.m in Sources */,
 				9CAFF2BA1FB59DCD00206C8B /* KNBPartPresentTransitionViewController.m in Sources */,
 				7B85CF991C9BF2C000E4997F /* ZCGoodsCell.m in Sources */,

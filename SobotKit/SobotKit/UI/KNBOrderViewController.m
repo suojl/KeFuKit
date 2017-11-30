@@ -7,17 +7,13 @@
 //
 
 #import "KNBOrderViewController.h"
-//#import "UIView+SDAutoLayout.h"
 #import "ZCUIColorsDefine.h"
 #import "ZCLIbGlobalDefine.h"
 #import "KNBHistoryOrderCell.h"
-//#import "AFNetworking.h"
 #import "KNBOrderInfo.h"
 #import "NSObject+YYModel.h"
 #import "ZCLibClient.h"
 #import "ZCUIConfigManager.h"
-//#import "MJRefresh.h"
-//#import ""
 
 #define kHistoryOrderCell @"KNBHistoryOrderCell"
 #define hTableViewHeight 227

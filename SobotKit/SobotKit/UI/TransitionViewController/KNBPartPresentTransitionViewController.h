@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol KNBOrderViewControllerDelegate <NSObject>
+@optional
+
+-(void) dismissViewController:(UIViewController *)controller andSendOrderMessage:(NSString *)msg;
+@end
+
 @interface KNBPartPresentTransitionViewController : UIViewController <UIViewControllerTransitioningDelegate>
 
 @end

@@ -36,7 +36,9 @@ typedef NS_ENUM(NSInteger,ZCKeyboardType) {
     ZCKeyboardOnClickAddPhotoPicture     = 13,
 
     /** 查询用户订单*/
-    ZCKeyboardOnClickQueryOrderForGoods = 14
+    ZCKeyboardOnClickQueryOrderForGoods = 14,
+    /** 查询售后订单*/
+    ZCKeyboardOnClickQuerySaleAfter = 15
 };
 
 /**

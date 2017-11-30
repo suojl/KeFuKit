@@ -50,6 +50,7 @@
 #import "KNBOrderCell.h"
 #import "YYModel.h"
 #import "KNBOrderViewController.h"
+#import "KNBAfterSaleViewController.h"
 
 
 #define cellRichTextIdentifier @"ZCRichTextChatCell"
@@ -2866,6 +2867,12 @@ typedef NS_ENUM(NSInteger,ExitType) {
         // 查询订单的点击事件
         [_zcKeyboardView hideKeyboard];
         KNBOrderViewController *orderVC = [[KNBOrderViewController alloc] init];
+        orderVC.vcDelegate = self;
+        [self presentViewController:orderVC animated:YES completion:nil];
+    }else if(type == ZCKeyboardOnClickQuerySaleAfter){
+        // 查询订单的点击事件
+        [_zcKeyboardView hideKeyboard];
+        KNBAfterSaleViewController *orderVC = [[KNBAfterSaleViewController alloc] init];
         orderVC.vcDelegate = self;
         [self presentViewController:orderVC animated:YES completion:nil];
     }
