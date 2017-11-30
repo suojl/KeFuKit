@@ -128,7 +128,7 @@
     _refreshView = [[UIView alloc]initWithFrame:CGRectMake(0, refreshView_Y, ScreenWidth, 20)];
     _refreshView.backgroundColor = [UIColor whiteColor];
     _refreshLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 20)];
-    _refreshLabel.text = @"上拉加载";
+    _refreshLabel.text = @"上拉加载更多";
     _refreshLabel.font = [UIFont systemFontOfSize:15];
     _refreshLabel.textColor = UIColorFromRGB(0xef508d);
     _refreshLabel.textAlignment = NSTextAlignmentCenter;
@@ -200,7 +200,7 @@
                 _orderTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
                 _refreshView.frame = CGRectMake(0, hTopViewHeight + hTableViewHeight,
                                                 ScreenWidth, 20);
-                _refreshLabel.text = @"上拉加载";
+                _refreshLabel.text = @"上拉加载更多";
                 [weakSelf.orderTableView reloadData];
             });
     }];
@@ -284,6 +284,10 @@
     if (offset >= 20) {
         _refreshLabel.text = @"正在加载数据";
         [self getDatasourceByNetwork];
+    }else{
+        _orderTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        _refreshView.frame = CGRectMake(0, hTopViewHeight + hTableViewHeight,
+                                        ScreenWidth, 20);
     }
 }
 
