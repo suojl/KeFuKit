@@ -21,7 +21,7 @@
 		9CAFF3241FB5ABB700206C8B /* ZCEmojiExpression.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9CAFF3211FB5ABB200206C8B /* ZCEmojiExpression.bundle */; };
 		9CAFF3251FB5ABB700206C8B /* SobotKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9CAFF3221FB5ABB700206C8B /* SobotKit.bundle */; };
 		9CAFF33B1FB5BC4B00206C8B /* SobotKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CAFF3341FB5B58500206C8B /* SobotKit.framework */; };
-		9CC6BBB41FC5126500DC229C /* KeFuSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9CC6BBB31FC5126500DC229C /* KeFuSDK.bundle */; };
+		9CEB9D251FD008AE001EB559 /* KeFuSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9CEB9D241FD008AD001EB559 /* KeFuSDK.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +61,7 @@
 		9CAFF3211FB5ABB200206C8B /* ZCEmojiExpression.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZCEmojiExpression.bundle; sourceTree = "<group>"; };
 		9CAFF3221FB5ABB700206C8B /* SobotKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SobotKit.bundle; sourceTree = "<group>"; };
 		9CAFF32D1FB5B58500206C8B /* SobotKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SobotKit.xcodeproj; path = ../SobotKit/SobotKit.xcodeproj; sourceTree = "<group>"; };
-		9CC6BBB31FC5126500DC229C /* KeFuSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = KeFuSDK.bundle; sourceTree = "<group>"; };
+		9CEB9D241FD008AD001EB559 /* KeFuSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = KeFuSDK.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,7 +132,7 @@
 		9CAFF31A1FB5AAE000206C8B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				9CC6BBB31FC5126500DC229C /* KeFuSDK.bundle */,
+				9CEB9D241FD008AD001EB559 /* KeFuSDK.bundle */,
 				9CAFF3221FB5ABB700206C8B /* SobotKit.bundle */,
 				9CAFF3211FB5ABB200206C8B /* ZCEmojiExpression.bundle */,
 			);
@@ -223,7 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CAFF2F81FB5A73C00206C8B /* LaunchScreen.storyboard in Resources */,
-				9CC6BBB41FC5126500DC229C /* KeFuSDK.bundle in Resources */,
+				9CEB9D251FD008AE001EB559 /* KeFuSDK.bundle in Resources */,
 				9CAFF3241FB5ABB700206C8B /* ZCEmojiExpression.bundle in Resources */,
 				9CAFF3251FB5ABB700206C8B /* SobotKit.bundle in Resources */,
 				9CAFF2F51FB5A73C00206C8B /* Assets.xcassets in Resources */,
