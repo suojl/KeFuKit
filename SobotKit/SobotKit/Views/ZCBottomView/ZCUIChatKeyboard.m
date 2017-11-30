@@ -410,7 +410,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
         }
     }else{
         titles = [NSMutableArray arrayWithObjects:@"订单",ZCSTLocalString(@"图片")
-                  ,ZCSTLocalString(@"评价"), nil];
+                  ,ZCSTLocalString(@"评价"),@"售后订单" nil];
         tags = [NSMutableArray arrayWithObjects:
                 [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickQueryOrderForGoods],
                 [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickAddPhotoPicture],
