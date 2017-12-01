@@ -14,10 +14,6 @@
 #import "NSObject+YYModel.h"
 #import "ZCLibClient.h"
 #import "ZCUIConfigManager.h"
-/*啊啊啊啊啊啊啊*/
-/*
-2222222222222222
- */
 
 #define kHistoryOrderCell @"KNBHistoryOrderCell"
 #define hTableViewHeight 227
@@ -93,7 +89,7 @@
     _closeBtn = [[UIButton alloc] init];
     [_closeBtn setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_close"] forState:UIControlStateNormal];
     [_closeBtn addTarget:self action:@selector(closeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [_closeBtn setFrame:CGRectMake(ScreenWidth - 30, 15, 15, 15)];
+    [_closeBtn setFrame:CGRectMake(ScreenWidth - 45, 0, 45, 45)];
     [self.topView addSubview:_closeBtn];
 
     // 布局界面frame
@@ -183,24 +179,26 @@
                  }
              }
              if (weakInfoArray.count == 0) {
-                 _emptyView.hidden = NO;
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     weakSelf.emptyView.hidden = NO;
+                 });
              }
             if (orderArray.count == 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
 //                    _orderTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
 //                    _refreshView.frame = CGRectMake(0, hTopViewHeight + hTableViewHeight,
 //                                                    ScreenWidth, 20);
-                    _refreshLabel.text = @"没有更多数据";
+                    weakSelf.refreshLabel.text = @"没有更多数据";
                 });
                 return;
             }
             _pageNumber ++;
             dispatch_async(dispatch_get_main_queue(), ^{
 
-                _orderTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-                _refreshView.frame = CGRectMake(0, hTopViewHeight + hTableViewHeight,
+                weakSelf.orderTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+                weakSelf.refreshView.frame = CGRectMake(0, hTopViewHeight + hTableViewHeight,
                                                 ScreenWidth, 20);
-                _refreshLabel.text = @"上拉加载更多";
+                weakSelf.refreshLabel.text = @"上拉加载更多";
                 [weakSelf.orderTableView reloadData];
             });
     }];

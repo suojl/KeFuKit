@@ -133,6 +133,15 @@
         _goodsPriceLabel.text = [NSString stringWithFormat:@"￥%@",goodsInfo.goodsPrice];
         [_goodsImageView loadWithURL:[NSURL URLWithString:goodsInfo.goodsImgUrl]
                           placeholer:[ZCUITools zcuiGetBundleImage:@"ZCicon_default_bg"] showActivityIndicatorView:YES];
+        
+        NSString *labelText = zcLibConvertToString(goodsInfo.orderState);
+        CGSize size = CGSizeMake(MAXFLOAT, MAXFLOAT);
+        
+        NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:12.0]};
+        
+        CGSize retSize = [labelText boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
+        CGFloat x = self.width - 34 - 17 - retSize.width;
+        [_orderStateLabel setFrame:CGRectMake(x, 15, (retSize.width + 2), 16)];
     }
 }
 @end

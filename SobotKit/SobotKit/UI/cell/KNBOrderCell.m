@@ -58,7 +58,7 @@
         [_orderState setTextColor:UIColorFromRGB(0xef508d)];
         [_orderState setBackgroundColor:[UIColor clearColor]];
         _orderState.numberOfLines = 1;
-        _orderState.lineBreakMode = NSLineBreakByTruncatingTail;
+        _orderState.lineBreakMode = NSLineBreakByWordWrapping;
         _orderState.layer.borderColor = UIColorFromRGB(0xef508d).CGColor;
         _orderState.layer.borderWidth = 1;
         _orderState.layer.masksToBounds = YES;
@@ -178,21 +178,33 @@
 
     _orderNumber.hidden = YES;
     _orderState.hidden = YES;
-    // 显示 订单编号
-    if (zcLibConvertToString([self getGoodsInfo].orderNumber)!=nil && ![@"" isEqualToString:[self getGoodsInfo].orderNumber]) {
-
-        _orderNumber.hidden = NO;
-        [_orderNumber setFrame:CGRectMake(15, 15, self.viewWidth - 113, 15)];
-        _orderNumber.text = [NSString stringWithFormat:@"订单号: %@",zcLibConvertToString([self getGoodsInfo].orderNumber)];
-        ivBgViewHeight = CGRectGetMaxY(_orderNumber.frame) + 15;
-    }
     // 显示 订单状态
     if (zcLibConvertToString([self getGoodsInfo].orderState)!=nil && ![@"" isEqualToString:[self getGoodsInfo].orderState]) {
 
         _orderState.hidden = NO;
-        CGFloat x = CGRectGetMaxX(_orderNumber.frame) + 2;
-        [_orderState setFrame:CGRectMake(x, 15, 47, 16)];
+//        CGFloat x = CGRectGetMaxX(_orderNumber.frame) + 2;
+//        [_orderState setFrame:CGRectMake(x, 15, 47, 16)];
+        NSString *labelText = zcLibConvertToString([self getGoodsInfo].orderState);
         _orderState.text = zcLibConvertToString([self getGoodsInfo].orderState);
+        CGSize size = CGSizeMake(MAXFLOAT, MAXFLOAT);
+        
+        NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:12.0]};
+        
+        CGSize retSize = [labelText boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
+        CGFloat x = ivBgViewWidth - 17 - retSize.width;
+        [_orderState setFrame:CGRectMake(x, 15, (retSize.width + 2), 16)];
+        
+        
+    }
+    
+    // 显示 订单编号
+    if (zcLibConvertToString([self getGoodsInfo].orderNumber)!=nil && ![@"" isEqualToString:[self getGoodsInfo].orderNumber]) {
+        
+        _orderNumber.hidden = NO;
+        CGFloat orderState_w = _orderState.frame.size.width + 34;
+        [_orderNumber setFrame:CGRectMake(15, 15, ivBgViewWidth - orderState_w, 15)];
+        _orderNumber.text = [NSString stringWithFormat:@"订单号: %@",zcLibConvertToString([self getGoodsInfo].orderNumber)];
+        ivBgViewHeight = CGRectGetMaxY(_orderNumber.frame) + 15;
     }
     // 显示 商品图片
     if (zcLibConvertToString([self getGoodsInfo].goodsImgUrl)!=nil && ![@"" isEqualToString:[self getGoodsInfo].goodsImgUrl]) {

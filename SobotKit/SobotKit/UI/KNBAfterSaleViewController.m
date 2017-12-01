@@ -14,6 +14,7 @@
 #import "NSObject+YYModel.h"
 #import "ZCLibClient.h"
 #import "ZCUIConfigManager.h"
+#import "KNBSaleAfterOrderInfo.h"
 
 #define kHistoryOrderCell @"KNBHistoryOrderCell"
 #define hTableViewHeight 227
@@ -89,7 +90,7 @@
         _closeBtn = [[UIButton alloc] init];
         [_closeBtn setImage:[ZCUITools knbUiGetBundleImage:@"KeFu_close"] forState:UIControlStateNormal];
         [_closeBtn addTarget:self action:@selector(closeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_closeBtn setFrame:CGRectMake(ScreenWidth - 30, 15, 15, 15)];
+        [_closeBtn setFrame:CGRectMake(ScreenWidth - 45, 0, 45, 45)];
         [self.topView addSubview:_closeBtn];
 
         // 布局界面frame
@@ -137,15 +138,14 @@
     -(void)getDatasourceByNetwork{
 
         NSString *versionNumber = [ZCUIConfigManager getInstance].kitInfo.versioNumber;
-        NSString *orderStatusFlag = [ZCUIConfigManager getInstance].kitInfo.orderStatusFlag;
+//        NSString *orderStatusFlag = [ZCUIConfigManager getInstance].kitInfo.orderStatusFlag;
         NSString *md5MixPrefix = [ZCUIConfigManager getInstance].kitInfo.md5MixPrefix;
         NSString *md5MixPostfix = [ZCUIConfigManager getInstance].kitInfo.md5MixPostfix;
-        NSString *requestURL =  [ZCUIConfigManager getInstance].kitInfo.queryOrderListForKF;
-        //    NSString * requestURL = @"http://10.10.8.22:9214/blln-app/order/queryOrderListForKF.do";
+        NSString *requestURL =  [ZCUIConfigManager getInstance].kitInfo.querySaleAfterForKF;
 
         NSString *userId = [ZCLibClient getZCLibClient].libInitInfo.userId;
 
-        NSString *paramters = [NSString stringWithFormat:@"{\"version\" : \"%@\", \"flag\" : %@, \"user_id\" : %@, \"page\" : %d}",versionNumber,orderStatusFlag,userId,_pageNumber];
+        NSString *paramters = [NSString stringWithFormat:@"{\"version\" : \"%@\",\"user_id\" : %@, \"page\" : %d}",versionNumber,userId,_pageNumber];
         NSString *paramterString = [NSString stringWithFormat:@"%@%@%@",md5MixPrefix,paramters,md5MixPostfix];
         NSString *signMd5String = zcLibMd5(paramterString);
         NSString *jsonParamters = [NSString stringWithFormat:@"%@%@",md5MixPrefix,paramters];
@@ -166,43 +166,51 @@
 
             NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSLog(@"%@", result);
-            KNBQueryBackInfo *orderData = [KNBQueryBackInfo yy_modelWithJSON:result];
-            NSArray<KNBOrderInfo *> *orderArray = orderData.data;
-
-            for (KNBOrderInfo *orderInfo in orderArray) {
-                for (KNBGoodsInfo *goodsInfo in orderInfo.goodsList) {
-                    goodsInfo.orderNumber = orderInfo.orderNo;
-                    goodsInfo.orderDate = orderInfo.createData;
-                    goodsInfo.orderId = orderInfo.orderId;
-                    goodsInfo.orderState = [NSString stringWithFormat:@"%ld",(long)orderInfo.orderStatus];
+            KNBSaleAfterModel *orderData = [KNBSaleAfterModel yy_modelWithJSON:result];
+            if (orderData.code == 200) {
+                
+                NSArray<KNBSaleAfterOrderInfo *> *orderArray = orderData.data;
+                
+                for (KNBSaleAfterOrderInfo *orderInfo in orderArray) {
+                    KNBGoodsInfo *goodsInfo = [KNBGoodsInfo new];
+                    goodsInfo.orderNumber = orderInfo.orderId;
+                    goodsInfo.orderDate = orderInfo.applyDate;
+                    goodsInfo.orderState = orderInfo.returnState;
+                    goodsInfo.goodsTitle = orderInfo.goodsTitle;
+                    goodsInfo.goodsPrice = orderInfo.returnPrice;
+                    goodsInfo.goodsImgUrl = orderInfo.goodsImgUrl;
+                    
                     [weakInfoArray addObject:goodsInfo];
                 }
-            }
-            if (weakInfoArray.count == 0) {
-                _emptyView.hidden = NO;
-            }
-            if (orderArray.count == 0) {
+                if (weakInfoArray.count == 0) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        weakSelf.emptyView.hidden = NO;
+                    });
+                }
+                if (orderArray.count == 0) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        //                    _orderTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+                        //                    _refreshView.frame = CGRectMake(0, hTopViewHeight + hTableViewHeight,
+                        //                                                    ScreenWidth, 20);
+                        weakSelf.refreshLabel.text = @"没有更多数据";
+                    });
+                    return;
+                }
+                _pageNumber ++;
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    //                    _orderTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-                    //                    _refreshView.frame = CGRectMake(0, hTopViewHeight + hTableViewHeight,
-                    //                                                    ScreenWidth, 20);
-                    _refreshLabel.text = @"没有更多数据";
+                    
+                    weakSelf.orderTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+                    weakSelf.refreshView.frame = CGRectMake(0, hTopViewHeight + hTableViewHeight,
+                                                    ScreenWidth, 20);
+                    weakSelf.refreshLabel.text = @"上拉加载更多";
+                    [weakSelf.orderTableView reloadData];
                 });
-                return;
             }
-            _pageNumber ++;
-            dispatch_async(dispatch_get_main_queue(), ^{
-
-                _orderTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-                _refreshView.frame = CGRectMake(0, hTopViewHeight + hTableViewHeight,
-                                                ScreenWidth, 20);
-                _refreshLabel.text = @"上拉加载更多";
-                [weakSelf.orderTableView reloadData];
-            });
         }];
         [dataTask resume];
     }
     -(void)closeBtnClick:(UIButton *)sender{
+        
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 

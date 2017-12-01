@@ -19,6 +19,8 @@
 //上边的字体
 @property(strong, nonatomic)UILabel * refreshLabel;
 
+@property (strong, nonatomic) UIView      *emptyView;
+
 @property (nonatomic, weak) id<KNBOrderViewControllerDelegate> vcDelegate;
 
 @end

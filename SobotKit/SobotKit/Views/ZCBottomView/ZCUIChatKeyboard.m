@@ -414,8 +414,11 @@ typedef NS_ENUM(NSInteger,ExitType) {
         tags = [NSMutableArray arrayWithObjects:
                 [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickQueryOrderForGoods],
                 [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickAddPhotoPicture],
-                [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickSatisfaction],
-                [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickQuerySaleAfter],nil];
+                [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickSatisfaction],nil];
+        if ([ZCUIConfigManager getInstance].kitInfo.isShowAfterSaleButton) {
+            [tags addObject:
+             [NSString stringWithFormat:@"%zd",ZCKeyboardOnClickQuerySaleAfter]];
+        }
 
     }
     [self creatButtonForArray:titles tags:tags];
@@ -605,7 +608,7 @@ typedef NS_ENUM(NSInteger,ExitType) {
             [_delegate keyboardItemClick:ZCKeyboardOnClickQueryOrderForGoods object:nil];
         }
     }else if (btn.tag == ZCKeyboardOnClickQuerySaleAfter){
-        // 查询订单
+        // 查询售后订单
         if (_delegate && [_delegate respondsToSelector:@selector(keyboardItemClick:object:)]) {
             [_delegate keyboardItemClick:ZCKeyboardOnClickQuerySaleAfter object:nil];
         }

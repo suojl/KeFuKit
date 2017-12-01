@@ -43,7 +43,7 @@
 #pragma mark 设置默认APPKEY
 //    initInfo.appKey         = @"6daf80b9ba1b48ed90f4c80f88bc3ab0";
     initInfo.appKey = @"2214500ad6d34511b851cf3ddb84c048";
-    initInfo.userId = @"1019728";
+    initInfo.userId = @"1062830";
 //    initInfo.userId = @"1007391";
 
     // 关键设置，必须设置了参数才生效
@@ -74,20 +74,21 @@
     /**   设置订单查询接口   **/
 
     // 设置md5加密格式
-    uiInfo.md5MixPrefix = @"blln";
-    uiInfo.md5MixPostfix = @"blln";
-    uiInfo.versioNumber = @"1.3.0";
-    uiInfo.orderStatusFlag = @"5";
-    // 设置订单查询接口
-    uiInfo.queryOrderListForKF = @"http://10.10.8.22:9214/blln-app/order/queryOrderListForKF.do";
-
-//    uiInfo.md5MixPrefix = @"mtmy";
-//    uiInfo.md5MixPostfix = @"mtmy";
+//    uiInfo.md5MixPrefix = @"blln";
+//    uiInfo.md5MixPostfix = @"blln";
 //    uiInfo.versioNumber = @"1.3.0";
 //    uiInfo.orderStatusFlag = @"5";
-//    // 设置订单查询接口http://60.205.112.197/mtmy-app/queryMyOrder150.do
-//    uiInfo.queryOrderListForKF = @"http://60.205.112.197/mtmy-app/order/queryMyOrder150.do";
+//    // 设置订单查询接口
+//    uiInfo.queryOrderListForKF = @"http://10.10.8.22:9214/blln-app/order/queryOrderListForKF.do";
 
+    uiInfo.md5MixPrefix = @"mtmy";
+    uiInfo.md5MixPostfix = @"mtmy";
+    uiInfo.versioNumber = @"1.3.0";
+    uiInfo.orderStatusFlag = @"5";
+    // 设置订单查询接口http://60.205.112.197/mtmy-app/queryMyOrder150.do
+    uiInfo.queryOrderListForKF = @"http://60.205.112.197/mtmy-app/order/queryMyOrder150.do";
+
+    uiInfo.querySaleAfterForKF = @"http://60.205.112.197/mtmy-app/saleAfter/querySaleAfter.do";
     /**   ----------------------END----------------------   **/
 
 //    [self customUnReadNumber:uiInfo];
@@ -165,9 +166,6 @@
     //mtmy订单状态（-2：取消订单；-1：待付款；1：待发货；2：待收货；3：已退款（退货并退款使用）；4：已完成；）
     //blln定制订单状态（-2：取消订单；-1：待支付；1：待量体；2：量体完成；3：待审核；4：打版；
     //5：裁剪；6：制作；7：质检；8：快递；9：试穿；10：待评价；11：完成）
-    /*
-     售后状态（-10：拒绝退货；11：申请退货；12：同意退货；13：退货中；14：退货完成；15：退款中；16：已退款；-20：拒绝换货；21：申请换货；22：同意换货；23：换货退货中；24：换货退货完成；25：换货中；26：换货完成）
-     */
     NSDictionary *mtmyOrderDictionary = @{
                                           @"-2":@"已取消",
                                           @"-1":@"待付款",
@@ -192,6 +190,26 @@
                                           @"11":@"已完成"
                                           };
     uiInfo.orderStateDictionary = bllnOrderDictionary;
+    /*
+     售后状态（-10：拒绝退货；11：申请退货；12：同意退货；13：退货中；14：退货完成；15：退款中；16：已退款；-20：拒绝换货；21：申请换货；22：同意换货；23：换货退货中；24：换货退货完成；25：换货中；26：换货完成）
+     */
+    uiInfo.isShowAfterSaleButton = YES;
+    uiInfo.afterSaleOrderStateDictionary = @{
+                                             @"-10":@"拒绝退货",
+                                             @"11":@"申请退货",
+                                             @"12":@"同意退货",
+                                             @"13":@"退货中",
+                                             @"14":@"退货完成",
+                                             @"15":@"退款中",
+                                             @"16":@"已退款",
+                                             @"-20":@"拒绝换货",
+                                             @"21":@"申请换货",
+                                             @"22":@"同意换货",
+                                             @"23":@"换货退货中",
+                                             @"24":@"换货退货完成",
+                                             @"25":@"换货中",
+                                             @"26":@"换货完成",
+                                             };
 }
 
 
