@@ -188,6 +188,8 @@
 		9CAFF35F1FB5C2F800206C8B /* KNBGoodsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAFF35B1FB5C2F800206C8B /* KNBGoodsInfo.m */; };
 		9CE1C86C1FCFF67E00ED6FAC /* KNBAfterSaleViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE1C86A1FCFF67E00ED6FAC /* KNBAfterSaleViewController.h */; };
 		9CE1C86D1FCFF67E00ED6FAC /* KNBAfterSaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE1C86B1FCFF67E00ED6FAC /* KNBAfterSaleViewController.m */; };
+		D8E417CA1FD12D350032ED89 /* KNBSaleAfterOrderInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = D8E417C81FD12D350032ED89 /* KNBSaleAfterOrderInfo.h */; };
+		D8E417CB1FD12D350032ED89 /* KNBSaleAfterOrderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E417C91FD12D350032ED89 /* KNBSaleAfterOrderInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -349,6 +351,8 @@
 		9CAFF35B1FB5C2F800206C8B /* KNBGoodsInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KNBGoodsInfo.m; sourceTree = "<group>"; };
 		9CE1C86A1FCFF67E00ED6FAC /* KNBAfterSaleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KNBAfterSaleViewController.h; sourceTree = "<group>"; };
 		9CE1C86B1FCFF67E00ED6FAC /* KNBAfterSaleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KNBAfterSaleViewController.m; sourceTree = "<group>"; };
+		D8E417C81FD12D350032ED89 /* KNBSaleAfterOrderInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KNBSaleAfterOrderInfo.h; sourceTree = "<group>"; };
+		D8E417C91FD12D350032ED89 /* KNBSaleAfterOrderInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KNBSaleAfterOrderInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -526,6 +530,8 @@
 				7B24832A1E691AF600476D2B /* ZCProductInfo.m */,
 				7BB21FB11C005652003539F7 /* ZCKitInfo.h */,
 				7BB21FB21C005652003539F7 /* ZCKitInfo.m */,
+				D8E417C81FD12D350032ED89 /* KNBSaleAfterOrderInfo.h */,
+				D8E417C91FD12D350032ED89 /* KNBSaleAfterOrderInfo.m */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -879,6 +885,7 @@
 				26CD8CD31EF25BD7000E7E19 /* ZCSatisfactionButton.h in Headers */,
 				9CAFF2B91FB59DCD00206C8B /* KNBPartPresentTransitionViewController.h in Headers */,
 				7B7EF6481FB3EC170034C02F /* ZCLibStatusDefine.h in Headers */,
+				D8E417CA1FD12D350032ED89 /* KNBSaleAfterOrderInfo.h in Headers */,
 				7BB2209C1C005653003539F7 /* ZCUIRatingView.h in Headers */,
 				7B7EF6491FB3EC170034C02F /* ZCLocalStore.h in Headers */,
 				7BD684CA1D40B23F00EBDB71 /* ZCMLEmojiLabel.h in Headers */,
@@ -1033,6 +1040,7 @@
 				7BB2207C1C005653003539F7 /* ZCChatBaseCell.m in Sources */,
 				26C831DC1DC8EB3400258378 /* ZCButton.m in Sources */,
 				7BB220831C005653003539F7 /* ZCRichTextChatCell.m in Sources */,
+				D8E417CB1FD12D350032ED89 /* KNBSaleAfterOrderInfo.m in Sources */,
 				7B4259DB1E52A6CB00153047 /* ZCSobotCore.m in Sources */,
 				7B7D441F1D1A2F8E00EB6EB4 /* EmojiBoardView.m in Sources */,
 				9CAFF35F1FB5C2F800206C8B /* KNBGoodsInfo.m in Sources */,

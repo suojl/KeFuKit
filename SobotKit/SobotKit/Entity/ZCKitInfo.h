@@ -506,7 +506,23 @@
  */
 @property (nonatomic, strong) NSDictionary *orderStateDictionary;
 
+/**
+ *  是否显示售后订单按钮
+ */
+@property (nonatomic, assign) BOOL isShowAfterSaleButton;
+
+/**
+ *  售后订单的状态数据表
+ */
+@property (nonatomic, strong) NSDictionary *afterSaleOrderStateDictionary;
+
+/**
+ *  查询售后订单的接口
+ */
+@property (nonatomic, strong) NSString *querySaleAfterForKF;
+
 //@property (nonatomic,strong) id<ZCReceivedMessageDelegate> delegate;
 //@property (nonatomic,strong) ReceivedMessageBlock          receivedBlock;
+
 
 @end
