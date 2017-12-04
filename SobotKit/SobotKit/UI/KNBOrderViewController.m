@@ -35,9 +35,9 @@
 @implementation KNBOrderViewController
 
 //  显示的tableview的高度
-int hTableViewHeight = 227;
+CGFloat hTableViewHeight = 227.0;
 //  头部视图的高度
-int hTopViewHeight = 45;
+CGFloat hTopViewHeight = 45.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -185,6 +185,7 @@ int hTopViewHeight = 45;
              if (weakInfoArray.count == 0) {
                  dispatch_async(dispatch_get_main_queue(), ^{
                      weakSelf.emptyView.hidden = NO;
+                     weakSelf.refreshView.hidden = YES;
                  });
              }
             if (orderArray.count == 0) {

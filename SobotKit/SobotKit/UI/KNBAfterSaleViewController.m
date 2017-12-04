@@ -36,6 +36,11 @@
 
 @implementation KNBAfterSaleViewController
 
+    //  显示的tableview的高度
+//    CGFloat hTableViewHeight = 227.0;
+//    //  头部视图的高度
+//    CGFloat hTopViewHeight = 45.0;
+
     - (void)viewDidLoad {
         [super viewDidLoad];
         // Do any additional setup after loading the view.
@@ -121,11 +126,11 @@
     //创建刷新的view,在屏幕外边,先添加到屏幕上,然后在添加tableView
     -(void)createRefreshView
     {
-        CGFloat refreshView_Y = CGRectGetMaxY(_orderTableView.frame);
-        _refreshView = [[UIView alloc]initWithFrame:CGRectMake(0, refreshView_Y, ScreenWidth, 20)];
+//        CGFloat refreshView_Y = CGRectGetMaxY(_orderTableView.frame);
+        _refreshView = [[UIView alloc]initWithFrame:CGRectMake(0, hTopViewHeight + 5, ScreenWidth, 20)];
         _refreshView.backgroundColor = [UIColor whiteColor];
         _refreshLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 20)];
-        _refreshLabel.text = @"上拉加载更多";
+        _refreshLabel.text = @"正在加载数据~";
         _refreshLabel.font = [UIFont systemFontOfSize:15];
         _refreshLabel.textColor = UIColorFromRGB(0xef508d);
         _refreshLabel.textAlignment = NSTextAlignmentCenter;
@@ -185,6 +190,7 @@
                 if (weakInfoArray.count == 0) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         weakSelf.emptyView.hidden = NO;
+                        weakSelf.refreshView.hidden = YES;
                     });
                 }
                 if (orderArray.count == 0) {
