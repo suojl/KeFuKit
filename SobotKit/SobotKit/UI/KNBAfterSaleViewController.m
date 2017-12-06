@@ -258,12 +258,12 @@
         //        [商品首图]:[http://f12.baidu.com/it/u=3087422712,1174175413&fm=72]
         //        [商品金额]:[1232323]
         //        [订单日期]:[2017-10-23]
-        NSString *contextStr = @"[消息类型]:[售后订单]\n";
-        contextStr = [contextStr stringByAppendingFormat:@"[订单编号]:[%@]\n",goodsInfo.orderNumber];
-        contextStr = [contextStr stringByAppendingFormat:@"[订单状态]:[%@]\n",goodsInfo.orderState];
-        contextStr = [contextStr stringByAppendingFormat:@"[下单时间]:[%@]\n",goodsInfo.orderDate];
+        NSString *contextStr = @"[消息类型]:[售后]\n";
+        contextStr = [contextStr stringByAppendingFormat:@"[售后编号]:[%@]\n",goodsInfo.orderNumber];
+        contextStr = [contextStr stringByAppendingFormat:@"[售后状态]:[%@]\n",goodsInfo.orderState];
+        contextStr = [contextStr stringByAppendingFormat:@"[申请时间]:[%@]\n",goodsInfo.orderDate];
         contextStr = [contextStr stringByAppendingFormat:@"[商品名称]:[%@]\n",goodsInfo.goodsTitle];
-        contextStr = [contextStr stringByAppendingFormat:@"[商品价格]:[%@]\n",goodsInfo.goodsPrice];
+        contextStr = [contextStr stringByAppendingFormat:@"[退款金额]:[%@]\n",goodsInfo.goodsPrice];
         contextStr = [contextStr stringByAppendingFormat:@"[商品首图]:[%@]",goodsInfo.goodsImgUrl];
 
         return contextStr;

@@ -43,8 +43,8 @@
 #pragma mark 设置默认APPKEY
 //    initInfo.appKey         = @"6daf80b9ba1b48ed90f4c80f88bc3ab0";
     initInfo.appKey = @"2214500ad6d34511b851cf3ddb84c048";
-//    initInfo.userId = @"1062830";
-    initInfo.userId = @"1007391";
+    initInfo.userId = @"1062830";
+//    initInfo.userId = @"1007391";
 
     // 关键设置，必须设置了参数才生效
     [[ZCLibClient getZCLibClient] setLibInitInfo:initInfo];

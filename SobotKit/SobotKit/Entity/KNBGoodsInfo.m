@@ -21,16 +21,16 @@
     [商品名称]:[]
  */
 +(NSDictionary *)modelCustomPropertyMapper{
-    return @{@"orderNumber":@"订单编号",
+    return @{@"orderNumber":@[@"订单编号",@"售后编号"],
              @"goodsNo":@"商品编号",
-             @"orderState":@"订单状态",
-             @"orderDate":@"下单时间",
+             @"orderState":@[@"订单状态",@"售后状态"],
+             @"orderDate":@[@"下单时间",@"申请时间"],
              @"cardType":@"消息类型",
 
              @"goodsImgUrl":@[@"firstImg",@"original_img",@"商品首图"],
              @"goodsTitle":@[@"goodsName",@"goods_name",@"商品名称"],
              @"goodsId":@[@"id",@"goods_id"],
-             @"goodsPrice":@[@"price",@"goods_price",@"商品价格"]
+             @"goodsPrice":@[@"price",@"goods_price",@"商品价格",@"退款金额"]
              };
 }
 
