@@ -10,14 +10,14 @@
 #import "UIView+SDAutoLayout.h"
 #import "ZCLIbGlobalDefine.h"
 
-@implementation KNBHistoryOrderCell
-{
-    UILabel     *_orderNumberLabel;
-    UILabel     *_orderStateLabel;
-    UILabel     *_goodsTitleLabel;
-    UILabel     *_goodsPriceLabel;
-    UILabel     *_orderDateLabel;
-    ZCUIImageView       *_goodsImageView;
+
+@implementation KNBHistoryOrderCell {
+    UILabel *_orderNumberLabel;
+    UILabel *_orderStateLabel;
+    UILabel *_goodsTitleLabel;
+    UILabel *_goodsPriceLabel;
+    UILabel *_orderDateLabel;
+    ZCUIImageView *_goodsImageView;
 }
 
 - (void)awakeFromNib {
@@ -31,7 +31,7 @@
     // Configure the view for the selected state
 }
 
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self setupUI];
@@ -39,7 +39,7 @@
     return self;
 }
 
--(void)setupUI{
+- (void)setupUI {
     self.contentView.backgroundColor = UIColorFromRGB(0xf9f9f9);
     // 订单号
     _orderNumberLabel = [UILabel new];
@@ -94,62 +94,64 @@
 
     /*       设置ui控件的frame    */
     _orderNumberLabel.sd_layout.leftSpaceToView(self.contentView, 15)
-                                .topSpaceToView(self.contentView, 15)
-                                .rightSpaceToView(self.contentView, 65)
-                                .heightIs(17);
+        .topSpaceToView(self.contentView, 15)
+        .rightSpaceToView(self.contentView, 65)
+        .heightIs(17);
 
     _orderStateLabel.sd_layout.rightSpaceToView(self.contentView, 15)
-                                .topSpaceToView(self.contentView, 15)
-                                .heightIs(17)
-                                .widthIs(45);
+        .topSpaceToView(self.contentView, 15)
+        .heightIs(17)
+        .widthIs(45);
 
     _goodsImageView.sd_layout.leftSpaceToView(self.contentView, 15)
-                                .topSpaceToView(_orderNumberLabel, 15)
-                                .heightIs(45).widthIs(45);
+        .topSpaceToView(_orderNumberLabel, 15)
+        .heightIs(45)
+        .widthIs(45);
 
     _goodsTitleLabel.sd_layout.leftSpaceToView(_goodsImageView, 15)
-                                .topEqualToView(_goodsImageView)
-                                .rightSpaceToView(self.contentView, 15).heightIs(15);
+        .topEqualToView(_goodsImageView)
+        .rightSpaceToView(self.contentView, 15)
+        .heightIs(15);
 
     _orderDateLabel.sd_layout.rightSpaceToView(self.contentView, 15)
-                                .bottomSpaceToView(self.contentView, 17)
-                                .widthIs(80).heightIs(15);
+        .bottomSpaceToView(self.contentView, 17)
+        .widthIs(80)
+        .heightIs(15);
 
     _goodsPriceLabel.sd_layout.leftSpaceToView(_goodsImageView, 15)
-                                .bottomSpaceToView(self.contentView, 17)
-                                .rightSpaceToView(_orderDateLabel, 15).autoHeightRatio(0);
-
-    
+        .bottomSpaceToView(self.contentView, 17)
+        .rightSpaceToView(_orderDateLabel, 15)
+        .autoHeightRatio(0);
 }
 
--(void)setGoodsInfo:(KNBGoodsInfo *)goodsInfo{
+- (void)setGoodsInfo:(KNBGoodsInfo *)goodsInfo {
     if (goodsInfo && _goodsInfo != goodsInfo) {
         _goodsInfo = goodsInfo;
 
-        _orderNumberLabel.text = [NSString stringWithFormat:@"订单号: %@",goodsInfo.orderNumber];
+        _orderNumberLabel.text = [NSString stringWithFormat:@"订单号: %@", goodsInfo.orderNumber];
         _orderDateLabel.text = goodsInfo.orderDate;
         _orderStateLabel.text = goodsInfo.orderState;
         _goodsTitleLabel.text = goodsInfo.goodsTitle;
-        _goodsPriceLabel.text = [NSString stringWithFormat:@"￥%@",goodsInfo.goodsPrice];
+        _goodsPriceLabel.text = [NSString stringWithFormat:@"￥%@", goodsInfo.goodsPrice];
         [_goodsImageView loadWithURL:[NSURL URLWithString:goodsInfo.goodsImgUrl]
-                          placeholer:[ZCUITools zcuiGetBundleImage:@"ZCicon_default_bg"] showActivityIndicatorView:YES];
-        
+                           placeholer:[ZCUITools zcuiGetBundleImage:@"ZCicon_default_bg"]
+            showActivityIndicatorView:YES];
+
         NSString *labelText = zcLibConvertToString(goodsInfo.orderState);
         if (labelText.length > 3) {
             CGSize size = CGSizeMake(MAXFLOAT, MAXFLOAT);
-            NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:12.0]};
+            NSDictionary *attribute = @{NSFontAttributeName : [UIFont systemFontOfSize:12.0]};
             CGSize retSize = [labelText boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
             _orderStateLabel.sd_layout.rightSpaceToView(self.contentView, 15)
-            .topSpaceToView(self.contentView, 15)
-            .heightIs(17)
-            .widthIs(retSize.width + 4);
-            
-            _orderNumberLabel.sd_layout.leftSpaceToView(self.contentView, 15)
-            .topSpaceToView(self.contentView, 15)
-            .rightSpaceToView(self.contentView, retSize.width + 23)
-            .heightIs(17);
-        }
+                .topSpaceToView(self.contentView, 15)
+                .heightIs(17)
+                .widthIs(retSize.width + 6);
 
+            _orderNumberLabel.sd_layout.leftSpaceToView(self.contentView, 15)
+                .topSpaceToView(self.contentView, 15)
+                .rightSpaceToView(self.contentView, retSize.width + 23)
+                .heightIs(17);
+        }
     }
 }
 @end

@@ -16,12 +16,10 @@
 @interface ZCKitInfo : NSObject
 
 
-
 /**
  *  接口域名
  */
-@property(nonatomic,strong) NSString *apiHost;
-
+@property (nonatomic, strong) NSString *apiHost;
 
 
 ////////////////////////////////////////////////////////////////
@@ -34,14 +32,14 @@
  *  默认为NO 未开启
  *
  */
-@property (nonatomic,assign) BOOL      isCloseAfterEvaluation;
+@property (nonatomic, assign) BOOL isCloseAfterEvaluation;
 
 /**
  *  返回时是否开启满意度评价
  *  默认为NO 未开启
  *
  */
-@property (nonatomic,assign) BOOL      isOpenEvaluation;
+@property (nonatomic, assign) BOOL isOpenEvaluation;
 
 /**
  *  自定义关闭的时候是否推送满意度评价
@@ -53,28 +51,27 @@
 /**
  *  机器人优先模式，是否直接显示转人工按钮(值为NO时，会在机器人无法回答时显示转人工按钮)，默认，YES
  */
-@property (nonatomic,assign) BOOL    isShowTansfer;
+@property (nonatomic, assign) BOOL isShowTansfer;
 
 /**
  *  机器人优先模式，通过记录机器人未知说辞的次数设置是否直接显示转人工按钮
  *  默认 0次。
  */
-@property (nonatomic,strong) NSString *unWordsCount;
+@property (nonatomic, strong) NSString *unWordsCount;
 
 
 /**
  *  是否开启语音功能
  *  默认开启
  */
-@property (nonatomic,assign) BOOL    isOpenRecord;
+@property (nonatomic, assign) BOOL isOpenRecord;
 
 
 /**
  是否开启机器人语音，（付费，否则语音无法识别）
  默认NO
  */
-@property (nonatomic,assign) BOOL    isOpenRobotVoice;
-
+@property (nonatomic, assign) BOOL isOpenRobotVoice;
 
 
 /**
@@ -82,7 +79,7 @@
  *
  *  默认关闭
  */
-@property (nonatomic,assign) BOOL    isShowNickName;
+@property (nonatomic, assign) BOOL isShowNickName;
 
 
 /**
@@ -90,7 +87,7 @@
  *
  *  默认不输入
  */
-@property (nonatomic,assign) BOOL    isAddNickName;
+@property (nonatomic, assign) BOOL isAddNickName;
 
 
 ////////////////////////////////////////////////////////////////
@@ -101,72 +98,72 @@
 /**
  *  产品信息
  */
-@property(nonatomic,strong) ZCProductInfo *productInfo;
+@property (nonatomic, strong) ZCProductInfo *productInfo;
 
 /**
  *  订单/商品信息
  */
-@property(nonatomic,strong) KNBGoodsInfo *orderGoodsInfo;
+@property (nonatomic, strong) KNBGoodsInfo *orderGoodsInfo;
 
 
 ////////////////////////////////////////////////////////////////
 // 自定义字体，（可选）
 ////////////////////////////////////////////////////////////////
 
-#pragma mark-
+#pragma mark -
 /**
  *  顶部标题颜色、评价标题
  */
-@property (nonatomic,strong) UIFont    *titleFont;
+@property (nonatomic, strong) UIFont *titleFont;
 
 /**
  *  页面返回按钮，输入框，评价提交按钮、Toast提示语
  */
-@property (nonatomic,strong) UIFont    *listTitleFont;
+@property (nonatomic, strong) UIFont *listTitleFont;
 
 /**
  *  各种按钮，网络提醒
  */
-@property (nonatomic,strong) UIFont    *listDetailFont;
+@property (nonatomic, strong) UIFont *listDetailFont;
 
 /**
  *  是否有以下情况
  */
-@property (nonatomic,strong) UIFont    *customlistDetailFont;
+@property (nonatomic, strong) UIFont *customlistDetailFont;
 
 /**
  *  消息提醒(转人工、客服接待等)
  */
-@property (nonatomic,strong) UIFont    *listTimeFont;
+@property (nonatomic, strong) UIFont *listTimeFont;
 
 /**
  *  聊天气泡中文字
  */
-@property (nonatomic,strong) UIFont    *chatFont;
+@property (nonatomic, strong) UIFont *chatFont;
 
 /**
  *  录音按钮的文字
  */
-@property (nonatomic,strong) UIFont    *voiceButtonFont;
+@property (nonatomic, strong) UIFont *voiceButtonFont;
 
 
 /**
  *   商品详情cell 中title的文字
  *
  */
-@property (nonatomic,strong) UIFont   *goodsTitleFont;
+@property (nonatomic, strong) UIFont *goodsTitleFont;
 
 /**
  *   商品详情cell中 摘要的文字
  *
  */
-@property (nonatomic,strong) UIFont   *goodsDetFont;
+@property (nonatomic, strong) UIFont *goodsDetFont;
 
 /**
  *    商品详情cell中 btn的背景色
  *
  */
-@property (nonatomic,strong) UIColor    *goodSendBtnColor;
+@property (nonatomic, strong) UIColor *goodSendBtnColor;
 
 
 /**
@@ -174,7 +171,7 @@
  * 网络状态中的背景色（连接中）
  *
  */
-@property (nonatomic,strong) UIColor    *socketStatusButtonBgColor;
+@property (nonatomic, strong) UIColor *socketStatusButtonBgColor;
 
 
 /**
@@ -182,13 +179,13 @@
  * 网络状态中的背景色（连接中）
  *
  */
-@property (nonatomic,strong) UIColor    *socketStatusButtonTitleColor;
+@property (nonatomic, strong) UIColor *socketStatusButtonTitleColor;
 
 
 /**
  *  满意度星级说明的文字颜色
  */
-@property (nonatomic,strong) UIColor    *scoreExplainTextColor;
+@property (nonatomic, strong) UIColor *scoreExplainTextColor;
 
 
 ////////////////////////////////////////////////////////////////
@@ -198,125 +195,120 @@
 /**
  *  对话页面背景
  */
-@property (nonatomic,strong) UIColor    *backgroundColor;
-
-
+@property (nonatomic, strong) UIColor *backgroundColor;
 
 
 /**
  *  自定义风格颜色：导航
  *
  */
-@property (nonatomic,strong) UIColor    *customBannerColor;
+@property (nonatomic, strong) UIColor *customBannerColor;
 
 
 /**
  *  相册导航栏的颜色
  *
  */
-@property (nonatomic,strong) UIColor   *imagePickerColor;
+@property (nonatomic, strong) UIColor *imagePickerColor;
 
 /**
  *  相册导航栏的标题颜色
  *
  */
-@property (nonatomic,strong) UIColor  *imagePickerTitleColor;
+@property (nonatomic, strong) UIColor *imagePickerTitleColor;
 
 
 /**
  *  左边聊天气泡颜色
  */
-@property (nonatomic,strong) UIColor    *leftChatColor;
+@property (nonatomic, strong) UIColor *leftChatColor;
 
 /**
  *  右边聊天气泡颜色
  */
-@property (nonatomic,strong) UIColor    *rightChatColor;
+@property (nonatomic, strong) UIColor *rightChatColor;
 
 /**
  *  左边聊天气泡复制选中的背景颜色
  */
-@property (nonatomic,strong) UIColor    *leftChatSelectedColor;
+@property (nonatomic, strong) UIColor *leftChatSelectedColor;
 
 /**
  *  右边聊天气泡复制选中的背景颜色
  */
-@property (nonatomic,strong) UIColor    *rightChatSelectedColor;
+@property (nonatomic, strong) UIColor *rightChatSelectedColor;
 
 
 /**
  *  底部bottom的背景颜色
  */
-@property (nonatomic,strong) UIColor    *backgroundBottomColor;
+@property (nonatomic, strong) UIColor *backgroundBottomColor;
 
 
 /**
  *  底部bottom框边框线颜色(输入框、录音按钮、分割线)
  */
-@property (nonatomic,strong) UIColor    *bottomLineColor;
+@property (nonatomic, strong) UIColor *bottomLineColor;
 
 /**
  *  评价普通按钮选中背景颜色和边框(默认跟随主题色customBannerColor)
  */
-@property (nonatomic,strong) UIColor    *commentOtherButtonBgColor;
+@property (nonatomic, strong) UIColor *commentOtherButtonBgColor;
 
 /**
  *  评价(立即结束、取消)按钮文字颜色(默认跟随主题色customBannerColor)
  */
-@property (nonatomic,strong) UIColor    *commentCommitButtonColor;
+@property (nonatomic, strong) UIColor *commentCommitButtonColor;
 
 /**
  * 评价提交按钮背景颜色和边框(默认跟随主题色customBannerColor)
  */
-@property (nonatomic,strong) UIColor    *commentCommitButtonBgColor;
+@property (nonatomic, strong) UIColor *commentCommitButtonBgColor;
 
 /**
  *  评价提交按钮点击后背景色，默认0x089899, 0.95
  */
-@property (nonatomic,strong) UIColor    *commentCommitButtonBgHighColor;
+@property (nonatomic, strong) UIColor *commentCommitButtonBgHighColor;
 
 
 /**
  *  提示气泡的背景颜色
  */
-@property (nonatomic,strong) UIColor    *BgTipAirBubblesColor;
+@property (nonatomic, strong) UIColor *BgTipAirBubblesColor;
 
 /**
  * 语音cell选中的背景色
  *
  */
-@property (nonatomic,strong) UIColor    *videoCellBgSelColor;
+@property (nonatomic, strong) UIColor *videoCellBgSelColor;
 
 /**
  *
  *  富文本中的线条颜色
  *
  */
-@property (nonatomic,strong) UIColor    *LineRichColor;
+@property (nonatomic, strong) UIColor *LineRichColor;
 
 /**
  *
  *  通告栏的背景色
  *
  */
-@property (nonatomic,strong) UIColor    *notificationTopViewBgColor;
+@property (nonatomic, strong) UIColor *notificationTopViewBgColor;
 
 /**
  *
  *  通告栏的文字颜色
  *
  */
-@property (nonatomic,strong) UIColor    *notificationTopViewLabelColor;
+@property (nonatomic, strong) UIColor *notificationTopViewLabelColor;
 
 /**
  *
  *  通告栏的字体设置
  *
  */
-@property (nonatomic,strong) UIFont    *notificationTopViewLabelFont;
-
-
-
+@property (nonatomic, strong) UIFont *notificationTopViewLabelFont;
 
 
 ////////////////////////////////////////////////////////////////
@@ -326,148 +318,148 @@
 /**
  *  提价评价按钮的文字颜色
  */
-@property (nonatomic,strong) UIColor    *submitEvaluationColor;
+@property (nonatomic, strong) UIColor *submitEvaluationColor;
 
 /**
  *  顶部文字颜色
  */
-@property (nonatomic,strong) UIColor    *topViewTextColor;
+@property (nonatomic, strong) UIColor *topViewTextColor;
 
 /**
  *  左边气泡文字颜色
  */
-@property (nonatomic,strong) UIColor    *leftChatTextColor;
+@property (nonatomic, strong) UIColor *leftChatTextColor;
 
 
 /**
  *  右边气泡文字颜色
  */
-@property (nonatomic,strong) UIColor    *rightChatTextColor;
+@property (nonatomic, strong) UIColor *rightChatTextColor;
 
 /**
  *  时间文字的颜色
  */
-@property (nonatomic,strong) UIColor    *timeTextColor;
+@property (nonatomic, strong) UIColor *timeTextColor;
 
 /**
  *  提示气泡文字颜色
  */
-@property (nonatomic,strong) UIColor    *tipLayerTextColor;
+@property (nonatomic, strong) UIColor *tipLayerTextColor;
 
 /**
  *  客服昵称颜色
  */
-@property (nonatomic,strong) UIColor    *serviceNameTextColor;
+@property (nonatomic, strong) UIColor *serviceNameTextColor;
 
 /**
  *  提示cell中客服昵称的文字颜色
  */
-@property (nonatomic,strong) UIColor    *nickNameTextColor;
+@property (nonatomic, strong) UIColor *nickNameTextColor;
 
 
 /**
  *  左边气泡中的链接颜色
  */
-@property (nonatomic,strong) UIColor   *chatLeftLinkColor;
+@property (nonatomic, strong) UIColor *chatLeftLinkColor;
 
 
 /**
  *  右边气泡中的链接颜色
  */
-@property(nonatomic,strong) UIColor    *chatRightLinkColor;
+@property (nonatomic, strong) UIColor *chatRightLinkColor;
 
 
 /**
  *  商品详情cell中title的文字颜色
  *
  */
-@property (nonatomic, strong) UIColor   *goodsTitleTextColor;
+@property (nonatomic, strong) UIColor *goodsTitleTextColor;
 
 /**
  *  商品详情cell中摘要的文字颜色
  *
  */
-@property (nonatomic, strong) UIColor   *goodsDetTextColor;
+@property (nonatomic, strong) UIColor *goodsDetTextColor;
 
 /**
  *  商品详情cell中标签的文字颜色
  *
  */
-@property (nonatomic ,strong) UIColor   *goodsTipTextColor;
+@property (nonatomic, strong) UIColor *goodsTipTextColor;
 
 /**
  *  商品详情cell中发送的文字颜色
  *
  */
-@property (nonatomic, strong) UIColor   *goodsSendTextColor;
+@property (nonatomic, strong) UIColor *goodsSendTextColor;
 
 /**
  *  提交评价后将结束会话的文字颜色
  *
  */
-@property (nonatomic, strong) UIColor   *satisfactionTextColor;
+@property (nonatomic, strong) UIColor *satisfactionTextColor;
 
 
 /**
  *  暂不评价文字颜色
  *
  */
-@property (nonatomic, strong) UIColor   *noSatisfactionTextColor;
+@property (nonatomic, strong) UIColor *noSatisfactionTextColor;
 
 
 /**
  *  评价页面中 已解决 未解决  文字的高亮状态颜色
  *
  */
-@property (nonatomic, strong) UIColor   *satisfactionTextSelectedColor;
+@property (nonatomic, strong) UIColor *satisfactionTextSelectedColor;
 
 
 /**
  *  评价页面中 已解决 未解决 按钮的选中的背景色
  *
  */
-@property (nonatomic, strong) UIColor   *satisfactionSelectedBgColor;
+@property (nonatomic, strong) UIColor *satisfactionSelectedBgColor;
 
 
 /**
  *  是否设置相册背景图片
  */
-@property (nonatomic ,assign) BOOL    isSetPhotoLibraryBgImage;
+@property (nonatomic, assign) BOOL isSetPhotoLibraryBgImage;
 
 
-#pragma mark- 自定义添加属性
+#pragma mark - 自定义添加属性
 
 
-#pragma mark- ***** 设置商品文字和颜色属性
+#pragma mark - ***** 设置商品文字和颜色属性
 
 /**
  商品/订单号 字体和颜色
  */
-@property (nonatomic,strong) UIFont  *orderNumberLabelFont;
-@property (nonatomic,strong) UIColor *orderNumberLabelColor;
+@property (nonatomic, strong) UIFont *orderNumberLabelFont;
+@property (nonatomic, strong) UIColor *orderNumberLabelColor;
 
 /**
  商品/订单状态 字体和颜色
  */
-@property (nonatomic,strong) UIFont *orderStateLabelFont;
-@property (nonatomic,strong) UIColor *orderStateLabelColor;
+@property (nonatomic, strong) UIFont *orderStateLabelFont;
+@property (nonatomic, strong) UIColor *orderStateLabelColor;
 
 /**
  商品/订单价钱 字体和颜色
  */
-@property (nonatomic,strong) UIFont *goodsPriceLabelFont;
-@property (nonatomic,strong) UIColor *goodsPriceLabelColor;
+@property (nonatomic, strong) UIFont *goodsPriceLabelFont;
+@property (nonatomic, strong) UIColor *goodsPriceLabelColor;
 
 /**
  商品/订单日期 字体和颜色
  */
-@property (nonatomic,strong) UIFont *orderDateLabelFont;
-@property (nonatomic,strong) UIColor *orderDateLabelColor;
+@property (nonatomic, strong) UIFont *orderDateLabelFont;
+@property (nonatomic, strong) UIColor *orderDateLabelColor;
 /**
  商品/订单描述 字体和颜色
  */
-@property (nonatomic,strong) UIFont *goodsTitleLabelFont;
-@property (nonatomic,strong) UIColor *goodsTitleLabelColor;
+@property (nonatomic, strong) UIFont *goodsTitleLabelFont;
+@property (nonatomic, strong) UIColor *goodsTitleLabelColor;
 
 /**
  *  MD5加密参数
@@ -505,6 +497,11 @@
  *  订单状态数据表
  */
 @property (nonatomic, strong) NSDictionary *orderStateDictionary;
+
+/**
+ *  是否显示订单按钮
+ */
+@property (nonatomic, assign) BOOL isShowOrderButton;
 
 /**
  *  是否显示售后订单按钮
