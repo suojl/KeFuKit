@@ -10,8 +10,6 @@
 #import <SobotKit/SobotKit.h>
 #import <UserNotifications/UserNotifications.h>
 
-#define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
-
 @interface AppDelegate ()<UIApplicationDelegate,UNUserNotificationCenterDelegate>
 
 @end
@@ -24,24 +22,24 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
 
-    if(SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(@"10.0")){
-        if (@available(iOS 10.0, *)) {
-            UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-            center.delegate = self;
-            [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
-                if( !error ){
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [[UIApplication sharedApplication] registerForRemoteNotifications];
-                    });
-                }
-            }];
-        } else {
-            // Fallback on earlier versions
-        }
-    }else{
-        [self registerPush:application];
-    }
+//    if(SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(@"10.0")){
+//        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+//        center.delegate = self;
+//        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
+//            if( !error ){
+//                [[UIApplication sharedApplication] registerForRemoteNotifications];
+//            }
+//        }];
+//    }else{
+//        [self registerPush:application];
+//    }
+    // 设置推送是否是测试环境，测试环境将使用开发证书
+    [[ZCLibClient getZCLibClient] setIsDebugMode:YES];
 
+    // 错误日志收集
+    [ZCLibClient setZCLibUncaughtExceptionHandler];
+
+    [ZCLibClient getZCLibClient].platformUnionCode = @"1001";
     return YES;
 }
 
@@ -88,11 +86,7 @@
     NSLog(@"Userinfo %@",notification.request.content.userInfo);
 
     //功能：可设置是否在应用内弹出通知
-    if (@available(iOS 10.0, *)) {
-        completionHandler(UNNotificationPresentationOptionAlert);
-    } else {
-        // Fallback on earlier versions
-    }
+    completionHandler(UNNotificationPresentationOptionAlert);
 
 }
 

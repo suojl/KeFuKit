@@ -9,7 +9,9 @@
 #import "ViewController.h"
 #import "AppDelegate.h"
 #import <SobotKit/SobotKit.h>
+
 //
+#define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 @interface ViewController ()
 
@@ -29,39 +31,28 @@
 }
 
 - (IBAction)btnClick:(id)sender {
-
-
-    // 设置推送是否是测试环境，测试环境将使用开发证书
+    ZCLibInitInfo *initInfo = [ZCLibInitInfo new];
+    
     [ZCLibClient getZCLibClient].platformUnionCode = @"1001";
     [[ZCLibClient getZCLibClient] setIsDebugMode:YES];
-
-    // 错误日志收集
-    [ZCLibClient setZCLibUncaughtExceptionHandler];
-
-    ZCLibInitInfo *initInfo = [ZCLibInitInfo new];//aaa
-
 #pragma mark 设置默认APPKEY
-//    initInfo.appKey         = @"6daf80b9ba1b48ed90f4c80f88bc3ab0";
-    initInfo.appKey = @"2214500ad6d34511b851cf3ddb84c048";
-    initInfo.userId = @"1062830";
-//    initInfo.userId = @"1007391";
+    initInfo.appKey         = @"e9ad00cfe99e426c9912833c040f46b5";
+//    initInfo.appKey = @"2214500ad6d34511b851cf3ddb84c048";
+    initInfo.userId = @"1063015";
 
     // 关键设置，必须设置了参数才生效
     [[ZCLibClient getZCLibClient] setLibInitInfo:initInfo];
-//        initInfo.serviceMode    = 4;
+    initInfo.skillSetId = @"7aa09f4de20849be9b449d90052eb7cc";
+    //    initInfo.serviceMode    = 4;
     // 组ID: 0abc24fed103436285cb9d3e40a9525f
     // 客服ID: 060001d0527d4996bfdb7a843b53c2ac
-    initInfo.skillSetId = @"469efb3e757d4cd7a1e03af18203fe4a";
+    //    initInfo.skillSetId = @"";
     //    initInfo.skillSetName = @"";
-    initInfo.receptionistId = @"4ef76f9d896c4be1b482f3f0eb01aacd";
+    //    initInfo.receptionistId = @"";
     //    initInfo.titleType = @"2";
-    initInfo.nickName = @"小锁";
-//    initInfo.realName = @"";    // 用户真实姓名
-//    initInfo.phone = @"";   //用户手机号
-//    initInfo.avatarUrl = @""; //设置用户头像
-//    initInfo.qqNumber = @"";    //QQ号码
-//    initInfo.userRemark = @"";  //用户备注
+    initInfo.nickName = @"mm1709136CIEK";
 //    initInfo.userSex = @"0";
+//        initInfo.zx = @"自定义字段测试";
 
     // 设置用户信息参数
 //    [self customUserInformationWith:initInfo];
@@ -74,47 +65,147 @@
     /**   设置订单查询接口   **/
 
     // 设置md5加密格式
-//    uiInfo.md5MixPrefix = @"blln";
-//    uiInfo.md5MixPostfix = @"blln";
-//    uiInfo.versioNumber = @"1.3.0";
-//    uiInfo.orderStatusFlag = @"5";
-//    // 设置订单查询接口
-//    uiInfo.queryOrderListForKF = @"http://10.10.8.22:9214/blln-app/order/queryOrderListForKF.do";
+    //    uiInfo.md5MixPrefix = @"blln";
+    //    uiInfo.md5MixPostfix = @"blln";
+    //    uiInfo.versioNumber = @"1.3.0";
+    ////    // 设置订单查询接口
+    //    uiInfo.queryOrderListForKF = @"http://10.10.8.22:9214/blln-app/order/queryOrderListForKF.do";
 
     uiInfo.md5MixPrefix = @"mtmy";
     uiInfo.md5MixPostfix = @"mtmy";
-    uiInfo.versioNumber = @"1.3.0";
+    uiInfo.versioNumber = @"2.6.0";
     uiInfo.orderStatusFlag = @"5";
-    // 设置订单查询接口http://60.205.112.197/mtmy-app/queryMyOrder150.do
-    uiInfo.queryOrderListForKF = @"http://60.205.112.197/mtmy-app/order/queryMyOrder150.do";
+    //    // 设置订单查询接口http://60.205.112.197/mtmy-app/queryMyOrder150.do
+    uiInfo.queryOrderListForKF = @"http://online-test.idengyun.com/mtmy-app/order/queryMyOrder150.do";
+    uiInfo.querySaleAfterForKF = @"http://online-test.idengyun.com/mtmy-app/saleAfter/querySaleAfter.do";
 
-    uiInfo.querySaleAfterForKF = @"http://60.205.112.197/mtmy-app/saleAfter/querySaleAfter.do";
+    uiInfo.isShowOrderButton = YES;
+    NSDictionary *mtmyOrderDictionary = @{
+                                          @"-2" : @"已取消",
+                                          @"-1" : @"待付款",
+                                          @"1" : @"待发货",
+                                          @"2" : @"待收货",
+                                          @"3" : @"已退款",
+                                          @"4" : @"已完成"
+                                          };
+    uiInfo.orderStateDictionary = mtmyOrderDictionary;
+    // 显示售后订单按钮
+    uiInfo.isShowAfterSaleButton = YES;
+    uiInfo.afterSaleOrderStateDictionary = @{
+                                             @"-10" : @"拒绝退货",
+                                             @"11" : @"申请退货",
+                                             @"12" : @"同意退货",
+                                             @"13" : @"退货中",
+                                             @"14" : @"退货完成",
+                                             @"15" : @"退款中",
+                                             @"16" : @"已退款",
+                                             @"-20" : @"拒绝换货",
+                                             @"21" : @"申请换货",
+                                             @"22" : @"同意换货",
+                                             @"23" : @"换货退货中",
+                                             @"24" : @"换货退货完成",
+                                             @"25" : @"换货中",
+                                             @"26" : @"换货完成",
+                                             };
     /**   ----------------------END----------------------   **/
 
 //    [self customUnReadNumber:uiInfo];
 
 //         切换服务器地址，默认https://api.sobot.com
-    uiInfo.apiHost = @"http://221.122.116.98/";
+//    uiInfo.apiHost = @"http://221.122.116.98";
 //    uiInfo.apiHost = @"https://api.sobot.com";
+    uiInfo.apiHost = @"http://kefu.idengyun.com";
 
     // 测试模式
     [ZCSobot setShowDebug:NO];
 
     [self customerGoodAndLeavePageWithParameter:uiInfo];
     NSLog(@"----%@",[[NSBundle mainBundle] pathForResource:@"SobotKit" ofType: @"bundle"]);
+
+
+/*
+
+    NSString *versionNumber = @"2.6.0";
+    NSString *orderStatusFlag = @"5";
+    NSString *md5MixPrefix = @"mtmy";
+    NSString *md5MixPostfix = @"mtmy";
+    NSString *requestURL =  @"http://online-test.idengyun.com/mtmy-app/order/queryMyOrder150.do";
+    //    NSString * requestURL = @"http://10.10.8.22:9214/blln-app/order/queryOrderListForKF.do";
+    NSLog(@"requestURL:%@",requestURL);
+    NSString *userId = [ZCLibClient getZCLibClient].libInitInfo.userId;
+
+    NSString *paramters = [NSString stringWithFormat:@"{\"version\" : \"%@\", \"flag\" : %@, \"user_id\" : %@, \"page\" : %d}",versionNumber,orderStatusFlag,userId,1];
+    NSString *paramterString = [NSString stringWithFormat:@"%@%@%@",md5MixPrefix,paramters,md5MixPostfix];
+    NSString *signMd5String = zcLibMd5(paramterString);
+
+    NSString *jsonParamters = [NSString stringWithFormat:@"%@%@",md5MixPrefix,paramters];
+
+    NSDictionary *parameters = @{@"sign": signMd5String,
+                                 @"jsonStr": jsonParamters};
+    NSURL *url = [NSURL URLWithString:requestURL];
+    NSLog(@"----------查询订单接口参数:%@",parameters);
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"POST";
+
+    request.HTTPBody = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:NULL];
+
+    NSURLSession *session = [NSURLSession sharedSession];
+
+//    __weak __typeof(self)weakSelf = self;
+//    __weak __typeof(_goodsInfoArray)weakInfoArray = _goodsInfoArray;
+//    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//
+//        NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//        NSLog(@"%@", result);
+//        KNBQueryBackInfo *orderData = [KNBQueryBackInfo yy_modelWithJSON:result];
+//        NSArray<KNBOrderInfo *> *orderArray = orderData.data;
+//
+//        for (KNBOrderInfo *orderInfo in orderArray) {
+//            for (KNBGoodsInfo *goodsInfo in orderInfo.goodsList) {
+//                goodsInfo.orderNumber = orderInfo.orderNo;
+//                goodsInfo.orderDate = orderInfo.createData;
+//                goodsInfo.orderId = orderInfo.orderId;
+//                goodsInfo.orderState = [NSString stringWithFormat:@"%ld",(long)orderInfo.orderStatus];
+//                [weakInfoArray addObject:goodsInfo];
+//            }
+//        }
+//        if (weakInfoArray.count == 0) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                weakSelf.emptyView.hidden = NO;
+//                weakSelf.refreshView.hidden = YES;
+//            });
+//        }
+//        if (orderArray.count == 0) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                //                    _orderTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+//                //                    _refreshView.frame = CGRectMake(0, hTopViewHeight + hTableViewHeight,
+//                //                                                    ScreenWidth, 20);
+//                weakSelf.refreshLabel.text = @"没有更多数据";
+//            });
+//            return;
+//        }
+//        _pageNumber ++;
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//
+//            weakSelf.orderTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+//            weakSelf.refreshView.frame = CGRectMake(0, hTopViewHeight + hTableViewHeight,
+//                                                    ScreenWidth, 20);
+//            weakSelf.refreshLabel.text = @"上拉加载更多";
+//            [weakSelf.orderTableView reloadData];
+//        });
+//    }];
+//    [dataTask resume];
+//}
+ */
     // 启动
     [ZCSobot startZCChatView:uiInfo with:self target:nil pageBlock:^(ZCUIChatController *object, ZCPageBlockType type) {
         // 点击返回
         if(type==ZCPageBlockGoBack){
             NSLog(@"关闭聊天界面!!!");
 
-            /*
-             这是因为平台版本，初始化默认会取上一次的编号直接连接通道，保证没有进入聊天界面也可以收消息，所以再链接进入sdk的时候，通道已经连接好了，但是连接的可能是你以前没有设置平台版本号的通道，导致无法收消息
-             */
-            [[ZCLibClient getZCLibClient] removePush:^(NSString *uid, NSData *token, NSError *error) {
-                NSLog(@"退出了,%@==%@",uid,error);
-            }];
-            [ZCLibClient closeAndoutZCServer:YES];
+            //            [[ZCLibClient getZCLibClient] removePush:^(NSString *uid, NSData *token, NSError *error) {
+            //                NSLog(@"退出了,%@==%@",uid,error);
+            //            }];
         }
 
         // 页面UI初始化完成，可以获取UIView，自定义UI
@@ -144,22 +235,22 @@
 // 自定义参数 商品信息相关
 - (void)customerGoodAndLeavePageWithParameter:(ZCKitInfo *)uiInfo{
 
-//    ZCProductInfo *productInfo = [ZCProductInfo new];
-//    productInfo.thumbUrl = @"http://f12.baidu.com/it/u=3087422712,1174175413&fm=72";
-//    productInfo.title = @"我是商品标题我是商品标题我是商品标题我是商品标题";
-//    productInfo.desc = @"商品描述商品描述商品描述商品描述商品描述商品描述商品描述";
-//    productInfo.label = @"商品标签，价格、分类等商品标签，价格、分类等";
-//    productInfo.link = @"http://f12.baidu.com/it/u=3087422712,1174175413&fm=72";
-//    productInfo.testAdd = @"自定义的添加字段";
-//    uiInfo.productInfo = productInfo;
+    ZCProductInfo *productInfo = [ZCProductInfo new];
+    productInfo.thumbUrl = @"http://f12.baidu.com/it/u=3087422712,1174175413&fm=72";
+    productInfo.title = @"我是商品标题我是商品标题我是商品标题我是商品标题";
+    productInfo.desc = @"商品描述商品描述商品描述商品描述商品描述商品描述商品描述";
+    productInfo.label = @"商品标签，价格、分类等商品标签，价格、分类等";
+    productInfo.link = @"http://f12.baidu.com/it/u=3087422712,1174175413&fm=72";
+    productInfo.testAdd = @"自定义的添加字段";
+    uiInfo.productInfo = productInfo;
 
     KNBGoodsInfo *goodsInfo = [KNBGoodsInfo new];
-//    goodsInfo.orderNumber = @"fads49534959032234";
-//    goodsInfo.orderState = @"待收货";
-//    goodsInfo.orderDate = @"2017-01-23";
+    goodsInfo.orderNumber = @"fads49534959032234";
+    goodsInfo.orderState = @"待收货";
+    goodsInfo.orderDate = @"2017-01-23";
     goodsInfo.goodsTitle = @"卡萨丁佛闻风丧胆";
     goodsInfo.goodsPrice = @"2434535";
-    goodsInfo.goodsImgUrl = @"http://imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=cfb53f93c3177f3e0439f44e18a651b2/6609c93d70cf3bc7814060c9db00baa1cd112a56.jpg";
+    goodsInfo.goodsImgUrl = @"http://f12.baidu.com/it/u=3087422712,1174175413&fm=72";
     goodsInfo.cardType = @"商品";
     uiInfo.orderGoodsInfo = goodsInfo;
 
@@ -189,27 +280,7 @@
                                           @"10":@"待评价",
                                           @"11":@"已完成"
                                           };
-    uiInfo.orderStateDictionary = bllnOrderDictionary;
-    /*
-     售后状态（-10：拒绝退货；11：申请退货；12：同意退货；13：退货中；14：退货完成；15：退款中；16：已退款；-20：拒绝换货；21：申请换货；22：同意换货；23：换货退货中；24：换货退货完成；25：换货中；26：换货完成）
-     */
-    uiInfo.isShowAfterSaleButton = YES;
-    uiInfo.afterSaleOrderStateDictionary = @{
-                                             @"-10":@"拒绝退货",
-                                             @"11":@"申请退货",
-                                             @"12":@"同意退货",
-                                             @"13":@"退货中",
-                                             @"14":@"退货完成",
-                                             @"15":@"退款中",
-                                             @"16":@"已退款",
-                                             @"-20":@"拒绝换货",
-                                             @"21":@"申请换货",
-                                             @"22":@"同意换货",
-                                             @"23":@"换货退货中",
-                                             @"24":@"换货退货完成",
-                                             @"25":@"换货中",
-                                             @"26":@"换货完成",
-                                             };
+    uiInfo.orderStateDictionary = mtmyOrderDictionary;
 }
 
 
